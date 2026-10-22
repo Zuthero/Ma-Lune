@@ -1,6 +1,6 @@
 # Content licence
 
-The health content of Ma Lune (the files in `content/` and the messages inside the flows) is © 2026 Zuthero Business Solutions and is licensed under the **Creative Commons Attribution-ShareAlike 4.0 International** licence (CC BY-SA 4.0).
+The health content of Ma Lune (`themes-fr.md` and the messages inside the flows) is © 2026 Zuthero Business Solutions and is licensed under the **Creative Commons Attribution-ShareAlike 4.0 International** licence (CC BY-SA 4.0).
 
 Full text: https://creativecommons.org/licenses/by-sa/4.0/legalcode
 

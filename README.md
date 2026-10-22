@@ -1,3 +1,5 @@
+<img src="logo.png" alt="Ma Lune logo" width="96">
+
 # Ma Lune 🌙
 
 **Ma Lune** is a free WhatsApp companion that gives girls aged 10 to 19 and their parents in the Democratic Republic of the Congo trusted information about periods, puberty and their bodies. It is built by [Zuthero Business Solutions](https://www.zuthero.com).
@@ -15,21 +17,21 @@
 ## How it is built
 - **WhatsApp Business Cloud API** for the channel
 - **RapidPro / TextIt** for the conversation flows
-- **Call AI** (large language model) for open questions, with strict safety instructions in [`ai/instructions-fr.md`](ai/instructions-fr.md)
+- **Call AI** (large language model) for open questions, with strict safety instructions in [`instructions-fr.md`](instructions-fr.md)
 - Anonymised results (topics, quiz scores, feedback) to measure impact
 
 ## Repository contents
-| Folder | What is inside |
+| File | What is inside |
 | --- | --- |
-| `flows/` | TextIt / RapidPro flow exports, ready to import |
-| `content/` | All lesson messages in French |
-| `ai/` | Instructions and safety rules for the AI assistant |
-| `docs/` | Safety and privacy design |
-| `tools/` | Python script that generates the flows from the content |
+| [`ma-lune-flows-generated.json`](ma-lune-flows-generated.json) | TextIt / RapidPro flow export, ready to import |
+| [`themes-fr.md`](themes-fr.md) | All lesson messages in French |
+| [`instructions-fr.md`](instructions-fr.md) | Instructions and safety rules for the AI assistant |
+| [`safety.md`](safety.md) | Safety and privacy design |
+| [`build.py`](build.py), [`content.py`](content.py) | Python script that generates the flows from the content |
 
 ## Reuse it
 1. Create a free workspace on TextIt or RapidPro and connect a WhatsApp number.
-2. Import the JSON files from `flows/`.
+2. Import `ma-lune-flows-generated.json` into your workspace.
 3. Adapt the content to your country and have it reviewed by a health professional before use.
 
 ## Status
@@ -58,7 +60,7 @@ info@zuthero.com · https://www.zuthero.com
 
 ## Réutiliser Ma Lune
 1. Créez un espace gratuit sur TextIt ou RapidPro et connectez un numéro WhatsApp.
-2. Importez les fichiers JSON du dossier `flows/`.
+2. Importez le fichier `ma-lune-flows-generated.json` dans votre espace.
 3. Adaptez le contenu à votre pays et faites-le valider par un professionnel de santé avant usage.
 
 ## Licence
