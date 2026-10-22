@@ -1,0 +1,5646 @@
+{
+ "version": "13",
+ "site": "https://textit.com",
+ "flows": [
+  {
+   "uuid": "a8347572-fd78-4e6c-8e88-2bb2c6bf92f2",
+   "name": "Mes règles",
+   "spec_version": "13.1.0",
+   "language": "fra",
+   "type": "messaging",
+   "revision": 1,
+   "expire_after_minutes": 10080,
+   "localization": {},
+   "nodes": [
+    {
+     "uuid": "80b98112-cbbe-4ed4-ab76-fb4eb5cf8a3c",
+     "actions": [
+      {
+       "uuid": "22a02a91-ce1b-44e4-b538-c91e17c4ab02",
+       "type": "send_msg",
+       "text": "📅 Quel était le PREMIER jour de tes dernières règles ?\nÉcris la date comme ceci : 15/10/2026",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "0a2f1fc0-ee08-4d2d-8483-1353c77b8686",
+       "destination_uuid": "547d34bb-04d1-4445-8a94-e8e50127a87e"
+      }
+     ]
+    },
+    {
+     "uuid": "547d34bb-04d1-4445-8a94-e8e50127a87e",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "1370cf82-8eea-41c7-b45c-cfa6a1589b39",
+      "cases": [
+       {
+        "uuid": "64ca38ac-d505-494c-816f-add1d6ca6041",
+        "type": "has_date_lt",
+        "arguments": [
+         "@(datetime_add(today(), -120, \"D\"))"
+        ],
+        "category_uuid": "d279abef-67bd-449b-b4d8-eaaa298b57f7"
+       },
+       {
+        "uuid": "31e2a085-eda2-4763-bbf0-7d50daf88dca",
+        "type": "has_date_lt",
+        "arguments": [
+         "@(datetime_add(today(), 1, \"D\"))"
+        ],
+        "category_uuid": "2b2f4354-316b-4230-a17e-fd6780879b70"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "d279abef-67bd-449b-b4d8-eaaa298b57f7",
+        "name": "Trop ancienne",
+        "exit_uuid": "181fa2b6-9296-40f1-8c60-70669c8b4537"
+       },
+       {
+        "uuid": "2b2f4354-316b-4230-a17e-fd6780879b70",
+        "name": "Date",
+        "exit_uuid": "a0b86be9-1b6c-4f77-b024-c0d0ce962c1b"
+       },
+       {
+        "uuid": "1370cf82-8eea-41c7-b45c-cfa6a1589b39",
+        "name": "Other",
+        "exit_uuid": "0453dbb2-ca62-40c6-9e76-80cadb0eac95"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "derniere"
+     },
+     "exits": [
+      {
+       "uuid": "181fa2b6-9296-40f1-8c60-70669c8b4537",
+       "destination_uuid": "463472da-f31a-4eef-a627-4120352f4cd8"
+      },
+      {
+       "uuid": "a0b86be9-1b6c-4f77-b024-c0d0ce962c1b",
+       "destination_uuid": "0918864f-2ee3-4426-8f55-98430e4bec3b"
+      },
+      {
+       "uuid": "0453dbb2-ca62-40c6-9e76-80cadb0eac95",
+       "destination_uuid": "12ddfec7-12c8-45bf-9f69-0d7c4229f3a6"
+      }
+     ]
+    },
+    {
+     "uuid": "12ddfec7-12c8-45bf-9f69-0d7c4229f3a6",
+     "actions": [
+      {
+       "uuid": "f1d77e46-3e6b-4ad0-9826-9cca03838a40",
+       "type": "send_msg",
+       "text": "Je n'ai pas compris la date 😊 Écris-la comme ceci : 15/10/2026 (jour/mois/année).",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "3d6101bd-1748-4e92-96f1-5c2c21a43694",
+       "destination_uuid": "547d34bb-04d1-4445-8a94-e8e50127a87e"
+      }
+     ]
+    },
+    {
+     "uuid": "463472da-f31a-4eef-a627-4120352f4cd8",
+     "actions": [
+      {
+       "uuid": "d29e6393-81aa-4e28-a437-ca0b705937c8",
+       "type": "send_msg",
+       "text": "🤔 Cette date est très ancienne. Vérifie l'année (par exemple 2026 et pas 2016) et réécris la date de tes DERNIÈRES règles : 15/10/2026",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "b597a4fb-d515-44ab-bdb3-a3b1494011be",
+       "destination_uuid": "547d34bb-04d1-4445-8a94-e8e50127a87e"
+      }
+     ]
+    },
+    {
+     "uuid": "0918864f-2ee3-4426-8f55-98430e4bec3b",
+     "actions": [
+      {
+       "uuid": "3d98a006-88b6-4cf9-a7b3-a4fc5a2dd7ae",
+       "type": "send_msg",
+       "text": "Merci ! Et le premier jour des règles D'AVANT (le mois précédent) ?\nÉcris la date, ou 0 si tu ne sais pas.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "72f58dd3-d81a-4ae3-a3dc-92e69baa7ab0",
+       "destination_uuid": "93bb939a-278a-4612-8482-fab5fc5662c9"
+      }
+     ]
+    },
+    {
+     "uuid": "93bb939a-278a-4612-8482-fab5fc5662c9",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "30769ccb-c7a6-46ed-865f-7528ae2b7ec2",
+      "cases": [
+       {
+        "uuid": "1da99707-0444-4446-ad90-0c8dbc5a1d16",
+        "type": "has_number_eq",
+        "arguments": [
+         "0"
+        ],
+        "category_uuid": "39075536-d95d-4a66-a9c6-a80ba2c37627"
+       },
+       {
+        "uuid": "847842ed-6059-474f-aa1c-2292b854c9e2",
+        "type": "has_date_lt",
+        "arguments": [
+         "@results.derniere.value"
+        ],
+        "category_uuid": "62414d29-6c68-49ce-aa02-d7f8dc045e8b"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "39075536-d95d-4a66-a9c6-a80ba2c37627",
+        "name": "Je ne sais pas",
+        "exit_uuid": "eca13ff4-112c-4707-b2a9-dc37fe827d31"
+       },
+       {
+        "uuid": "62414d29-6c68-49ce-aa02-d7f8dc045e8b",
+        "name": "Date",
+        "exit_uuid": "022b7d77-b11a-46ef-9fc6-c2d7147fd137"
+       },
+       {
+        "uuid": "30769ccb-c7a6-46ed-865f-7528ae2b7ec2",
+        "name": "Other",
+        "exit_uuid": "5216b174-d292-4b01-a762-7143293b3e9b"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "avant"
+     },
+     "exits": [
+      {
+       "uuid": "eca13ff4-112c-4707-b2a9-dc37fe827d31",
+       "destination_uuid": "5bebecdc-b5b8-4e58-8460-e585d4e5c35e"
+      },
+      {
+       "uuid": "022b7d77-b11a-46ef-9fc6-c2d7147fd137",
+       "destination_uuid": "ca86cb17-6cb7-4efa-a9f5-451409ef80eb"
+      },
+      {
+       "uuid": "5216b174-d292-4b01-a762-7143293b3e9b",
+       "destination_uuid": "a1a55f28-1f1b-48e0-acb7-f7ba0635f4de"
+      }
+     ]
+    },
+    {
+     "uuid": "a1a55f28-1f1b-48e0-acb7-f7ba0635f4de",
+     "actions": [
+      {
+       "uuid": "c502363e-e86a-4da9-ab60-6b43df905ec6",
+       "type": "send_msg",
+       "text": "Écris une date AVANT tes dernières règles (ex. 17/09/2026), ou 0 si tu ne sais pas 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "8decff70-345f-4683-b765-982dad8770fb",
+       "destination_uuid": "93bb939a-278a-4612-8482-fab5fc5662c9"
+      }
+     ]
+    },
+    {
+     "uuid": "ca86cb17-6cb7-4efa-a9f5-451409ef80eb",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@(datetime_diff(results.avant.value, results.derniere.value, \"D\"))",
+      "default_category_uuid": "c4c0ce43-5ef6-4f1b-b7e6-fe90a7400b01",
+      "cases": [
+       {
+        "uuid": "1958425a-2cc8-4722-8a19-e0a545af2d61",
+        "type": "has_number_between",
+        "arguments": [
+         "15",
+         "60"
+        ],
+        "category_uuid": "96a7cc3c-a370-4567-9f55-5bf07f7343be"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "96a7cc3c-a370-4567-9f55-5bf07f7343be",
+        "name": "Plausible",
+        "exit_uuid": "32542de0-a281-40db-ae9a-00527710776c"
+       },
+       {
+        "uuid": "c4c0ce43-5ef6-4f1b-b7e6-fe90a7400b01",
+        "name": "Other",
+        "exit_uuid": "1ea003c9-0aeb-469e-8ab4-f8edb575e4a9"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "32542de0-a281-40db-ae9a-00527710776c",
+       "destination_uuid": "ad17b2fe-9eb0-4338-8707-a38084bc417e"
+      },
+      {
+       "uuid": "1ea003c9-0aeb-469e-8ab4-f8edb575e4a9",
+       "destination_uuid": "2700f576-55b5-4601-9620-7f4c7bf11285"
+      }
+     ]
+    },
+    {
+     "uuid": "ad17b2fe-9eb0-4338-8707-a38084bc417e",
+     "actions": [
+      {
+       "uuid": "4a632d43-4e66-4692-88fa-80f988c67980",
+       "type": "send_msg",
+       "text": "🌙 Ton dernier cycle a duré @(datetime_diff(results.avant.value, results.derniere.value, \"D\")) jours.\n📅 Tes prochaines règles devraient arriver vers le @(format_date(datetime_add(results.derniere.value, datetime_diff(results.avant.value, results.derniere.value, \"D\"), \"D\"))).\n\n🎒 Pense à mettre ton kit dans ton sac quelques jours avant !\nC'est une estimation : chez les jeunes filles, le cycle change souvent. Note chaque mois tes dates avec Ma Lune pour un calcul plus précis.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "5ed10c0a-0cb6-4dcb-80e3-27c613d3fcc7",
+       "type": "set_contact_field",
+       "field": {
+        "key": "derniere_regle",
+        "name": "Dernière règle"
+       },
+       "value": "@results.derniere.value"
+      },
+      {
+       "uuid": "89777c2e-ad35-4b8b-b2d7-b3b56d19bd9d",
+       "type": "set_contact_field",
+       "field": {
+        "key": "duree_cycle",
+        "name": "Durée cycle"
+       },
+       "value": "@(datetime_diff(results.avant.value, results.derniere.value, \"D\"))"
+      },
+      {
+       "uuid": "b5ec9b18-dbf4-4f93-9ba4-af7f6f49664b",
+       "type": "set_contact_field",
+       "field": {
+        "key": "prochaines_regles",
+        "name": "Prochaines règles"
+       },
+       "value": "@(datetime_add(results.derniere.value, datetime_diff(results.avant.value, results.derniere.value, \"D\"), \"D\"))"
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "d3f7d259-8fba-4c30-a811-5131c08f35d0",
+       "destination_uuid": null
+      }
+     ]
+    },
+    {
+     "uuid": "2700f576-55b5-4601-9620-7f4c7bf11285",
+     "actions": [
+      {
+       "uuid": "e2982875-f219-403d-a916-163672cdea48",
+       "type": "send_msg",
+       "text": "Hmm, il y a @(datetime_diff(results.avant.value, results.derniere.value, \"D\")) jours entre tes deux dates. C'est inhabituel : vérifie tes dates. Si c'est bien ça plusieurs mois de suite, parles-en à un agent de santé 🩺\nEn attendant, je calcule avec un cycle moyen de 28 jours 👇",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "d2412651-92f5-4abb-8a81-5544951a5dd5",
+       "destination_uuid": "5bebecdc-b5b8-4e58-8460-e585d4e5c35e"
+      }
+     ]
+    },
+    {
+     "uuid": "5bebecdc-b5b8-4e58-8460-e585d4e5c35e",
+     "actions": [
+      {
+       "uuid": "132ccddd-2dc6-4f57-8c50-b83b6078402b",
+       "type": "send_msg",
+       "text": "📅 Avec un cycle moyen de 28 jours, tes prochaines règles devraient arriver vers le @(format_date(datetime_add(results.derniere.value, 28, \"D\"))).\n\n🎒 Pense à mettre ton kit dans ton sac quelques jours avant !\nLe mois prochain, note encore le premier jour de tes règles ici : je pourrai calculer TON vrai cycle.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "7943fa70-076a-4103-8f73-c4a20ad73adc",
+       "type": "set_contact_field",
+       "field": {
+        "key": "derniere_regle",
+        "name": "Dernière règle"
+       },
+       "value": "@results.derniere.value"
+      },
+      {
+       "uuid": "0bf7209e-d7b0-42c2-ba13-ca9525633479",
+       "type": "set_contact_field",
+       "field": {
+        "key": "prochaines_regles",
+        "name": "Prochaines règles"
+       },
+       "value": "@(datetime_add(results.derniere.value, 28, \"D\"))"
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "62962968-0dc5-4f38-a73c-c74b2ba11432",
+       "destination_uuid": null
+      }
+     ]
+    }
+   ],
+   "_ui": {
+    "nodes": {
+     "80b98112-cbbe-4ed4-ab76-fb4eb5cf8a3c": {
+      "position": {
+       "left": 0,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "547d34bb-04d1-4445-8a94-e8e50127a87e": {
+      "position": {
+       "left": 320,
+       "top": 0
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "12ddfec7-12c8-45bf-9f69-0d7c4229f3a6": {
+      "position": {
+       "left": 640,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "463472da-f31a-4eef-a627-4120352f4cd8": {
+      "position": {
+       "left": 960,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "0918864f-2ee3-4426-8f55-98430e4bec3b": {
+      "position": {
+       "left": 1280,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "93bb939a-278a-4612-8482-fab5fc5662c9": {
+      "position": {
+       "left": 1600,
+       "top": 0
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "a1a55f28-1f1b-48e0-acb7-f7ba0635f4de": {
+      "position": {
+       "left": 0,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "ca86cb17-6cb7-4efa-a9f5-451409ef80eb": {
+      "position": {
+       "left": 320,
+       "top": 420
+      },
+      "type": "split_by_expression",
+      "config": {}
+     },
+     "ad17b2fe-9eb0-4338-8707-a38084bc417e": {
+      "position": {
+       "left": 640,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "2700f576-55b5-4601-9620-7f4c7bf11285": {
+      "position": {
+       "left": 960,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "5bebecdc-b5b8-4e58-8460-e585d4e5c35e": {
+      "position": {
+       "left": 1280,
+       "top": 420
+      },
+      "type": "execute_actions"
+     }
+    }
+   }
+  },
+  {
+   "uuid": "66962937-3847-46d6-82dd-881d19af7f30",
+   "name": "Urgence",
+   "spec_version": "13.1.0",
+   "language": "fra",
+   "type": "messaging",
+   "revision": 1,
+   "expire_after_minutes": 10080,
+   "localization": {},
+   "nodes": [
+    {
+     "uuid": "38cbe6bf-5b79-4bba-b04d-fba3251f988a",
+     "actions": [
+      {
+       "uuid": "92f96c35-e55b-43a0-8a71-9c2a5daf40ae",
+       "type": "send_msg",
+       "text": "@contact.name, merci de m'avoir écrit. Ce que tu vis est important et ce n'est pas ta faute. 💛\nSi tu es en danger maintenant, va tout de suite à l'hôpital ou au centre de santé le plus proche, ou chez un adulte de confiance.\nUne personne de l'équipe Ma Lune va te répondre ici, en privé, le plus vite possible.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "438c8ee7-254c-498e-966e-ca548a6e7ae7",
+       "type": "add_contact_groups",
+       "groups": [
+        {
+         "uuid": "806366ee-172e-4395-8f32-1d9ff6556e8b",
+         "name": "Urgence"
+        }
+       ]
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "2d84d859-cc6a-48af-97fa-3374fa798d20",
+       "destination_uuid": null
+      }
+     ]
+    }
+   ],
+   "_ui": {
+    "nodes": {
+     "38cbe6bf-5b79-4bba-b04d-fba3251f988a": {
+      "position": {
+       "left": 0,
+       "top": 0
+      },
+      "type": "execute_actions"
+     }
+    }
+   }
+  },
+  {
+   "uuid": "ca7d0b00-da77-448b-b4b7-9d98114db27b",
+   "name": "Apprendre",
+   "spec_version": "13.1.0",
+   "language": "fra",
+   "type": "messaging",
+   "revision": 1,
+   "expire_after_minutes": 10080,
+   "localization": {},
+   "nodes": [
+    {
+     "uuid": "9844acef-eb91-449e-ad06-5f96d8a19e5e",
+     "actions": [
+      {
+       "uuid": "402b9abb-12dc-4dbe-bf20-3c17d305ea32",
+       "type": "send_msg",
+       "text": "Que veux-tu découvrir ? 🌙\n1️⃣ Mes règles\n2️⃣ Mon corps qui grandit\n3️⃣ Prendre soin de moi\n4️⃣ Mes émotions et ma sécurité\n5️⃣ Pratique et santé",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "49d58c3c-6d24-4e5a-9a34-c1a77424dfd3",
+       "destination_uuid": "0bb73860-a497-4bf7-91ca-3f1a5305baf9"
+      }
+     ]
+    },
+    {
+     "uuid": "0bb73860-a497-4bf7-91ca-3f1a5305baf9",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "1aea5176-b29c-4ab8-a5cb-9035beec582a",
+      "cases": [
+       {
+        "uuid": "43696f70-00f5-4d8a-ad1d-b76dbd59c4db",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "797a3ffc-14f8-4007-83d9-12a061a5d6cf"
+       },
+       {
+        "uuid": "1dfe2ce4-bab8-46a8-a5f7-2d36c93bffde",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "a0fece8d-618a-4ce0-83c2-19338d32c03f"
+       },
+       {
+        "uuid": "709f6009-a422-48d0-8c58-317a7566d6db",
+        "type": "has_number_eq",
+        "arguments": [
+         "3"
+        ],
+        "category_uuid": "79ec8c21-f523-46bb-88da-c52a94a7bf5d"
+       },
+       {
+        "uuid": "b648adf1-0c16-4b92-ad68-3e2597e6886f",
+        "type": "has_number_eq",
+        "arguments": [
+         "4"
+        ],
+        "category_uuid": "66a04644-beab-4a9c-b628-3ff1768c75c1"
+       },
+       {
+        "uuid": "761d7f70-ce10-40ee-a310-e45bce18c913",
+        "type": "has_number_eq",
+        "arguments": [
+         "5"
+        ],
+        "category_uuid": "4d463435-7df8-4c47-8ffe-24860f70e11b"
+       },
+       {
+        "uuid": "d528c85e-f62b-4eef-8b0e-7f199070ac63",
+        "type": "has_any_word",
+        "arguments": [
+         "frappe frappée frapper battue battre bat tape tapée viol violée violence violences violent abus abusée agression agressée attouchement attouchements inceste harcèlement harcelée harcèle menace menacée chantage forcée forcé forcer obligée touchée enceinte grossesse mourir tuer suicide danger peur secours urgence saigne saignement hémorragie évanouie"
+        ],
+        "category_uuid": "80c0e7f5-a24a-46db-9289-249aba83a7bb"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "797a3ffc-14f8-4007-83d9-12a061a5d6cf",
+        "name": "Mes règles",
+        "exit_uuid": "47b633b3-20ea-4f75-88a2-6fd22228cc80"
+       },
+       {
+        "uuid": "a0fece8d-618a-4ce0-83c2-19338d32c03f",
+        "name": "Mon corps qui grandit",
+        "exit_uuid": "ce7491a1-4cc8-4cec-9a9b-6c187fb4ec20"
+       },
+       {
+        "uuid": "79ec8c21-f523-46bb-88da-c52a94a7bf5d",
+        "name": "Prendre soin de moi",
+        "exit_uuid": "3682775b-45bc-4cbb-a117-22d9b3cd2dd0"
+       },
+       {
+        "uuid": "66a04644-beab-4a9c-b628-3ff1768c75c1",
+        "name": "Mes émotions et ma sécurité",
+        "exit_uuid": "c0a5d858-c056-47e8-9723-cf0a49f25c90"
+       },
+       {
+        "uuid": "4d463435-7df8-4c47-8ffe-24860f70e11b",
+        "name": "Pratique et santé",
+        "exit_uuid": "ab7c5372-c9cc-437c-ba70-deb2baefa629"
+       },
+       {
+        "uuid": "80c0e7f5-a24a-46db-9289-249aba83a7bb",
+        "name": "Urgence",
+        "exit_uuid": "a657db7d-21ab-4d52-8f88-e4ceb7c98df8"
+       },
+       {
+        "uuid": "1aea5176-b29c-4ab8-a5cb-9035beec582a",
+        "name": "Other",
+        "exit_uuid": "b34606f0-90f1-41a1-a233-3733ede9fa03"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "theme"
+     },
+     "exits": [
+      {
+       "uuid": "47b633b3-20ea-4f75-88a2-6fd22228cc80",
+       "destination_uuid": "0fe8adb7-80dc-44ef-9955-f09ad6c945b7"
+      },
+      {
+       "uuid": "ce7491a1-4cc8-4cec-9a9b-6c187fb4ec20",
+       "destination_uuid": "22363c44-3838-4ce0-a553-d116114ce00a"
+      },
+      {
+       "uuid": "3682775b-45bc-4cbb-a117-22d9b3cd2dd0",
+       "destination_uuid": "06f93442-c38d-489c-b0d7-7546034a9e5f"
+      },
+      {
+       "uuid": "c0a5d858-c056-47e8-9723-cf0a49f25c90",
+       "destination_uuid": "2ec3c08f-218d-4e35-b87f-4bee2215afec"
+      },
+      {
+       "uuid": "ab7c5372-c9cc-437c-ba70-deb2baefa629",
+       "destination_uuid": "eca10642-4dd3-489e-afe6-585d3337e4f9"
+      },
+      {
+       "uuid": "a657db7d-21ab-4d52-8f88-e4ceb7c98df8",
+       "destination_uuid": "b4a95679-f06b-42e3-9198-acfb35a52908"
+      },
+      {
+       "uuid": "b34606f0-90f1-41a1-a233-3733ede9fa03",
+       "destination_uuid": "ea6e4c20-abd3-4caa-971f-b8ef15ffe2c7"
+      }
+     ]
+    },
+    {
+     "uuid": "ea6e4c20-abd3-4caa-971f-b8ef15ffe2c7",
+     "actions": [
+      {
+       "uuid": "c01c7771-e4dd-4c43-a5cb-84e461b52e80",
+       "type": "send_msg",
+       "text": "Écris un numéro de 1 à 5 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "63233af4-61a0-48e2-8fe4-92d2472eca6f",
+       "destination_uuid": "0bb73860-a497-4bf7-91ca-3f1a5305baf9"
+      }
+     ]
+    },
+    {
+     "uuid": "0fe8adb7-80dc-44ef-9955-f09ad6c945b7",
+     "actions": [
+      {
+       "uuid": "ce454103-44f2-43fa-8411-07a051f078a7",
+       "type": "send_msg",
+       "text": "Mes règles 🌙\n1️⃣ C'est quoi les règles ?\n2️⃣ Mon cycle\n3️⃣ Calculer mon cycle\n4️⃣ Crampes et règles irrégulières\n0️⃣ Retour",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "ffd82cb5-c3ed-47d1-96e0-8005f0b2dc76",
+       "destination_uuid": "cba92c41-ceb1-42fa-9238-cfdafb86ffc9"
+      }
+     ]
+    },
+    {
+     "uuid": "cba92c41-ceb1-42fa-9238-cfdafb86ffc9",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "2852db28-b0ac-4831-a176-2a980272cfa4",
+      "cases": [
+       {
+        "uuid": "6e8a61da-ed7a-411f-ae97-d578279fd239",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "ab3d169c-9a77-4552-9ea7-75f1ce8862a2"
+       },
+       {
+        "uuid": "7fb7896a-20f0-443d-ad58-e3a2a679ae60",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "22016a4c-94d3-49a1-8b07-21fe9c31737e"
+       },
+       {
+        "uuid": "f9627fda-b7b2-49f7-bb37-385b46dab7ba",
+        "type": "has_number_eq",
+        "arguments": [
+         "3"
+        ],
+        "category_uuid": "d6fcd88e-b011-4512-95fb-29a5efe5ecd1"
+       },
+       {
+        "uuid": "69bee2a3-f37f-4185-b023-2a25b67da93c",
+        "type": "has_number_eq",
+        "arguments": [
+         "4"
+        ],
+        "category_uuid": "cc29cb03-1622-4f55-bfe0-ee9c73b69184"
+       },
+       {
+        "uuid": "b3aeb060-d8ef-4d10-b2d6-c5dcfcefc848",
+        "type": "has_number_eq",
+        "arguments": [
+         "0"
+        ],
+        "category_uuid": "06e4840c-8134-4cf6-b749-4158b12aa5af"
+       },
+       {
+        "uuid": "7257265f-71b0-4f38-b412-fe2dfcc559ba",
+        "type": "has_any_word",
+        "arguments": [
+         "frappe frappée frapper battue battre bat tape tapée viol violée violence violences violent abus abusée agression agressée attouchement attouchements inceste harcèlement harcelée harcèle menace menacée chantage forcée forcé forcer obligée touchée enceinte grossesse mourir tuer suicide danger peur secours urgence saigne saignement hémorragie évanouie"
+        ],
+        "category_uuid": "effb4090-6c55-4c99-8735-d5b8270f4b5c"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "ab3d169c-9a77-4552-9ea7-75f1ce8862a2",
+        "name": "T1 C'est quoi les règles ?",
+        "exit_uuid": "080ac33e-09da-4941-ab35-019a103f96d7"
+       },
+       {
+        "uuid": "22016a4c-94d3-49a1-8b07-21fe9c31737e",
+        "name": "T2 Mon cycle",
+        "exit_uuid": "fdb9eb16-b2bc-46e4-b0ca-e453c2c765b3"
+       },
+       {
+        "uuid": "d6fcd88e-b011-4512-95fb-29a5efe5ecd1",
+        "name": "T12 Calculer mon cycle",
+        "exit_uuid": "11a3cd4c-7275-4897-9087-2f918a800f83"
+       },
+       {
+        "uuid": "cc29cb03-1622-4f55-bfe0-ee9c73b69184",
+        "name": "T15 Crampes et règles irrégulières",
+        "exit_uuid": "a7dc8f94-b83c-4972-b605-2f9ce6112cf3"
+       },
+       {
+        "uuid": "06e4840c-8134-4cf6-b749-4158b12aa5af",
+        "name": "Retour",
+        "exit_uuid": "69c88a96-5977-409e-8323-73b84b777a0e"
+       },
+       {
+        "uuid": "effb4090-6c55-4c99-8735-d5b8270f4b5c",
+        "name": "Urgence",
+        "exit_uuid": "6e71c06e-aac9-4af8-af45-061051858244"
+       },
+       {
+        "uuid": "2852db28-b0ac-4831-a176-2a980272cfa4",
+        "name": "Other",
+        "exit_uuid": "643eacc8-8350-4b08-93c1-f28b87016b3f"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "sujet"
+     },
+     "exits": [
+      {
+       "uuid": "080ac33e-09da-4941-ab35-019a103f96d7",
+       "destination_uuid": "c387d20e-367a-4935-89da-26e68d508441"
+      },
+      {
+       "uuid": "fdb9eb16-b2bc-46e4-b0ca-e453c2c765b3",
+       "destination_uuid": "1a2770cf-e36c-40f1-a6cf-c804054fa2c5"
+      },
+      {
+       "uuid": "11a3cd4c-7275-4897-9087-2f918a800f83",
+       "destination_uuid": "d964756d-3045-4e23-bdf5-7ac925e794f4"
+      },
+      {
+       "uuid": "a7dc8f94-b83c-4972-b605-2f9ce6112cf3",
+       "destination_uuid": "940b472c-5469-4f26-b3ab-e0714dfed083"
+      },
+      {
+       "uuid": "69c88a96-5977-409e-8323-73b84b777a0e",
+       "destination_uuid": "9844acef-eb91-449e-ad06-5f96d8a19e5e"
+      },
+      {
+       "uuid": "6e71c06e-aac9-4af8-af45-061051858244",
+       "destination_uuid": "9492f447-cfb6-4eda-8e9b-965a777a4706"
+      },
+      {
+       "uuid": "643eacc8-8350-4b08-93c1-f28b87016b3f",
+       "destination_uuid": "8afe82a9-5af9-4776-b4eb-3e2814c088bf"
+      }
+     ]
+    },
+    {
+     "uuid": "8afe82a9-5af9-4776-b4eb-3e2814c088bf",
+     "actions": [
+      {
+       "uuid": "28c645ae-5fac-465d-a13f-13710d8145bc",
+       "type": "send_msg",
+       "text": "Écris un numéro de 0 à 4 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "e3527cc7-64e8-492e-a364-e90da70a6a2a",
+       "destination_uuid": "cba92c41-ceb1-42fa-9238-cfdafb86ffc9"
+      }
+     ]
+    },
+    {
+     "uuid": "9492f447-cfb6-4eda-8e9b-965a777a4706",
+     "actions": [
+      {
+       "uuid": "b1f526f7-8b23-43fa-a13c-0ed4d1678bf1",
+       "type": "enter_flow",
+       "flow": {
+        "uuid": "66962937-3847-46d6-82dd-881d19af7f30",
+        "name": "Urgence"
+       }
+      }
+     ],
+     "router": {
+      "type": "switch",
+      "operand": "@child.run.status",
+      "default_category_uuid": "99669cdc-75b5-4163-b539-ee61a9f29537",
+      "cases": [
+       {
+        "uuid": "d44823b5-d561-47fa-af57-5ccc77cf32da",
+        "type": "has_only_text",
+        "arguments": [
+         "completed"
+        ],
+        "category_uuid": "99669cdc-75b5-4163-b539-ee61a9f29537"
+       },
+       {
+        "uuid": "e585c227-ee67-4bf8-a38e-8819db04f988",
+        "type": "has_only_text",
+        "arguments": [
+         "expired"
+        ],
+        "category_uuid": "57b53713-6f5c-4a7e-8810-6a5a2e0a7921"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "99669cdc-75b5-4163-b539-ee61a9f29537",
+        "name": "Complete",
+        "exit_uuid": "1c765fe6-ece4-4ea1-beef-ed176450c16e"
+       },
+       {
+        "uuid": "57b53713-6f5c-4a7e-8810-6a5a2e0a7921",
+        "name": "Expired",
+        "exit_uuid": "46faee12-0d03-4f22-81f3-b3e54f36fed1"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "1c765fe6-ece4-4ea1-beef-ed176450c16e",
+       "destination_uuid": null
+      },
+      {
+       "uuid": "46faee12-0d03-4f22-81f3-b3e54f36fed1",
+       "destination_uuid": null
+      }
+     ]
+    },
+    {
+     "uuid": "22363c44-3838-4ce0-a553-d116114ce00a",
+     "actions": [
+      {
+       "uuid": "92a9e2c0-2684-4fc4-894d-f4e0ff13206e",
+       "type": "send_msg",
+       "text": "Mon corps qui grandit 🌙\n1️⃣ Comprendre la puberté\n2️⃣ Mon corps et la sexualité\n3️⃣ Pertes blanches et infections\n4️⃣ Le vaccin HPV\n5️⃣ Grandir sereine\n0️⃣ Retour",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "a7a58029-d974-4ddc-bf3d-88a6d74afa64",
+       "destination_uuid": "78e756b2-ad32-4e9d-a144-b7f095ce85cd"
+      }
+     ]
+    },
+    {
+     "uuid": "78e756b2-ad32-4e9d-a144-b7f095ce85cd",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "8a58413e-3767-4868-8da1-1e03864eed29",
+      "cases": [
+       {
+        "uuid": "2131ede0-da4c-43f9-af3d-27a0f8a03750",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "504d3853-b715-4c84-8c40-997b8ade6795"
+       },
+       {
+        "uuid": "4c26398b-0d5b-4458-9373-db73c4a70122",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "5628ef44-49a8-4f2a-9e72-676d35b4f494"
+       },
+       {
+        "uuid": "f31ccef9-ccf5-458e-84ad-275e505d37fc",
+        "type": "has_number_eq",
+        "arguments": [
+         "3"
+        ],
+        "category_uuid": "ec755dd0-399b-4b69-9845-a1c7d3de17c7"
+       },
+       {
+        "uuid": "6ace68a2-2d8c-4808-a0a5-2f12c2b8d046",
+        "type": "has_number_eq",
+        "arguments": [
+         "4"
+        ],
+        "category_uuid": "1eaae786-5572-48fa-9f9a-f8858871feb3"
+       },
+       {
+        "uuid": "d2017ec1-b361-4a16-a925-a0c86f24ef6c",
+        "type": "has_number_eq",
+        "arguments": [
+         "5"
+        ],
+        "category_uuid": "c011fdd7-9c41-4ec9-b829-cfa9db0a330f"
+       },
+       {
+        "uuid": "74011886-b62b-4db2-8875-ff535b685871",
+        "type": "has_number_eq",
+        "arguments": [
+         "0"
+        ],
+        "category_uuid": "d9263c37-4564-4abf-8b3d-dea636b1b8a2"
+       },
+       {
+        "uuid": "165b0055-d9cb-41a0-864d-e50b7255f29c",
+        "type": "has_any_word",
+        "arguments": [
+         "frappe frappée frapper battue battre bat tape tapée viol violée violence violences violent abus abusée agression agressée attouchement attouchements inceste harcèlement harcelée harcèle menace menacée chantage forcée forcé forcer obligée touchée enceinte grossesse mourir tuer suicide danger peur secours urgence saigne saignement hémorragie évanouie"
+        ],
+        "category_uuid": "097ac12f-7a70-46ed-a27c-63562991192d"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "504d3853-b715-4c84-8c40-997b8ade6795",
+        "name": "T13 Comprendre la puberté",
+        "exit_uuid": "7c8f98fb-afaf-4b3f-83d4-09018756988e"
+       },
+       {
+        "uuid": "5628ef44-49a8-4f2a-9e72-676d35b4f494",
+        "name": "T14 Mon corps et la sexualité",
+        "exit_uuid": "42d4f0e8-f536-4b17-ad12-256789bf24c4"
+       },
+       {
+        "uuid": "ec755dd0-399b-4b69-9845-a1c7d3de17c7",
+        "name": "T16 Pertes blanches et infections",
+        "exit_uuid": "93d878a7-d24d-4957-b7be-d949fad2cee4"
+       },
+       {
+        "uuid": "1eaae786-5572-48fa-9f9a-f8858871feb3",
+        "name": "T19 Le vaccin HPV",
+        "exit_uuid": "5581bf0e-42bf-452f-842a-b8a4ef9716eb"
+       },
+       {
+        "uuid": "c011fdd7-9c41-4ec9-b829-cfa9db0a330f",
+        "name": "T10 Grandir sereine",
+        "exit_uuid": "dd4639bd-460b-495f-80b4-7a8a154c5863"
+       },
+       {
+        "uuid": "d9263c37-4564-4abf-8b3d-dea636b1b8a2",
+        "name": "Retour",
+        "exit_uuid": "9c9c6439-14e3-43b6-b75d-6a729d9cfbbd"
+       },
+       {
+        "uuid": "097ac12f-7a70-46ed-a27c-63562991192d",
+        "name": "Urgence",
+        "exit_uuid": "2852897e-d6a1-43fc-bcb7-7965457e88d2"
+       },
+       {
+        "uuid": "8a58413e-3767-4868-8da1-1e03864eed29",
+        "name": "Other",
+        "exit_uuid": "03f2c69f-b5d6-4d1c-9304-ff11c97add4e"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "sujet"
+     },
+     "exits": [
+      {
+       "uuid": "7c8f98fb-afaf-4b3f-83d4-09018756988e",
+       "destination_uuid": "56306581-4a71-4324-9476-a050822006a8"
+      },
+      {
+       "uuid": "42d4f0e8-f536-4b17-ad12-256789bf24c4",
+       "destination_uuid": "322e213a-0958-4f0c-b517-b5acace76542"
+      },
+      {
+       "uuid": "93d878a7-d24d-4957-b7be-d949fad2cee4",
+       "destination_uuid": "634e8b84-f005-4ee4-bcf1-eeda0f7cc341"
+      },
+      {
+       "uuid": "5581bf0e-42bf-452f-842a-b8a4ef9716eb",
+       "destination_uuid": "f68088ba-1cfb-44ef-90e6-4847e0b789f5"
+      },
+      {
+       "uuid": "dd4639bd-460b-495f-80b4-7a8a154c5863",
+       "destination_uuid": "cd4a9129-df28-429f-b125-288e657b7756"
+      },
+      {
+       "uuid": "9c9c6439-14e3-43b6-b75d-6a729d9cfbbd",
+       "destination_uuid": "9844acef-eb91-449e-ad06-5f96d8a19e5e"
+      },
+      {
+       "uuid": "2852897e-d6a1-43fc-bcb7-7965457e88d2",
+       "destination_uuid": "6e4cce37-b63e-4684-a9a1-d452fb209b66"
+      },
+      {
+       "uuid": "03f2c69f-b5d6-4d1c-9304-ff11c97add4e",
+       "destination_uuid": "b4152e37-0dc1-49e6-994a-e6e5c802b367"
+      }
+     ]
+    },
+    {
+     "uuid": "b4152e37-0dc1-49e6-994a-e6e5c802b367",
+     "actions": [
+      {
+       "uuid": "cb1254ca-e4a5-436b-8cdf-1c1e83fbf6c9",
+       "type": "send_msg",
+       "text": "Écris un numéro de 0 à 5 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "3703cf24-6e8f-4ad9-9444-be9101f48e86",
+       "destination_uuid": "78e756b2-ad32-4e9d-a144-b7f095ce85cd"
+      }
+     ]
+    },
+    {
+     "uuid": "6e4cce37-b63e-4684-a9a1-d452fb209b66",
+     "actions": [
+      {
+       "uuid": "d9e560d6-9a66-49da-a877-56cf4bbadb4a",
+       "type": "enter_flow",
+       "flow": {
+        "uuid": "66962937-3847-46d6-82dd-881d19af7f30",
+        "name": "Urgence"
+       }
+      }
+     ],
+     "router": {
+      "type": "switch",
+      "operand": "@child.run.status",
+      "default_category_uuid": "052a64dc-6fcf-4938-ab81-28a57bc95836",
+      "cases": [
+       {
+        "uuid": "9679c178-6b47-4903-80dd-5775609487ac",
+        "type": "has_only_text",
+        "arguments": [
+         "completed"
+        ],
+        "category_uuid": "052a64dc-6fcf-4938-ab81-28a57bc95836"
+       },
+       {
+        "uuid": "93df13cc-e712-4cb5-9e8f-8ad969c53de5",
+        "type": "has_only_text",
+        "arguments": [
+         "expired"
+        ],
+        "category_uuid": "c39573a2-1174-4aef-bc19-9a6a110302d3"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "052a64dc-6fcf-4938-ab81-28a57bc95836",
+        "name": "Complete",
+        "exit_uuid": "701778d8-3220-48e4-bc3d-79cb602864f4"
+       },
+       {
+        "uuid": "c39573a2-1174-4aef-bc19-9a6a110302d3",
+        "name": "Expired",
+        "exit_uuid": "fe56bad1-66ca-4e70-a254-b6e823bce341"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "701778d8-3220-48e4-bc3d-79cb602864f4",
+       "destination_uuid": null
+      },
+      {
+       "uuid": "fe56bad1-66ca-4e70-a254-b6e823bce341",
+       "destination_uuid": null
+      }
+     ]
+    },
+    {
+     "uuid": "06f93442-c38d-489c-b0d7-7546034a9e5f",
+     "actions": [
+      {
+       "uuid": "e4564e18-a8ec-411a-9ac9-36424176ce89",
+       "type": "send_msg",
+       "text": "Prendre soin de moi 🌙\n1️⃣ Hygiène\n2️⃣ Les douleurs\n3️⃣ Manger et bouger\n4️⃣ Fatigue et anémie\n0️⃣ Retour",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "73c7c341-414e-49e9-898c-16cc2ffb3d1e",
+       "destination_uuid": "69cf3192-30a8-4b1c-a907-317935c313a7"
+      }
+     ]
+    },
+    {
+     "uuid": "69cf3192-30a8-4b1c-a907-317935c313a7",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "ee1babd5-5559-49e7-9aa0-9e272acc26a9",
+      "cases": [
+       {
+        "uuid": "47a309ea-b206-4748-9169-5c5314c77ba3",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "519d92c0-1261-4ad8-9c51-47a7da4dd827"
+       },
+       {
+        "uuid": "4769f89c-916f-4e30-8455-42fd77227148",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "ab9fcddd-edb4-4225-9100-ef5e698ae679"
+       },
+       {
+        "uuid": "6c3d196d-debf-44c0-80ee-4a3813c32927",
+        "type": "has_number_eq",
+        "arguments": [
+         "3"
+        ],
+        "category_uuid": "00d828e3-0ca7-470d-bb69-834ad0a1a285"
+       },
+       {
+        "uuid": "48cf4aa9-f106-484e-b051-b87c835ff5e3",
+        "type": "has_number_eq",
+        "arguments": [
+         "4"
+        ],
+        "category_uuid": "35b868a8-256b-4c7a-9e40-b763f9931eab"
+       },
+       {
+        "uuid": "9db06c94-59d4-476d-bf7d-a28dcce99161",
+        "type": "has_number_eq",
+        "arguments": [
+         "0"
+        ],
+        "category_uuid": "b9572a7b-4872-4025-951f-2937cb146c2c"
+       },
+       {
+        "uuid": "a4b5aa0f-922e-43ed-af55-239e4c996948",
+        "type": "has_any_word",
+        "arguments": [
+         "frappe frappée frapper battue battre bat tape tapée viol violée violence violences violent abus abusée agression agressée attouchement attouchements inceste harcèlement harcelée harcèle menace menacée chantage forcée forcé forcer obligée touchée enceinte grossesse mourir tuer suicide danger peur secours urgence saigne saignement hémorragie évanouie"
+        ],
+        "category_uuid": "69bc1e11-e2e9-4700-8e7d-a109789e40df"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "519d92c0-1261-4ad8-9c51-47a7da4dd827",
+        "name": "T4 Hygiène",
+        "exit_uuid": "57377fa8-eaf4-4bbb-ba57-fcbc8843cb33"
+       },
+       {
+        "uuid": "ab9fcddd-edb4-4225-9100-ef5e698ae679",
+        "name": "T5 Les douleurs",
+        "exit_uuid": "1396da42-cb21-4b69-82ab-320ee271b1a9"
+       },
+       {
+        "uuid": "00d828e3-0ca7-470d-bb69-834ad0a1a285",
+        "name": "T7 Manger et bouger",
+        "exit_uuid": "0e9398f8-abd8-41d3-8b1f-e2e22dd66aa9"
+       },
+       {
+        "uuid": "35b868a8-256b-4c7a-9e40-b763f9931eab",
+        "name": "T17 Fatigue et anémie",
+        "exit_uuid": "d98f0de6-6eda-4a11-aed4-393dee47fe73"
+       },
+       {
+        "uuid": "b9572a7b-4872-4025-951f-2937cb146c2c",
+        "name": "Retour",
+        "exit_uuid": "3a44ae3e-93af-4beb-a3d2-a6789b0cfe62"
+       },
+       {
+        "uuid": "69bc1e11-e2e9-4700-8e7d-a109789e40df",
+        "name": "Urgence",
+        "exit_uuid": "6fb08e95-a4a6-4a9c-9baa-99bb859c8879"
+       },
+       {
+        "uuid": "ee1babd5-5559-49e7-9aa0-9e272acc26a9",
+        "name": "Other",
+        "exit_uuid": "de626f79-66d8-4245-9418-ad3bd02ab345"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "sujet"
+     },
+     "exits": [
+      {
+       "uuid": "57377fa8-eaf4-4bbb-ba57-fcbc8843cb33",
+       "destination_uuid": "2cef1c6e-fc56-45fb-af6e-289d7b2ad1b0"
+      },
+      {
+       "uuid": "1396da42-cb21-4b69-82ab-320ee271b1a9",
+       "destination_uuid": "290fdda4-f8cf-4355-bda0-e87394f159cc"
+      },
+      {
+       "uuid": "0e9398f8-abd8-41d3-8b1f-e2e22dd66aa9",
+       "destination_uuid": "d9b486e3-6297-485b-b3a8-a10b346c8a9e"
+      },
+      {
+       "uuid": "d98f0de6-6eda-4a11-aed4-393dee47fe73",
+       "destination_uuid": "db81f530-f6f0-4414-9ddb-782e04e952b4"
+      },
+      {
+       "uuid": "3a44ae3e-93af-4beb-a3d2-a6789b0cfe62",
+       "destination_uuid": "9844acef-eb91-449e-ad06-5f96d8a19e5e"
+      },
+      {
+       "uuid": "6fb08e95-a4a6-4a9c-9baa-99bb859c8879",
+       "destination_uuid": "e26b13ef-5f8b-4002-90cb-11fb198f649b"
+      },
+      {
+       "uuid": "de626f79-66d8-4245-9418-ad3bd02ab345",
+       "destination_uuid": "7a6db323-5509-4906-a99e-fe7da06cae8a"
+      }
+     ]
+    },
+    {
+     "uuid": "7a6db323-5509-4906-a99e-fe7da06cae8a",
+     "actions": [
+      {
+       "uuid": "7099cb77-145b-4deb-9f32-d83fcf288ace",
+       "type": "send_msg",
+       "text": "Écris un numéro de 0 à 4 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "10779210-3ebb-4743-a2b5-10dc318e42bb",
+       "destination_uuid": "69cf3192-30a8-4b1c-a907-317935c313a7"
+      }
+     ]
+    },
+    {
+     "uuid": "e26b13ef-5f8b-4002-90cb-11fb198f649b",
+     "actions": [
+      {
+       "uuid": "b07460e6-d4d7-48d2-bbe8-449c6e87956d",
+       "type": "enter_flow",
+       "flow": {
+        "uuid": "66962937-3847-46d6-82dd-881d19af7f30",
+        "name": "Urgence"
+       }
+      }
+     ],
+     "router": {
+      "type": "switch",
+      "operand": "@child.run.status",
+      "default_category_uuid": "55755a56-2b16-4d68-8335-1084d403670a",
+      "cases": [
+       {
+        "uuid": "17d35cab-41c6-4d9b-915f-d633157d102e",
+        "type": "has_only_text",
+        "arguments": [
+         "completed"
+        ],
+        "category_uuid": "55755a56-2b16-4d68-8335-1084d403670a"
+       },
+       {
+        "uuid": "2464a5ed-ce2d-47a4-bee3-da2d0d131309",
+        "type": "has_only_text",
+        "arguments": [
+         "expired"
+        ],
+        "category_uuid": "4749407f-80c3-4ad8-bdd6-fa3a5e8f89e6"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "55755a56-2b16-4d68-8335-1084d403670a",
+        "name": "Complete",
+        "exit_uuid": "e579a8d9-51bd-485e-992e-22c945cb1d9a"
+       },
+       {
+        "uuid": "4749407f-80c3-4ad8-bdd6-fa3a5e8f89e6",
+        "name": "Expired",
+        "exit_uuid": "b0cb3fde-9fd1-42fe-8da0-54470462ac6b"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "e579a8d9-51bd-485e-992e-22c945cb1d9a",
+       "destination_uuid": null
+      },
+      {
+       "uuid": "b0cb3fde-9fd1-42fe-8da0-54470462ac6b",
+       "destination_uuid": null
+      }
+     ]
+    },
+    {
+     "uuid": "2ec3c08f-218d-4e35-b87f-4bee2215afec",
+     "actions": [
+      {
+       "uuid": "88744ce3-be11-4863-ba20-5233bb688db6",
+       "type": "send_msg",
+       "text": "Mes émotions et ma sécurité 🌙\n1️⃣ Mes émotions\n2️⃣ Mon corps m'appartient\n3️⃣ Sécurité en ligne\n0️⃣ Retour",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "32faa5a7-b09f-4aca-8f80-8a8d0b3038d7",
+       "destination_uuid": "e922290a-5ef6-4b03-8d01-323d6025fe58"
+      }
+     ]
+    },
+    {
+     "uuid": "e922290a-5ef6-4b03-8d01-323d6025fe58",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "9ca67683-5252-4118-b732-041487f76e6c",
+      "cases": [
+       {
+        "uuid": "08f17b2e-6874-463e-8e38-aa40f2bb04e3",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "2ed9559e-ac17-49e7-a74c-b3806f3a3879"
+       },
+       {
+        "uuid": "284008d5-d37a-409e-93f3-8fe28ff1919f",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "99ba3885-a6bc-423b-9abd-20e8b129c330"
+       },
+       {
+        "uuid": "8a4d0a31-43cb-42b3-af6f-856dc52f08f9",
+        "type": "has_number_eq",
+        "arguments": [
+         "3"
+        ],
+        "category_uuid": "43c690aa-2d06-4d5c-ae5d-97be176fbbba"
+       },
+       {
+        "uuid": "b1482259-cce6-4f31-9f98-332336f64250",
+        "type": "has_number_eq",
+        "arguments": [
+         "0"
+        ],
+        "category_uuid": "a76fe080-13c4-4af1-8e43-4f29bb367e74"
+       },
+       {
+        "uuid": "480db5b2-2c6d-4ed0-b050-8dd7b2eb7be8",
+        "type": "has_any_word",
+        "arguments": [
+         "frappe frappée frapper battue battre bat tape tapée viol violée violence violences violent abus abusée agression agressée attouchement attouchements inceste harcèlement harcelée harcèle menace menacée chantage forcée forcé forcer obligée touchée enceinte grossesse mourir tuer suicide danger peur secours urgence saigne saignement hémorragie évanouie"
+        ],
+        "category_uuid": "c48be5b3-4b31-40c9-beab-552839b5d578"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "2ed9559e-ac17-49e7-a74c-b3806f3a3879",
+        "name": "T6 Mes émotions",
+        "exit_uuid": "c2686736-73b9-4b5c-a8ea-8084d5a99e3c"
+       },
+       {
+        "uuid": "99ba3885-a6bc-423b-9abd-20e8b129c330",
+        "name": "T9 Mon corps m'appartient",
+        "exit_uuid": "b4395990-8998-4528-b5a4-e4594e95c790"
+       },
+       {
+        "uuid": "43c690aa-2d06-4d5c-ae5d-97be176fbbba",
+        "name": "T18 Sécurité en ligne",
+        "exit_uuid": "63c25270-f52a-40a9-a397-9eb4c00de6cc"
+       },
+       {
+        "uuid": "a76fe080-13c4-4af1-8e43-4f29bb367e74",
+        "name": "Retour",
+        "exit_uuid": "a791d58d-afba-43f2-9041-b4a9d4028d49"
+       },
+       {
+        "uuid": "c48be5b3-4b31-40c9-beab-552839b5d578",
+        "name": "Urgence",
+        "exit_uuid": "d77cc159-16f5-40ea-a71d-b20de31c7a44"
+       },
+       {
+        "uuid": "9ca67683-5252-4118-b732-041487f76e6c",
+        "name": "Other",
+        "exit_uuid": "34c32d0d-fdd4-4b53-b4d1-3325ff6da121"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "sujet"
+     },
+     "exits": [
+      {
+       "uuid": "c2686736-73b9-4b5c-a8ea-8084d5a99e3c",
+       "destination_uuid": "ac2b5f94-a1f9-415d-b043-9c84c9d5facb"
+      },
+      {
+       "uuid": "b4395990-8998-4528-b5a4-e4594e95c790",
+       "destination_uuid": "ef50211e-9c91-4d18-9b49-e5a3bb3a8ecf"
+      },
+      {
+       "uuid": "63c25270-f52a-40a9-a397-9eb4c00de6cc",
+       "destination_uuid": "475072af-12be-4d44-8b49-dfca45c85dfa"
+      },
+      {
+       "uuid": "a791d58d-afba-43f2-9041-b4a9d4028d49",
+       "destination_uuid": "9844acef-eb91-449e-ad06-5f96d8a19e5e"
+      },
+      {
+       "uuid": "d77cc159-16f5-40ea-a71d-b20de31c7a44",
+       "destination_uuid": "685ffcce-59fe-4941-8b6b-5678b2028a60"
+      },
+      {
+       "uuid": "34c32d0d-fdd4-4b53-b4d1-3325ff6da121",
+       "destination_uuid": "1bf39f1d-dffe-4ae9-b55d-ea02d82460d0"
+      }
+     ]
+    },
+    {
+     "uuid": "1bf39f1d-dffe-4ae9-b55d-ea02d82460d0",
+     "actions": [
+      {
+       "uuid": "7dc6be3e-29e8-4ba2-b561-017875a61f31",
+       "type": "send_msg",
+       "text": "Écris un numéro de 0 à 3 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "ef35f304-4614-4010-b650-8c9ba47e7fa6",
+       "destination_uuid": "e922290a-5ef6-4b03-8d01-323d6025fe58"
+      }
+     ]
+    },
+    {
+     "uuid": "685ffcce-59fe-4941-8b6b-5678b2028a60",
+     "actions": [
+      {
+       "uuid": "30a14f1e-ac0e-46c0-b75b-f9531589ea31",
+       "type": "enter_flow",
+       "flow": {
+        "uuid": "66962937-3847-46d6-82dd-881d19af7f30",
+        "name": "Urgence"
+       }
+      }
+     ],
+     "router": {
+      "type": "switch",
+      "operand": "@child.run.status",
+      "default_category_uuid": "f86cb36b-e4a0-439d-a871-e3b4a88fac74",
+      "cases": [
+       {
+        "uuid": "9dfa3552-8c31-4aec-b91e-80b127682dcd",
+        "type": "has_only_text",
+        "arguments": [
+         "completed"
+        ],
+        "category_uuid": "f86cb36b-e4a0-439d-a871-e3b4a88fac74"
+       },
+       {
+        "uuid": "61d5f8ee-9f67-47fa-87a2-fff4e5f49d49",
+        "type": "has_only_text",
+        "arguments": [
+         "expired"
+        ],
+        "category_uuid": "bd80f88f-2364-4afe-8d69-af6c6064992f"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "f86cb36b-e4a0-439d-a871-e3b4a88fac74",
+        "name": "Complete",
+        "exit_uuid": "51dbfd8a-3106-4afb-abd5-c05d76f8da0e"
+       },
+       {
+        "uuid": "bd80f88f-2364-4afe-8d69-af6c6064992f",
+        "name": "Expired",
+        "exit_uuid": "e35b665a-7245-4732-a6a9-1ac88cc78c21"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "51dbfd8a-3106-4afb-abd5-c05d76f8da0e",
+       "destination_uuid": null
+      },
+      {
+       "uuid": "e35b665a-7245-4732-a6a9-1ac88cc78c21",
+       "destination_uuid": null
+      }
+     ]
+    },
+    {
+     "uuid": "eca10642-4dd3-489e-afe6-585d3337e4f9",
+     "actions": [
+      {
+       "uuid": "39bc758a-f6b5-4212-be39-673afc220545",
+       "type": "send_msg",
+       "text": "Pratique et santé 🌙\n1️⃣ Me préparer\n2️⃣ Pas d'argent pour des serviettes ?\n3️⃣ Quand voir un médecin\n0️⃣ Retour",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "cbcfac17-3c51-4480-a7d5-e5dc18939822",
+       "destination_uuid": "a0af7fc6-ec99-4ca2-9ada-7088e665dcaf"
+      }
+     ]
+    },
+    {
+     "uuid": "a0af7fc6-ec99-4ca2-9ada-7088e665dcaf",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "243c40c8-1a24-40b7-ab04-f6484c244bb4",
+      "cases": [
+       {
+        "uuid": "cdd2e703-6f13-4740-bfec-e114baf0478c",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "cf3a72e3-e356-4e93-9416-126747b028ac"
+       },
+       {
+        "uuid": "756c3ba3-40bf-49f4-88fe-16d1d55473e5",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "63c33a35-4ddd-4eac-b415-96a7b287ff23"
+       },
+       {
+        "uuid": "3370df8a-ec6e-4d72-a541-9061afffe628",
+        "type": "has_number_eq",
+        "arguments": [
+         "3"
+        ],
+        "category_uuid": "a7428673-134d-4bfc-a29e-b5312efdb181"
+       },
+       {
+        "uuid": "75c6933f-f503-4602-9b25-8c9f845e53fd",
+        "type": "has_number_eq",
+        "arguments": [
+         "0"
+        ],
+        "category_uuid": "f2e25018-b94e-44cb-af18-23c8310ab6ea"
+       },
+       {
+        "uuid": "ee1ab656-8de6-4320-9522-6a3d62274549",
+        "type": "has_any_word",
+        "arguments": [
+         "frappe frappée frapper battue battre bat tape tapée viol violée violence violences violent abus abusée agression agressée attouchement attouchements inceste harcèlement harcelée harcèle menace menacée chantage forcée forcé forcer obligée touchée enceinte grossesse mourir tuer suicide danger peur secours urgence saigne saignement hémorragie évanouie"
+        ],
+        "category_uuid": "a4e392f9-d3b4-4085-a5b2-425003b4de2a"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "cf3a72e3-e356-4e93-9416-126747b028ac",
+        "name": "T3 Me préparer",
+        "exit_uuid": "d7dfed57-9c29-411a-b13b-dd8e40ab9d3c"
+       },
+       {
+        "uuid": "63c33a35-4ddd-4eac-b415-96a7b287ff23",
+        "name": "T11 Pas d'argent pour des serviettes",
+        "exit_uuid": "d5642e86-814c-40b3-8cae-06c9422015e9"
+       },
+       {
+        "uuid": "a7428673-134d-4bfc-a29e-b5312efdb181",
+        "name": "T8 Quand voir un médecin",
+        "exit_uuid": "75f82db3-b459-4b5d-9bf8-c788228c5323"
+       },
+       {
+        "uuid": "f2e25018-b94e-44cb-af18-23c8310ab6ea",
+        "name": "Retour",
+        "exit_uuid": "ccbfa801-2e42-449b-a976-986767cb3a4d"
+       },
+       {
+        "uuid": "a4e392f9-d3b4-4085-a5b2-425003b4de2a",
+        "name": "Urgence",
+        "exit_uuid": "6a6bdae6-4bc1-40b8-a1cb-57428879cc09"
+       },
+       {
+        "uuid": "243c40c8-1a24-40b7-ab04-f6484c244bb4",
+        "name": "Other",
+        "exit_uuid": "601265a7-8fbd-4c44-83ef-0ed02b442827"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "sujet"
+     },
+     "exits": [
+      {
+       "uuid": "d7dfed57-9c29-411a-b13b-dd8e40ab9d3c",
+       "destination_uuid": "7013d2af-dbb4-4d8d-8867-22d34e77d789"
+      },
+      {
+       "uuid": "d5642e86-814c-40b3-8cae-06c9422015e9",
+       "destination_uuid": "0f60de23-fdf2-4013-b905-b0c4e96dea6f"
+      },
+      {
+       "uuid": "75f82db3-b459-4b5d-9bf8-c788228c5323",
+       "destination_uuid": "1e444c25-8739-4c28-865c-c80e6d8c8fd3"
+      },
+      {
+       "uuid": "ccbfa801-2e42-449b-a976-986767cb3a4d",
+       "destination_uuid": "9844acef-eb91-449e-ad06-5f96d8a19e5e"
+      },
+      {
+       "uuid": "6a6bdae6-4bc1-40b8-a1cb-57428879cc09",
+       "destination_uuid": "53cd44ed-cc46-4005-baf7-32d8920d43ba"
+      },
+      {
+       "uuid": "601265a7-8fbd-4c44-83ef-0ed02b442827",
+       "destination_uuid": "ce20338c-0a67-444c-ab49-b820ea572b18"
+      }
+     ]
+    },
+    {
+     "uuid": "ce20338c-0a67-444c-ab49-b820ea572b18",
+     "actions": [
+      {
+       "uuid": "e238faa9-2c66-4153-b3c0-2ff2b78c7a02",
+       "type": "send_msg",
+       "text": "Écris un numéro de 0 à 3 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "4f9104c1-5f28-4f6b-acf7-93eb22d51e85",
+       "destination_uuid": "a0af7fc6-ec99-4ca2-9ada-7088e665dcaf"
+      }
+     ]
+    },
+    {
+     "uuid": "53cd44ed-cc46-4005-baf7-32d8920d43ba",
+     "actions": [
+      {
+       "uuid": "cb9bf32e-fbe4-4648-81ec-e0e5be08eb7f",
+       "type": "enter_flow",
+       "flow": {
+        "uuid": "66962937-3847-46d6-82dd-881d19af7f30",
+        "name": "Urgence"
+       }
+      }
+     ],
+     "router": {
+      "type": "switch",
+      "operand": "@child.run.status",
+      "default_category_uuid": "745f2aec-39d4-43e3-9584-82116c9a86ec",
+      "cases": [
+       {
+        "uuid": "f17e8ffb-936f-4550-b7d0-e71e7556f43b",
+        "type": "has_only_text",
+        "arguments": [
+         "completed"
+        ],
+        "category_uuid": "745f2aec-39d4-43e3-9584-82116c9a86ec"
+       },
+       {
+        "uuid": "57305d5e-f23e-4da0-a61b-1cf32905033c",
+        "type": "has_only_text",
+        "arguments": [
+         "expired"
+        ],
+        "category_uuid": "69324d77-c8c5-4c62-8a70-4999c03b38a9"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "745f2aec-39d4-43e3-9584-82116c9a86ec",
+        "name": "Complete",
+        "exit_uuid": "8f506ee3-02f1-4dfc-8fdf-0551b9ddcc9f"
+       },
+       {
+        "uuid": "69324d77-c8c5-4c62-8a70-4999c03b38a9",
+        "name": "Expired",
+        "exit_uuid": "10b3a529-ccdd-4f17-953d-5232ffd73b58"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "8f506ee3-02f1-4dfc-8fdf-0551b9ddcc9f",
+       "destination_uuid": null
+      },
+      {
+       "uuid": "10b3a529-ccdd-4f17-953d-5232ffd73b58",
+       "destination_uuid": null
+      }
+     ]
+    },
+    {
+     "uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651",
+     "actions": [
+      {
+       "uuid": "30da1d3e-0a25-46f5-88df-e40ea69e832b",
+       "type": "send_msg",
+       "text": "Ce thème t'a aidée ?\n1️⃣ 👍 Oui\n2️⃣ 👎 Non",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "e1733cf5-a537-4aa4-99b6-74da2783405e",
+       "destination_uuid": "6f536a8a-c75c-4267-af79-f45d836aeb4b"
+      }
+     ]
+    },
+    {
+     "uuid": "6f536a8a-c75c-4267-af79-f45d836aeb4b",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "8b7e0ecd-2d28-4768-9941-e64e6715c070",
+      "cases": [
+       {
+        "uuid": "72a6ba54-6a2d-495b-b3da-15fc40772f5a",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "7fb0966e-f34e-433a-b9af-85849eb90ed0"
+       },
+       {
+        "uuid": "58c97bfa-a799-46b8-a541-71e4c37990e8",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "24e1bcef-01cc-46df-8cb7-d8c6908a9788"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "7fb0966e-f34e-433a-b9af-85849eb90ed0",
+        "name": "Oui",
+        "exit_uuid": "c4c4a097-84d9-4fc0-be02-cf52652da203"
+       },
+       {
+        "uuid": "24e1bcef-01cc-46df-8cb7-d8c6908a9788",
+        "name": "Non",
+        "exit_uuid": "727cc02b-352d-40a8-88fe-2fe6c0ceecac"
+       },
+       {
+        "uuid": "8b7e0ecd-2d28-4768-9941-e64e6715c070",
+        "name": "Other",
+        "exit_uuid": "48a88b8e-91a5-4466-a278-d05f7e84662a"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "avis"
+     },
+     "exits": [
+      {
+       "uuid": "c4c4a097-84d9-4fc0-be02-cf52652da203",
+       "destination_uuid": "a2a3cc3d-228c-4c55-b964-af988a99c8c4"
+      },
+      {
+       "uuid": "727cc02b-352d-40a8-88fe-2fe6c0ceecac",
+       "destination_uuid": "a2a3cc3d-228c-4c55-b964-af988a99c8c4"
+      },
+      {
+       "uuid": "48a88b8e-91a5-4466-a278-d05f7e84662a",
+       "destination_uuid": "a2a3cc3d-228c-4c55-b964-af988a99c8c4"
+      }
+     ]
+    },
+    {
+     "uuid": "a2a3cc3d-228c-4c55-b964-af988a99c8c4",
+     "actions": [
+      {
+       "uuid": "a5cb9f72-128e-4da9-8373-444700cc54e3",
+       "type": "send_msg",
+       "text": "Merci pour ton avis ! 💛 Choisis un autre sujet ci-dessous (0 pour les autres thèmes), ou écris MENU pour le menu principal.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "c314f181-461d-4f9b-9f2b-4dc91e087cdc",
+       "destination_uuid": "21a8120e-55b4-478b-8b30-7b7fd81878a1"
+      }
+     ]
+    },
+    {
+     "uuid": "21a8120e-55b4-478b-8b30-7b7fd81878a1",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@results.theme",
+      "default_category_uuid": "d1051e48-5dd6-47e5-b2b9-1c5f2be4f756",
+      "cases": [
+       {
+        "uuid": "5c1d6ba1-cbc4-432a-9a25-371467d06214",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "d4b6a977-c3fe-4ac7-a71b-827e221ccbd4"
+       },
+       {
+        "uuid": "676cbf89-5047-4389-b37a-64aaae321143",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "632996da-942d-4968-883f-9e6336666871"
+       },
+       {
+        "uuid": "2f4d3353-b22e-4a3b-943f-4af757b3c0d1",
+        "type": "has_number_eq",
+        "arguments": [
+         "3"
+        ],
+        "category_uuid": "d85e492e-6bcc-4ec3-9ff5-faacef28289e"
+       },
+       {
+        "uuid": "c9d89223-c07e-47c6-bddc-d808c5781c73",
+        "type": "has_number_eq",
+        "arguments": [
+         "4"
+        ],
+        "category_uuid": "4826813b-e666-4ab0-968c-236e0b4248fb"
+       },
+       {
+        "uuid": "4ab6bfdb-b44d-41c1-a2e9-449bc5cf401e",
+        "type": "has_number_eq",
+        "arguments": [
+         "5"
+        ],
+        "category_uuid": "56075b75-3606-4774-9ad9-5cf1f1c2cf07"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "d4b6a977-c3fe-4ac7-a71b-827e221ccbd4",
+        "name": "Mes règles",
+        "exit_uuid": "f0728ae9-3285-46db-b3cc-c667553982a2"
+       },
+       {
+        "uuid": "632996da-942d-4968-883f-9e6336666871",
+        "name": "Mon corps qui grandit",
+        "exit_uuid": "d70299bc-c4ad-477d-9050-bc7b7d02c463"
+       },
+       {
+        "uuid": "d85e492e-6bcc-4ec3-9ff5-faacef28289e",
+        "name": "Prendre soin de moi",
+        "exit_uuid": "69d5568d-e961-416f-9269-666e17a07ca8"
+       },
+       {
+        "uuid": "4826813b-e666-4ab0-968c-236e0b4248fb",
+        "name": "Mes émotions et ma sécurité",
+        "exit_uuid": "2b97f90f-711c-4736-92e0-974baa06edde"
+       },
+       {
+        "uuid": "56075b75-3606-4774-9ad9-5cf1f1c2cf07",
+        "name": "Pratique et santé",
+        "exit_uuid": "afcd467c-2eda-4c47-a862-6b9f54e35bd6"
+       },
+       {
+        "uuid": "d1051e48-5dd6-47e5-b2b9-1c5f2be4f756",
+        "name": "Other",
+        "exit_uuid": "b6a71681-060d-46b2-a032-2ad1d1f99f73"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "f0728ae9-3285-46db-b3cc-c667553982a2",
+       "destination_uuid": "0fe8adb7-80dc-44ef-9955-f09ad6c945b7"
+      },
+      {
+       "uuid": "d70299bc-c4ad-477d-9050-bc7b7d02c463",
+       "destination_uuid": "22363c44-3838-4ce0-a553-d116114ce00a"
+      },
+      {
+       "uuid": "69d5568d-e961-416f-9269-666e17a07ca8",
+       "destination_uuid": "06f93442-c38d-489c-b0d7-7546034a9e5f"
+      },
+      {
+       "uuid": "2b97f90f-711c-4736-92e0-974baa06edde",
+       "destination_uuid": "2ec3c08f-218d-4e35-b87f-4bee2215afec"
+      },
+      {
+       "uuid": "afcd467c-2eda-4c47-a862-6b9f54e35bd6",
+       "destination_uuid": "eca10642-4dd3-489e-afe6-585d3337e4f9"
+      },
+      {
+       "uuid": "b6a71681-060d-46b2-a032-2ad1d1f99f73",
+       "destination_uuid": "9844acef-eb91-449e-ad06-5f96d8a19e5e"
+      }
+     ]
+    },
+    {
+     "uuid": "c387d20e-367a-4935-89da-26e68d508441",
+     "actions": [
+      {
+       "uuid": "ae74cf46-c7fc-410a-8814-7cf8cd84d8ac",
+       "type": "send_msg",
+       "text": "🌙 Thème 1 : C'est quoi les règles ?\n\nLes règles, c'est un peu de sang qui sort du vagin chaque mois. C'est normal et c'est un signe que ton corps grandit bien. 🌸",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "355ac4f2-88ee-4917-9656-eb6d85b26915",
+       "type": "send_msg",
+       "text": "Chaque mois, l'utérus (une petite poche dans ton ventre) prépare un « nid » doux. S'il n'y a pas de bébé, ce nid se détache et sort sous forme de sang : ce sont les règles.\n\nLes premières règles arrivent souvent entre 10 et 15 ans, parfois un peu avant ou un peu après. Chaque fille a son propre rythme.\nElles durent en général 2 à 7 jours.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "3c758661-c9e9-459a-b09e-c43375abdfb4",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Les règles, c'est sale. »\n✅ Vrai : le sang des règles n'est pas sale. C'est un sang normal du corps. Toutes les femmes du monde ont leurs règles : ta maman, tes tantes, tes enseignantes. Il n'y a aucune honte. 💛",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "f80a1fee-f824-4d43-b1b3-076e0f379f14",
+       "type": "send_msg",
+       "text": "🧘🏾‍♀️ Petit exercice :\nPose une main sur ton ventre. Respire lentement 3 fois et dis dans ta tête : « Mon corps grandit. C'est normal. »",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "abf92f3d-a9de-43bf-8a91-194278b6bfb5",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "1a2770cf-e36c-40f1-a6cf-c804054fa2c5",
+     "actions": [
+      {
+       "uuid": "ab7df529-553a-43c0-a4ad-c3c64095ad36",
+       "type": "send_msg",
+       "text": "🌙 Thème 2 : Mon cycle\n\nLe cycle, c'est le temps entre le premier jour de tes règles et le premier jour des règles suivantes.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "4bee1f99-07e8-4a51-8970-30004aa0f4a4",
+       "type": "send_msg",
+       "text": "Chez les jeunes filles, un cycle dure souvent entre 21 et 45 jours.\nAu début, les règles peuvent être irrégulières : un mois tôt, un mois tard, parfois un mois sans règles. C'est fréquent pendant les 2 ou 3 premières années, le temps que ton corps trouve son rythme.\n\n📅 Astuce : note le premier jour de tes règles. Tu peux le faire ici avec Ma Lune (option 3 du menu).",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "c25a9634-2b4e-4d41-a8f4-8417363b90e6",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Si mes règles ne viennent pas chaque mois au même jour, je suis malade. »\n✅ Vrai : au début, c'est normal que ce soit irrégulier. Mais si tu n'as plus de règles pendant plus de 3 mois, ou si elles reviennent très souvent, parles-en à un agent de santé.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "d6c3f1b4-2b65-47c5-8f02-b0a722c8c6cf",
+       "type": "send_msg",
+       "text": "✍🏾 Petit exercice :\nComment te sens-tu aujourd'hui ? Choisis un seul mot : calme, fatiguée, triste, joyeuse, énervée…\nNoter ton humeur t'aide à mieux connaître ton corps.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "cf8aa105-5178-4d0a-ab73-1cd7344ab4c0",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "d964756d-3045-4e23-bdf5-7ac925e794f4",
+     "actions": [
+      {
+       "uuid": "3998047b-4b3a-451f-ad71-5071f8bac641",
+       "type": "send_msg",
+       "text": "🌙 Thème 12 : Calculer mon cycle\n\nSavoir calculer ton cycle t'aide à deviner quand tes prochaines règles vont arriver. 📅",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "17efdc09-55ee-46d5-8a3d-a4be5e9c117c",
+       "type": "send_msg",
+       "text": "1. Note le PREMIER jour de tes règles. C'est le jour 1.\n2. Le mois suivant, note encore le premier jour de tes règles.\n3. Compte les jours entre les deux : c'est la durée de ton cycle.\n\nExemple : règles le 3 mars, puis le 31 mars → cycle de 28 jours.\nPour deviner les prochaines règles : ajoute ce nombre de jours au jour 1 → environ le 28 avril.\n\n💡 Note 3 cycles de suite, et fais la moyenne : c'est plus précis.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "30624972-1733-40d2-bda6-2e0b555cdd81",
+       "type": "send_msg",
+       "text": "⚠️ Chez les jeunes filles, le cycle change souvent d'un mois à l'autre. Ce calcul sert à te préparer, PAS à éviter une grossesse : il n'est pas assez sûr pour ça.\n\n✅ Ma Lune peut le faire pour toi : choisis « Noter le début de mes règles » dans le MENU, et je t'enverrai un rappel avant tes prochaines règles.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "8cdb97d2-d47c-4636-b37d-c402dc6e153b",
+       "type": "send_msg",
+       "text": "✍🏾 Essayons maintenant ensemble : je vais calculer ton cycle pour toi 👇",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "c768c275-a4d4-4e83-a0b9-46b3aeb95a4c",
+       "destination_uuid": "36dcc205-5418-4297-ad53-4e69b59ee423"
+      }
+     ]
+    },
+    {
+     "uuid": "36dcc205-5418-4297-ad53-4e69b59ee423",
+     "actions": [
+      {
+       "uuid": "26bb30b2-ef51-47cd-b029-70d8a8f033c3",
+       "type": "enter_flow",
+       "flow": {
+        "uuid": "a8347572-fd78-4e6c-8e88-2bb2c6bf92f2",
+        "name": "Mes règles"
+       }
+      }
+     ],
+     "router": {
+      "type": "switch",
+      "operand": "@child.run.status",
+      "default_category_uuid": "3ab0ca1e-f5e1-4a6d-bd74-6e8de57ce812",
+      "cases": [
+       {
+        "uuid": "2ee0c5c3-3062-4dfd-9cb5-95b0b84667d4",
+        "type": "has_only_text",
+        "arguments": [
+         "completed"
+        ],
+        "category_uuid": "3ab0ca1e-f5e1-4a6d-bd74-6e8de57ce812"
+       },
+       {
+        "uuid": "88cab556-952d-42fe-a01e-a2bdebdb350a",
+        "type": "has_only_text",
+        "arguments": [
+         "expired"
+        ],
+        "category_uuid": "f7c14d5a-9948-401f-bca1-dccbb42d1d2d"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "3ab0ca1e-f5e1-4a6d-bd74-6e8de57ce812",
+        "name": "Complete",
+        "exit_uuid": "4529fd90-af2a-4940-945c-7ee9a62de8ab"
+       },
+       {
+        "uuid": "f7c14d5a-9948-401f-bca1-dccbb42d1d2d",
+        "name": "Expired",
+        "exit_uuid": "66d01234-badd-4b30-9659-0851b68e31ad"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "4529fd90-af2a-4940-945c-7ee9a62de8ab",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      },
+      {
+       "uuid": "66d01234-badd-4b30-9659-0851b68e31ad",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "940b472c-5469-4f26-b3ab-e0714dfed083",
+     "actions": [
+      {
+       "uuid": "2b6343bb-ce29-4d16-a886-837d29479fc0",
+       "type": "send_msg",
+       "text": "🌙 Thème 15 : Crampes et règles irrégulières\n\nDouleurs et règles qui ne viennent pas à la même date : ce sont les deux questions les plus fréquentes. Voyons ce qui est normal, et ce qui ne l'est pas. 🔍",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "c1f3f097-50c2-451e-bd74-54cf106ae23c",
+       "type": "send_msg",
+       "text": "Pourquoi ? Pendant les règles, l'utérus se contracte pour faire sortir le sang. Ça peut faire mal au bas du ventre, au dos ou aux cuisses, surtout les 1 à 2 premiers jours.\n\n✅ Normal : une douleur qui se calme avec la chaleur, le repos, le mouvement ou un comprimé contre la douleur.\n🚩 Pas normal : une douleur qui t'empêche d'aller à l'école chaque mois, qui ne passe pas avec un comprimé, ou qui arrive aussi en dehors des règles. → Va voir un agent de santé.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "e51da35c-2396-445f-ad4a-5fa563c2cbc6",
+       "type": "send_msg",
+       "text": "Pourquoi ? Les 2 à 3 premières années, ton corps apprend son rythme. Le stress, la maladie, un grand changement de poids ou beaucoup de sport peuvent aussi décaler les règles.\n\n✅ Normal : un cycle entre 21 et 45 jours, qui change un peu d'un mois à l'autre.\n🚩 Pas normal : plus de 3 mois sans règles, des règles plus d'une fois toutes les 3 semaines, ou des règles de plus de 7 jours. → Va voir un agent de santé.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "1d1b6b29-52ae-44c6-9dbc-744114fcab4c",
+       "type": "send_msg",
+       "text": "📓 Ton carnet de règles :\nChaque mois, note le premier jour, le nombre de jours et ta douleur de 1 à 5. Montre ce carnet au médecin si tu consultes : ça l'aide beaucoup ! Ma Lune peut noter tes dates pour toi (MENU, option 3).",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "531e47c2-03df-4b9a-b02e-511be79e91d9",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "56306581-4a71-4324-9476-a050822006a8",
+     "actions": [
+      {
+       "uuid": "51c71e75-ab56-446c-bcc1-e52f2e03f4a0",
+       "type": "send_msg",
+       "text": "🌙 Thème 13 : Comprendre la puberté\n\nLa puberté, c'est la période où ton corps passe de celui d'une enfant à celui d'une jeune femme. Elle commence souvent entre 8 et 13 ans et dure plusieurs années. 🌸",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "dab6244a-9565-40ed-bf75-48f222ea61d7",
+       "type": "send_msg",
+       "text": "Ce qui change, petit à petit :\n• la poitrine commence à pousser (souvent le premier signe)\n• des poils apparaissent sous les bras et sur le sexe\n• tu grandis plus vite, tes hanches s'élargissent\n• tu transpires plus : lave-toi chaque jour\n• des boutons peuvent apparaître\n• un liquide blanc ou transparent peut tacher ta culotte\n• puis arrivent les règles, souvent 2 à 3 ans après le début de la poitrine",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "5d14d12d-a8af-4fdf-94dc-90b263beee4d",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Si mon amie a déjà ses règles et pas moi, j'ai un problème. »\n✅ Vrai : chaque corps a son propre rythme. Certaines commencent tôt, d'autres plus tard. C'est normal. Parle à un agent de santé seulement si tu n'as aucun signe de poitrine à 13 ans, ou pas de règles à 15 ans.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "02b29462-1498-4e3a-994a-428c14d0068a",
+       "type": "send_msg",
+       "text": "🪞 Regarde-toi avec douceur :\nQuel changement as-tu remarqué dans ton corps ? Dis-toi : « Mon corps change à son rythme, et c'est bien. »",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "bcb7e3d5-e2f8-4f22-b9b2-ef908ff7d6f7",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "322e213a-0958-4f0c-b517-b5acace76542",
+     "actions": [
+      {
+       "uuid": "e81a0e7d-1fdf-4813-b56b-1426f9fe94a2",
+       "type": "send_msg",
+       "text": "🌙 Thème 14 : Mon corps et la sexualité\n\nPendant la puberté, on peut avoir de nouveaux sentiments : être attirée par quelqu'un, avoir le cœur qui bat. C'est normal. Ce qui compte, c'est de faire des choix qui te protègent. 💛",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "91716ffe-09eb-446f-802b-9439e1b01c8b",
+       "type": "send_msg",
+       "text": "• Ton corps t'appartient. Tu as le droit de dire NON ou d'attendre, à tout moment, même si tu as déjà dit oui avant.\n• Personne n'a le droit de te forcer, de te menacer ou de te donner de l'argent ou des cadeaux en échange de relations.\n• Les relations sexuelles peuvent entraîner une grossesse et des infections (IST, VIH), même la première fois.\n• Il existe des moyens de se protéger : un agent de santé peut t'expliquer, en toute confidentialité.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "fd0b20e4-c052-48a6-8737-8075a397f8d8",
+       "type": "send_msg",
+       "text": "❌ Mythe : « La première fois, on ne peut pas tomber enceinte. »\n❌ Mythe : « Si un garçon insiste, c'est qu'il m'aime. »\n✅ Vrai : une grossesse est possible dès la première fois. Et quelqu'un qui t'aime respecte ton NON.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "252cca6a-83b5-4811-86a4-0d604b2d38a7",
+       "type": "send_msg",
+       "text": "🗣️ Entraîne-toi à dire non :\n« Non, je ne veux pas. » « Je ne suis pas prête. » « Respecte mon choix. »\nDire non calmement, c'est un droit.\n\nTu as une question privée ou quelqu'un te met la pression ? Écris PARLER : une personne de l'équipe Ma Lune te répondra en privé.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "f8447148-7d8e-40c7-bf4e-c078f73e9c95",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "634e8b84-f005-4ee4-bcf1-eeda0f7cc341",
+     "actions": [
+      {
+       "uuid": "7e817e04-7e2b-4e3f-b9e8-257725e5dff2",
+       "type": "send_msg",
+       "text": "🌙 Thème 16 : Pertes blanches et infections\n\nUn liquide blanc ou transparent dans ta culotte, ce sont des « pertes ». C'est normal : c'est la façon naturelle dont ton vagin se nettoie. 🌸",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "c3515af7-7cf8-43c1-96c1-d92c62f0779d",
+       "type": "send_msg",
+       "text": "✅ Normal : blanc ou transparent, un peu collant, sans mauvaise odeur. La quantité change pendant le cycle.\n🚩 Va voir un agent de santé si les pertes :\n• sentent très mauvais\n• sont jaunes, vertes, grises ou ressemblent à du lait caillé\n• grattent, brûlent, ou font mal en urinant\nCes infections se soignent bien.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "c20c4128-66b7-4777-a927-7c7b62b09fe1",
+       "type": "send_msg",
+       "text": "❌ Ne mets RIEN à l'intérieur du vagin pour le « laver » ou le « resserrer » : pas de savon, de javel, de feuilles, de poudres, de plantes, de pierres ou de produits vendus pour ça. Cela peut brûler et provoquer des infections graves.\n✅ Lave seulement l'extérieur à l'eau propre. Porte des culottes en coton, propres et sèches.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "7fdffd74-18ea-4c06-b590-368269795f5b",
+       "type": "send_msg",
+       "text": "🧺 Petit réflexe : chaque soir, change de culotte et fais sécher tes culottes lavées au soleil. Simple, et très efficace contre les infections !",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "6fedda1d-74e1-414b-b4fb-67a1185b4ba5",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "f68088ba-1cfb-44ef-90e6-4847e0b789f5",
+     "actions": [
+      {
+       "uuid": "2cd59ff6-033b-4e19-89a3-9d77e663498c",
+       "type": "send_msg",
+       "text": "🌙 Thème 19 : Le vaccin HPV\n\nLe HPV (papillomavirus) est un virus très fréquent. Il peut causer, des années plus tard, le cancer du col de l'utérus, un cancer qui touche beaucoup de femmes en RDC. 💉",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "e5582f53-a50d-44ab-a105-871fc382b1bc",
+       "type": "send_msg",
+       "text": "Un vaccin protège contre ce virus. Il marche le mieux quand on le reçoit jeune, entre 9 et 14 ans.\nLa RDC prévoit de proposer ce vaccin aux filles de 9 à 14 ans. Demande à ton école ou au centre de santé s'il est disponible près de chez toi.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "e389a2ee-4de3-4dd7-b4ff-0a1751c6a4d6",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Ce vaccin rend les filles stériles. »\n✅ Vrai : le vaccin HPV n'empêche pas d'avoir des enfants plus tard. Il est utilisé depuis de nombreuses années dans le monde et protège ta santé future.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "be4972d9-7d0c-4313-aaff-86d017b53392",
+       "type": "send_msg",
+       "text": "💛 Parents : le vaccin HPV est un cadeau de santé pour l'avenir de votre fille. Parlez-en avec un agent de santé, et accompagnez-la le jour de la vaccination.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "a62aa7ea-7898-4b62-90f1-305973446617",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "cd4a9129-df28-429f-b125-288e657b7756",
+     "actions": [
+      {
+       "uuid": "ad5f3661-b57d-4e82-9d10-be5e50371dd6",
+       "type": "send_msg",
+       "text": "🌙 Thème 10 : Grandir sereine\n\nGrandir, c'est une aventure. Ton corps change, tes émotions aussi, et tu deviens chaque jour un peu plus toi-même. 🌸",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "5d3cadb4-1ee0-474e-91dd-73f5e5c8d2ba",
+       "type": "send_msg",
+       "text": "Ce qui aide à grandir sereine :\n• parler des règles avec ta maman ou une adulte de confiance, même si c'est un peu gênant au début\n• poser tes questions sans honte, ici ou à un agent de santé\n• aider une amie qui a ses premières règles : partage une serviette, rassure-la, ne te moque jamais\n• garder confiance en toi : tes règles ne décident pas de ta valeur",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "418979ba-2314-44a4-b076-7e8328ab8dc3",
+       "type": "send_msg",
+       "text": "❌ Mythe : « On ne parle pas de ça. »\n✅ Vrai : en parler aide les filles à mieux prendre soin d'elles. Plus on en parle, moins il y a de honte. Tu peux être celle qui aide les autres ! 💪🏾",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "ae529c8c-bf0a-4666-9995-5cec88aee52a",
+       "type": "send_msg",
+       "text": "💌 Un mot gentil pour toi :\nÉcris une phrase douce à toi-même, par exemple : « Je suis fière de moi et de mon corps. » Garde-la dans ton cœur.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "eaadaf69-de92-4521-9e6e-1eacea2c53ab",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "2cef1c6e-fc56-45fb-af6e-289d7b2ad1b0",
+     "actions": [
+      {
+       "uuid": "aa25776d-e306-43fc-af54-b5ac7eae06ea",
+       "type": "send_msg",
+       "text": "🌙 Thème 4 : Hygiène\n\nPendant tes règles, quelques gestes simples te gardent propre et en bonne santé. 🧼",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "46b73987-547d-4091-af6a-6739c7e144fe",
+       "type": "send_msg",
+       "text": "• Change ta serviette toutes les 4 à 6 heures, et jamais plus de 8 heures, même si elle semble peu pleine.\n• Lave-toi les mains avant et après.\n• Lave l'extérieur de ton sexe avec de l'eau propre, au moins une fois par jour. Pas besoin de laver à l'intérieur : le vagin se nettoie tout seul.\n\n🧺 Serviettes lavables : lave-les à l'eau froide puis avec du savon, rince bien et fais-les sécher complètement, de préférence au soleil. Ne les utilise jamais humides.\n🗑️ Serviettes jetables : enroule-les dans du papier ou un sachet et jette-les à la poubelle. Ne les jette pas dans les toilettes.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "3f4f9392-c161-4d57-8fc2-57130469fff7",
+       "type": "send_msg",
+       "text": "❌ Mythe : « On ne doit pas se laver pendant les règles. »\n✅ Vrai : au contraire, se laver est important ! Prendre une douche ou un bain pendant les règles est sûr et t'aide à te sentir bien.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "9e8112f2-439e-44b7-935c-87452d5f81fc",
+       "type": "send_msg",
+       "text": "🧘🏾‍♀️ Petit exercice (2 minutes) :\nFerme les yeux. Remarque tes pieds, tes jambes, ton ventre, tes épaules. Relâche chaque partie en soufflant doucement.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "769568cc-0ed8-42db-8dab-bb14788e2df9",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "290fdda4-f8cf-4355-bda0-e87394f159cc",
+     "actions": [
+      {
+       "uuid": "4260bf60-27bc-428d-b07e-aae6443d4b09",
+       "type": "send_msg",
+       "text": "🌙 Thème 5 : Les douleurs\n\nBeaucoup de filles ont mal au ventre ou au dos pendant leurs règles. Ce sont des crampes. C'est fréquent, et il existe des moyens de te soulager. 🌸",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "add517d9-a980-4ba4-b7f6-12a34015846e",
+       "type": "send_msg",
+       "text": "Pour te soulager :\n• Mets quelque chose de chaud sur ton ventre (une bouteille d'eau tiède enveloppée dans un tissu).\n• Repose-toi, allongée sur le côté avec les genoux pliés.\n• Bouge doucement : marcher ou t'étirer peut aider.\n• Bois de l'eau.\n\n💊 Oui, tu as le droit de prendre un comprimé contre la douleur, comme l'ibuprofène ou le paracétamol. C'est sûr si tu respectes la dose écrite sur la boîte ou donnée par le pharmacien ou l'agent de santé. Prends-le avec un peu de nourriture.\n⚠️ Pas d'aspirine avant 16 ans. Si tu es allergique, si tu as de l'asthme ou mal à l'estomac, demande d'abord à un agent de santé.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "930f3a1d-ce17-4cbc-9926-b77534d8bf53",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Il faut souffrir en silence. »\n✅ Vrai : tu as le droit d'avoir mal et d'en parler. Si la douleur est si forte que tu ne peux pas aller à l'école, ou si les médicaments ne t'aident pas, va voir un agent de santé. Ce n'est pas normal de souffrir autant.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "eb232f95-ba3e-47b6-b1c9-f472a5606b6a",
+       "type": "send_msg",
+       "text": "🔥 Respiration des mains chaudes :\nFrotte tes mains l'une contre l'autre pendant 10 secondes. Pose-les sur ton ventre. Inspire par le nez en comptant jusqu'à 4, souffle par la bouche en comptant jusqu'à 6. Fais-le 5 fois.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "3b297362-72b6-4a68-b9ee-3646accf92e7",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "d9b486e3-6297-485b-b3a8-a10b346c8a9e",
+     "actions": [
+      {
+       "uuid": "a014dd83-2dba-4e19-802e-fa16f7877afe",
+       "type": "send_msg",
+       "text": "🌙 Thème 7 : Manger et bouger\n\nPendant tes règles, tu peux continuer ta vie normale : manger, jouer, faire du sport et aller à l'école. ⚽📚",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "ef02597d-88a8-423e-a7d8-5fdd9027622a",
+       "type": "send_msg",
+       "text": "Les règles ne sont PAS une maladie. Tu peux faire du sport, aller à la gym, danser, courir, jouer au foot.\nBouger aide même souvent à diminuer les crampes et à te sentir de meilleure humeur. Écoute ton corps : si tu es très fatiguée un jour, fais une activité plus douce.\n\nPour avoir de l'énergie :\n• Bois beaucoup d'eau.\n• Mange des aliments riches en fer, car tu perds un peu de sang : haricots, feuilles de manioc (pondu), légumes verts, poisson, œufs, viande quand c'est possible.\n• Les fruits (orange, mangue, goyave) aident ton corps à bien utiliser le fer.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "6d3b7952-2d3c-45c9-ba1f-4c1f788c8a7f",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Les règles sont une maladie, il faut rester couchée. »\n❌ Mythe : « Pendant les règles, on ne doit pas faire de sport ni aller à l'école. »\n❌ Mythe : « Il y a des aliments interdits pendant les règles. »\n✅ Vrai : les règles sont une partie normale de la vie. Tu peux aller à l'école, faire du sport et manger normalement.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "c05233b1-8bcc-4ba1-9ea8-148e29b1f09b",
+       "type": "send_msg",
+       "text": "🤸🏾‍♀️ Étirement de 5 minutes :\nDebout, lève les bras au ciel et étire-toi. Penche-toi doucement à droite, puis à gauche. Ensuite, assise, rapproche tes genoux de ta poitrine et respire calmement.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "cc72bfd2-9448-4b1c-b580-d3960c24dca0",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "db81f530-f6f0-4414-9ddb-782e04e952b4",
+     "actions": [
+      {
+       "uuid": "b420ec64-42d6-428d-ac89-b474fc75ea57",
+       "type": "send_msg",
+       "text": "🌙 Thème 17 : Fatigue et anémie\n\nChaque mois, tu perds un peu de sang et donc un peu de fer. Si ton corps manque de fer, tu peux avoir une anémie : le sang transporte moins bien l'oxygène. 🩸",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "7a1728f0-f184-4079-919e-b39547bb13d5",
+       "type": "send_msg",
+       "text": "Pense à l'anémie si tu es souvent :\n• très fatiguée, même après avoir dormi\n• essoufflée en montant les escaliers\n• pâle (intérieur des paupières, ongles, lèvres)\n• avec des vertiges ou des maux de tête\n• avec du mal à te concentrer à l'école\n\nAvec des règles abondantes, le risque est plus grand. Un agent de santé peut vérifier avec une simple prise de sang.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "9d2c7604-7b65-4103-960d-ae582e78da02",
+       "type": "send_msg",
+       "text": "🥗 Mange chaque jour un aliment riche en fer : haricots, pondu et autres feuilles vertes, poisson, chenilles, œufs, viande ou foie quand c'est possible.\n🍊 Avec un fruit (orange, mangue, goyave), ton corps absorbe mieux le fer.\n☕ Évite le thé juste pendant le repas : il bloque le fer.\n💊 Ne prends pas de comprimés de fer sans l'avis d'un agent de santé.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "45b0758c-8453-4d62-a435-dc14f9577390",
+       "type": "send_msg",
+       "text": "🍽️ Défi de la semaine : chaque jour, ajoute un aliment riche en fer et un fruit à ton repas. Note comment tu te sens après 7 jours !",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "abee8ff6-3848-4f4e-808a-44f57bc36e9b",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "ac2b5f94-a1f9-415d-b043-9c84c9d5facb",
+     "actions": [
+      {
+       "uuid": "51e22c4e-0fc2-412b-9c0d-a19688f568dd",
+       "type": "send_msg",
+       "text": "🌙 Thème 6 : Mes émotions\n\nAvant ou pendant les règles, tu peux te sentir plus triste, plus énervée ou plus fatiguée. C'est lié aux hormones, des messagers naturels de ton corps. 💛",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "8c618bff-b65e-48f9-85be-92acbf64b70d",
+       "type": "send_msg",
+       "text": "C'est normal d'avoir des hauts et des bas. Ce qui peut aider :\n• dormir suffisamment\n• parler à une amie ou à une adulte de confiance\n• faire une pause, prier, écouter de la musique, chanter\n• être douce avec toi-même\n\nSi tu te sens triste presque tous les jours, même en dehors des règles, ou si tu as des idées de te faire du mal, écris PARLER. Une personne de l'équipe Ma Lune te répondra.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "538d1a60-8ae0-46c4-8fcc-4b39f8390fa2",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Une fille qui pleure ou qui est émotive est faible. »\n✅ Vrai : ressentir ses émotions, c'est humain. Les reconnaître et en parler demande du courage. 💪🏾",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "ab4074c2-aa26-4b40-905e-cc54549afea7",
+       "type": "send_msg",
+       "text": "🏷️ Nomme ton émotion :\nQu'est-ce que tu ressens maintenant ? Dis-le dans ta tête : « Je me sens… ». Mettre un nom sur une émotion la rend souvent plus légère.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "8eb0b714-9b60-4d48-adef-57daa1f28b90",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "ef50211e-9c91-4d18-9b49-e5a3bb3a8ecf",
+     "actions": [
+      {
+       "uuid": "77dc9ade-ab44-4de2-b9d5-3147a519b3eb",
+       "type": "send_msg",
+       "text": "🌙 Thème 9 : Mon corps m'appartient\n\nTon corps est à toi. Personne n'a le droit de le toucher ou de te forcer à faire quelque chose sans ton accord. 💛",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "411c7f34-0a81-4943-a034-5bd694b18776",
+       "type": "send_msg",
+       "text": "Avoir ses règles veut dire que ton corps grandit. Cela ne veut pas dire que tu es prête pour le mariage ou pour une relation.\n\nBon à savoir : dès que tu as tes règles, ton corps peut tomber enceinte. C'est une raison de plus pour protéger ton corps et ton avenir.\n\nSi quelqu'un te touche d'une façon qui te met mal à l'aise, te force, te menace ou te demande de garder un secret, ce n'est pas ta faute.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "147aecf7-93c8-4c6a-bca4-d81e5d6c0917",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Une fille qui a ses règles est déjà une femme prête. »\n✅ Vrai : tu es encore une jeune fille qui grandit. Tu as le droit d'aller à l'école, de jouer et de choisir ton avenir.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "78d25c34-04c5-46d4-901d-a24c01c3fc68",
+       "type": "send_msg",
+       "text": "🤝 Ma liste de confiance :\nPense à 2 ou 3 adultes à qui tu peux parler si quelque chose ne va pas : ta maman, une tante, une enseignante, une infirmière…\n\nSi quelqu'un te fait du mal ou si tu as peur, écris PARLER : une personne de l'équipe Ma Lune te répondra en privé. En cas de danger, va à l'hôpital ou au centre de santé le plus proche avec un adulte de confiance.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "25d51e82-e888-4c55-ac14-5fe92c26f8d2",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "475072af-12be-4d44-8b49-dfca45c85dfa",
+     "actions": [
+      {
+       "uuid": "48f40b11-54ce-466a-a7a8-7d3cfd56e2be",
+       "type": "send_msg",
+       "text": "🌙 Thème 18 : Sécurité en ligne\n\nWhatsApp, Facebook, TikTok : c'est pratique pour parler avec ses amies. Mais il faut aussi se protéger en ligne. 📱",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "d0ef41d1-2071-41af-ab0c-16d7d1c2c68f",
+       "type": "send_msg",
+       "text": "• N'envoie jamais de photo de ton corps ou de toi déshabillée, même à quelqu'un que tu aimes. Une photo peut être partagée pour toujours.\n• Ne donne pas ton adresse, ton école ou tes horaires à des inconnus.\n• Ne va jamais seule rencontrer quelqu'un connu en ligne.\n• Une personne qui te promet de l'argent, du crédit ou des cadeaux en échange de photos ou de rendez-vous te met en danger.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "0deb37d5-2cca-4f79-8a42-136e45a2b382",
+       "type": "send_msg",
+       "text": "Si quelqu'un te menace de publier une photo, t'insulte ou te harcèle :\n• Ce n'est PAS ta faute.\n• N'envoie rien de plus et ne paie pas.\n• Fais une capture d'écran, puis bloque et signale la personne.\n• Parles-en tout de suite à un adulte de confiance, ou écris PARLER.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "51b24642-1630-4719-b934-ea5bbe4722ad",
+       "type": "send_msg",
+       "text": "🔒 Vérifie maintenant : dans WhatsApp, va dans Paramètres > Confidentialité, et choisis « Mes contacts » pour ta photo de profil et « qui peut m'ajouter aux groupes ».",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "c8f0011d-d382-49c7-a4fc-455c33ba3896",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "7013d2af-dbb4-4d8d-8867-22d34e77d789",
+     "actions": [
+      {
+       "uuid": "05fb0ce4-e883-4fa4-adfd-f9a56feb5918",
+       "type": "send_msg",
+       "text": "🌙 Thème 3 : Me préparer\n\nQuand on est prête, on a moins peur. Prépare un petit kit pour tes règles ! 🎒",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "57e32d22-bba8-4c9c-802a-a98c113292ab",
+       "type": "send_msg",
+       "text": "Ton kit dans ton sac :\n• 2 ou 3 serviettes hygiéniques (jetables ou lavables)\n• une culotte de rechange\n• un petit sachet en plastique pour garder une serviette utilisée jusqu'à la poubelle\n• un mouchoir ou du papier\n\n📅 Mets ton kit dans ton sac quelques jours AVANT la date de tes prochaines règles, et garde-le pendant toutes tes règles. Comme ça, tu es prête à l'école, au marché ou chez des amis, et tu évites de tacher tes vêtements.\n\nSi tes règles arrivent à l'école sans kit : demande à une amie, une enseignante ou l'infirmière. En urgence, un tissu propre plié peut aider en attendant.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "79ef42bb-ea92-424d-ba15-6bbc7fccd872",
+       "type": "send_msg",
+       "text": "🔔 Ton corps te prévient souvent quelques jours avant tes règles. Tu peux remarquer :\n• des seins un peu gonflés ou sensibles\n• un ventre gonflé ou de petites crampes en bas du ventre ou du dos\n• quelques boutons sur le visage\n• plus de fatigue ou plus faim que d'habitude\n• une humeur qui change : plus triste, plus énervée\n\nToutes les filles n'ont pas tous ces signes. Quand tu les remarques, pense à mettre ton kit dans ton sac ! 🎒\n\n🌸 Avant les toutes premières règles : la poitrine commence à se développer, des poils apparaissent, et souvent un liquide blanc ou transparent tache la culotte quelques mois avant. C'est normal : tes premières règles approchent.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "0ca3157d-1fe0-4103-97a3-186e27d7a534",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Tout le monde verra que j'ai mes règles. »\n✅ Vrai : personne ne peut le savoir si tu ne le dis pas. Et si une tache arrive sur tes vêtements, ce n'est pas grave : ça arrive à presque toutes les filles. Attache un pull autour de ta taille et continue ta journée. 💪🏾",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "4a5a6dd0-7d18-489e-857a-8d3b86208354",
+       "type": "send_msg",
+       "text": "💬 Phrase magique pour les moments gênants :\n« C'est normal, ça arrive à toutes les femmes. »\nRépète-la 2 fois dans ta tête. Tu peux l'utiliser si quelqu'un se moque de toi.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "2a9eec1c-726e-41b7-bc9e-1a370e85b32c",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "0f60de23-fdf2-4013-b905-b0c4e96dea6f",
+     "actions": [
+      {
+       "uuid": "d127955e-94d5-4f71-851b-57d81369cbf4",
+       "type": "send_msg",
+       "text": "🌙 Thème 11 : Pas d'argent pour des serviettes ?\n\nBeaucoup de filles n'ont pas toujours de quoi acheter des serviettes. Ce n'est pas ta faute, et il existe des solutions propres et sûres. 💛",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "cc313c7b-e100-4252-b991-44c0e004823f",
+       "type": "send_msg",
+       "text": "✅ Solutions sûres :\n• Les serviettes lavables : elles coûtent plus cher au début, mais durent environ un an.\n• Un tissu en coton propre, plié en plusieurs couches, que tu changes comme une serviette.\n\nPour un tissu ou une serviette lavable :\n• lave à l'eau froide, puis avec du savon\n• rince bien\n• sèche complètement, de préférence au soleil\n• garde-le dans un sachet propre et sec",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "571c0a62-ee53-4baf-9399-ae495db45c89",
+       "type": "send_msg",
+       "text": "❌ À éviter, car cela peut donner des infections :\n• papier journal, feuilles, sable, coton de matelas\n• chiffons sales ou humides\n• un tissu qui n'a pas séché complètement\n\n🙋🏾‍♀️ Tu peux demander de l'aide : à l'infirmière de l'école, au centre de santé, à une association de femmes ou d'église, ou à une adulte de confiance.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "f14f8287-24c1-4ef9-b928-614c006709d0",
+       "type": "send_msg",
+       "text": "🧵 Petit défi :\nAvec ta maman ou une adulte, préparez ensemble 2 tissus en coton propres, lavés et séchés au soleil, et rangez-les dans un sachet propre. Ton kit de secours est prêt !",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "b09e8f33-5981-472b-919f-5b0686a5f450",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "1e444c25-8739-4c28-865c-c80e6d8c8fd3",
+     "actions": [
+      {
+       "uuid": "7dbaeb3e-83ea-4d48-b132-556c9f10a056",
+       "type": "send_msg",
+       "text": "🌙 Thème 8 : Quand voir un médecin\n\nLa plupart du temps, les règles sont normales. Mais certains signes méritent d'aller voir un agent de santé ou un médecin. 🩺",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "368db6c6-2503-45e1-8c68-6bcd1f787c5e",
+       "type": "send_msg",
+       "text": "Va voir un agent de santé si :\n• tu dois changer ta serviette toutes les 1 à 2 heures parce qu'elle est pleine\n• tes règles durent plus de 7 jours\n• la douleur t'empêche d'aller à l'école ou les médicaments ne t'aident pas\n• tu n'as plus de règles pendant plus de 3 mois (après les avoir eues)\n• tu as 15 ans et tu n'as jamais eu de règles\n• tu te sens très fatiguée, tu as des vertiges ou tu t'évanouis\n\n🚨 Urgence : saignement très fort, douleur très forte, fièvre ou évanouissement → va tout de suite à l'hôpital avec un adulte.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "211247bb-871b-4082-acdb-8a77e08ea5e2",
+       "type": "send_msg",
+       "text": "❌ Mythe : « C'est la honte d'aller voir un médecin pour les règles. »\n✅ Vrai : les médecins et les infirmières voient ces questions tous les jours. Prendre soin de ta santé, c'est intelligent et courageux.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "80add568-f109-4880-8f55-ec7afb95cc57",
+       "type": "send_msg",
+       "text": "📝 Prépare ta visite :\nÉcris 3 questions que tu aimerais poser au médecin. Par exemple : « Est-ce normal que… ? ». Tu peux y aller avec ta maman ou un adulte de confiance.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "fb83a5ff-b42a-4e23-b4cb-5dfce8398fe5",
+       "destination_uuid": "b93458aa-3870-4d70-b8ea-e5a1b3b5a651"
+      }
+     ]
+    },
+    {
+     "uuid": "b4a95679-f06b-42e3-9198-acfb35a52908",
+     "actions": [
+      {
+       "uuid": "2a57a16d-175e-4ac1-8bb4-f28742ad41d7",
+       "type": "enter_flow",
+       "flow": {
+        "uuid": "66962937-3847-46d6-82dd-881d19af7f30",
+        "name": "Urgence"
+       }
+      }
+     ],
+     "router": {
+      "type": "switch",
+      "operand": "@child.run.status",
+      "default_category_uuid": "41b999c8-7f5a-4504-9f74-d0aca8ddb2d9",
+      "cases": [
+       {
+        "uuid": "a40ebaf9-df74-43c8-a434-fd5af442521e",
+        "type": "has_only_text",
+        "arguments": [
+         "completed"
+        ],
+        "category_uuid": "41b999c8-7f5a-4504-9f74-d0aca8ddb2d9"
+       },
+       {
+        "uuid": "8ab373cb-0fa1-49a5-be99-0d89f9690cc5",
+        "type": "has_only_text",
+        "arguments": [
+         "expired"
+        ],
+        "category_uuid": "f763b6f9-ba13-4f21-82a6-7c371c1f2011"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "41b999c8-7f5a-4504-9f74-d0aca8ddb2d9",
+        "name": "Complete",
+        "exit_uuid": "1e0b0309-b40c-4e14-b074-10303121c125"
+       },
+       {
+        "uuid": "f763b6f9-ba13-4f21-82a6-7c371c1f2011",
+        "name": "Expired",
+        "exit_uuid": "a2fed931-e4be-4e37-a7a6-b07cff89a5be"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "1e0b0309-b40c-4e14-b074-10303121c125",
+       "destination_uuid": null
+      },
+      {
+       "uuid": "a2fed931-e4be-4e37-a7a6-b07cff89a5be",
+       "destination_uuid": null
+      }
+     ]
+    }
+   ],
+   "_ui": {
+    "nodes": {
+     "9844acef-eb91-449e-ad06-5f96d8a19e5e": {
+      "position": {
+       "left": 0,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "0bb73860-a497-4bf7-91ca-3f1a5305baf9": {
+      "position": {
+       "left": 320,
+       "top": 0
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "ea6e4c20-abd3-4caa-971f-b8ef15ffe2c7": {
+      "position": {
+       "left": 640,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "0fe8adb7-80dc-44ef-9955-f09ad6c945b7": {
+      "position": {
+       "left": 960,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "cba92c41-ceb1-42fa-9238-cfdafb86ffc9": {
+      "position": {
+       "left": 1280,
+       "top": 0
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "8afe82a9-5af9-4776-b4eb-3e2814c088bf": {
+      "position": {
+       "left": 1600,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "9492f447-cfb6-4eda-8e9b-965a777a4706": {
+      "position": {
+       "left": 0,
+       "top": 420
+      },
+      "type": "split_by_subflow",
+      "config": {}
+     },
+     "22363c44-3838-4ce0-a553-d116114ce00a": {
+      "position": {
+       "left": 320,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "78e756b2-ad32-4e9d-a144-b7f095ce85cd": {
+      "position": {
+       "left": 640,
+       "top": 420
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "b4152e37-0dc1-49e6-994a-e6e5c802b367": {
+      "position": {
+       "left": 960,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "6e4cce37-b63e-4684-a9a1-d452fb209b66": {
+      "position": {
+       "left": 1280,
+       "top": 420
+      },
+      "type": "split_by_subflow",
+      "config": {}
+     },
+     "06f93442-c38d-489c-b0d7-7546034a9e5f": {
+      "position": {
+       "left": 1600,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "69cf3192-30a8-4b1c-a907-317935c313a7": {
+      "position": {
+       "left": 0,
+       "top": 840
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "7a6db323-5509-4906-a99e-fe7da06cae8a": {
+      "position": {
+       "left": 320,
+       "top": 840
+      },
+      "type": "execute_actions"
+     },
+     "e26b13ef-5f8b-4002-90cb-11fb198f649b": {
+      "position": {
+       "left": 640,
+       "top": 840
+      },
+      "type": "split_by_subflow",
+      "config": {}
+     },
+     "2ec3c08f-218d-4e35-b87f-4bee2215afec": {
+      "position": {
+       "left": 960,
+       "top": 840
+      },
+      "type": "execute_actions"
+     },
+     "e922290a-5ef6-4b03-8d01-323d6025fe58": {
+      "position": {
+       "left": 1280,
+       "top": 840
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "1bf39f1d-dffe-4ae9-b55d-ea02d82460d0": {
+      "position": {
+       "left": 1600,
+       "top": 840
+      },
+      "type": "execute_actions"
+     },
+     "685ffcce-59fe-4941-8b6b-5678b2028a60": {
+      "position": {
+       "left": 0,
+       "top": 1260
+      },
+      "type": "split_by_subflow",
+      "config": {}
+     },
+     "eca10642-4dd3-489e-afe6-585d3337e4f9": {
+      "position": {
+       "left": 320,
+       "top": 1260
+      },
+      "type": "execute_actions"
+     },
+     "a0af7fc6-ec99-4ca2-9ada-7088e665dcaf": {
+      "position": {
+       "left": 640,
+       "top": 1260
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "ce20338c-0a67-444c-ab49-b820ea572b18": {
+      "position": {
+       "left": 960,
+       "top": 1260
+      },
+      "type": "execute_actions"
+     },
+     "53cd44ed-cc46-4005-baf7-32d8920d43ba": {
+      "position": {
+       "left": 1280,
+       "top": 1260
+      },
+      "type": "split_by_subflow",
+      "config": {}
+     },
+     "b93458aa-3870-4d70-b8ea-e5a1b3b5a651": {
+      "position": {
+       "left": 1600,
+       "top": 1260
+      },
+      "type": "execute_actions"
+     },
+     "6f536a8a-c75c-4267-af79-f45d836aeb4b": {
+      "position": {
+       "left": 0,
+       "top": 1680
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "a2a3cc3d-228c-4c55-b964-af988a99c8c4": {
+      "position": {
+       "left": 320,
+       "top": 1680
+      },
+      "type": "execute_actions"
+     },
+     "21a8120e-55b4-478b-8b30-7b7fd81878a1": {
+      "position": {
+       "left": 640,
+       "top": 1680
+      },
+      "type": "split_by_expression",
+      "config": {}
+     },
+     "c387d20e-367a-4935-89da-26e68d508441": {
+      "position": {
+       "left": 960,
+       "top": 1680
+      },
+      "type": "execute_actions"
+     },
+     "1a2770cf-e36c-40f1-a6cf-c804054fa2c5": {
+      "position": {
+       "left": 1280,
+       "top": 1680
+      },
+      "type": "execute_actions"
+     },
+     "d964756d-3045-4e23-bdf5-7ac925e794f4": {
+      "position": {
+       "left": 1600,
+       "top": 1680
+      },
+      "type": "execute_actions"
+     },
+     "36dcc205-5418-4297-ad53-4e69b59ee423": {
+      "position": {
+       "left": 0,
+       "top": 2100
+      },
+      "type": "split_by_subflow",
+      "config": {}
+     },
+     "940b472c-5469-4f26-b3ab-e0714dfed083": {
+      "position": {
+       "left": 320,
+       "top": 2100
+      },
+      "type": "execute_actions"
+     },
+     "56306581-4a71-4324-9476-a050822006a8": {
+      "position": {
+       "left": 640,
+       "top": 2100
+      },
+      "type": "execute_actions"
+     },
+     "322e213a-0958-4f0c-b517-b5acace76542": {
+      "position": {
+       "left": 960,
+       "top": 2100
+      },
+      "type": "execute_actions"
+     },
+     "634e8b84-f005-4ee4-bcf1-eeda0f7cc341": {
+      "position": {
+       "left": 1280,
+       "top": 2100
+      },
+      "type": "execute_actions"
+     },
+     "f68088ba-1cfb-44ef-90e6-4847e0b789f5": {
+      "position": {
+       "left": 1600,
+       "top": 2100
+      },
+      "type": "execute_actions"
+     },
+     "cd4a9129-df28-429f-b125-288e657b7756": {
+      "position": {
+       "left": 0,
+       "top": 2520
+      },
+      "type": "execute_actions"
+     },
+     "2cef1c6e-fc56-45fb-af6e-289d7b2ad1b0": {
+      "position": {
+       "left": 320,
+       "top": 2520
+      },
+      "type": "execute_actions"
+     },
+     "290fdda4-f8cf-4355-bda0-e87394f159cc": {
+      "position": {
+       "left": 640,
+       "top": 2520
+      },
+      "type": "execute_actions"
+     },
+     "d9b486e3-6297-485b-b3a8-a10b346c8a9e": {
+      "position": {
+       "left": 960,
+       "top": 2520
+      },
+      "type": "execute_actions"
+     },
+     "db81f530-f6f0-4414-9ddb-782e04e952b4": {
+      "position": {
+       "left": 1280,
+       "top": 2520
+      },
+      "type": "execute_actions"
+     },
+     "ac2b5f94-a1f9-415d-b043-9c84c9d5facb": {
+      "position": {
+       "left": 1600,
+       "top": 2520
+      },
+      "type": "execute_actions"
+     },
+     "ef50211e-9c91-4d18-9b49-e5a3bb3a8ecf": {
+      "position": {
+       "left": 0,
+       "top": 2940
+      },
+      "type": "execute_actions"
+     },
+     "475072af-12be-4d44-8b49-dfca45c85dfa": {
+      "position": {
+       "left": 320,
+       "top": 2940
+      },
+      "type": "execute_actions"
+     },
+     "7013d2af-dbb4-4d8d-8867-22d34e77d789": {
+      "position": {
+       "left": 640,
+       "top": 2940
+      },
+      "type": "execute_actions"
+     },
+     "0f60de23-fdf2-4013-b905-b0c4e96dea6f": {
+      "position": {
+       "left": 960,
+       "top": 2940
+      },
+      "type": "execute_actions"
+     },
+     "1e444c25-8739-4c28-865c-c80e6d8c8fd3": {
+      "position": {
+       "left": 1280,
+       "top": 2940
+      },
+      "type": "execute_actions"
+     },
+     "b4a95679-f06b-42e3-9198-acfb35a52908": {
+      "position": {
+       "left": 1600,
+       "top": 2940
+      },
+      "type": "split_by_subflow",
+      "config": {}
+     }
+    }
+   }
+  },
+  {
+   "uuid": "36d3cc19-b8a2-4e6a-9883-7081e0ca51e4",
+   "name": "Apprendre Jeunes",
+   "spec_version": "13.1.0",
+   "language": "fra",
+   "type": "messaging",
+   "revision": 1,
+   "expire_after_minutes": 10080,
+   "localization": {},
+   "nodes": [
+    {
+     "uuid": "4f5156e6-4906-46cc-8cc5-16290839686d",
+     "actions": [
+      {
+       "uuid": "6b702ec1-e918-4086-b1fe-fece5ef104bc",
+       "type": "send_msg",
+       "text": "Choisis un thème 🌸\n1️⃣ C'est quoi les règles ?\n2️⃣ Comprendre la puberté\n3️⃣ Calculer mon cycle\n4️⃣ Me préparer\n5️⃣ Hygiène\n6️⃣ Mon corps m'appartient\n7️⃣ Grandir sereine\n\nÉcris le numéro.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "50d0954c-9732-4051-a98b-c9746c015564",
+       "destination_uuid": "8fa132cb-49a7-4ebd-9898-5ec4ae91d5b5"
+      }
+     ]
+    },
+    {
+     "uuid": "8fa132cb-49a7-4ebd-9898-5ec4ae91d5b5",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "cfb4d5ac-527a-4c1c-8f90-70f20aca43a1",
+      "cases": [
+       {
+        "uuid": "a314a688-84e0-4846-96e7-ad3684c23af8",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "7c6117e7-8004-49be-a3f8-092c6c83941c"
+       },
+       {
+        "uuid": "ab0976eb-c7f8-4507-9e3a-c1d4b822fb80",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "ce27f6d5-dcf6-4fbd-bbae-bafb784215cf"
+       },
+       {
+        "uuid": "a66a0662-784c-407a-8431-be17df5dd9c2",
+        "type": "has_number_eq",
+        "arguments": [
+         "3"
+        ],
+        "category_uuid": "3db833e3-6909-4434-88ce-351e1f829530"
+       },
+       {
+        "uuid": "2ae386cb-835d-487b-af7e-d0e25e9c8d6e",
+        "type": "has_number_eq",
+        "arguments": [
+         "4"
+        ],
+        "category_uuid": "a066d3e2-bc55-4a52-a7f3-22203a7d35d3"
+       },
+       {
+        "uuid": "048cdcb9-83c7-4381-9e19-77ad0b364455",
+        "type": "has_number_eq",
+        "arguments": [
+         "5"
+        ],
+        "category_uuid": "21fd40b2-f91d-44b5-8473-8905cbee664c"
+       },
+       {
+        "uuid": "b82955df-4177-40e1-9fb3-c84770e7acb9",
+        "type": "has_number_eq",
+        "arguments": [
+         "6"
+        ],
+        "category_uuid": "9692aa0c-b6e9-4bd6-aed2-a5a1c4decb5d"
+       },
+       {
+        "uuid": "818e8394-5922-4edf-ad53-d45043b55345",
+        "type": "has_number_eq",
+        "arguments": [
+         "7"
+        ],
+        "category_uuid": "66687652-b75b-45c6-b16b-6f317c001355"
+       },
+       {
+        "uuid": "ca666c75-5fb9-4147-a66c-ce629d4cc73b",
+        "type": "has_any_word",
+        "arguments": [
+         "frappe frappée frapper battue battre bat tape tapée viol violée violence violences violent abus abusée agression agressée attouchement attouchements inceste harcèlement harcelée harcèle menace menacée chantage forcée forcé forcer obligée touchée enceinte grossesse mourir tuer suicide danger peur secours urgence saigne saignement hémorragie évanouie"
+        ],
+        "category_uuid": "a3cab426-804c-4390-863e-8b0c4397c7f5"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "7c6117e7-8004-49be-a3f8-092c6c83941c",
+        "name": "C'est quoi les règles ?",
+        "exit_uuid": "27273e4d-ca30-4478-9a9d-6d1b917855ba"
+       },
+       {
+        "uuid": "ce27f6d5-dcf6-4fbd-bbae-bafb784215cf",
+        "name": "Comprendre la puberté",
+        "exit_uuid": "a6b13197-27f7-483e-8997-cada89bd93a1"
+       },
+       {
+        "uuid": "3db833e3-6909-4434-88ce-351e1f829530",
+        "name": "Calculer mon cycle",
+        "exit_uuid": "4b1ea28b-c4e9-4470-a36b-a990455905c7"
+       },
+       {
+        "uuid": "a066d3e2-bc55-4a52-a7f3-22203a7d35d3",
+        "name": "Me préparer",
+        "exit_uuid": "b221a58f-b086-46a4-a8ed-fbc961311e43"
+       },
+       {
+        "uuid": "21fd40b2-f91d-44b5-8473-8905cbee664c",
+        "name": "Hygiène",
+        "exit_uuid": "908b0ba1-fc1e-4213-9d98-4d5d470d49fd"
+       },
+       {
+        "uuid": "9692aa0c-b6e9-4bd6-aed2-a5a1c4decb5d",
+        "name": "Mon corps (doux)",
+        "exit_uuid": "bf562f3b-5be5-4337-af0f-3c93971e4c68"
+       },
+       {
+        "uuid": "66687652-b75b-45c6-b16b-6f317c001355",
+        "name": "Grandir sereine",
+        "exit_uuid": "3a8f2095-2d1b-4944-9564-d05b3c1072de"
+       },
+       {
+        "uuid": "a3cab426-804c-4390-863e-8b0c4397c7f5",
+        "name": "Urgence",
+        "exit_uuid": "9c06de13-6cd3-4080-8b37-9c3b10a52949"
+       },
+       {
+        "uuid": "cfb4d5ac-527a-4c1c-8f90-70f20aca43a1",
+        "name": "Other",
+        "exit_uuid": "ec7db563-6518-4995-a2d6-b6004cbccdc5"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "sujet"
+     },
+     "exits": [
+      {
+       "uuid": "27273e4d-ca30-4478-9a9d-6d1b917855ba",
+       "destination_uuid": "d40a97f8-401a-4432-87b5-45019822acfd"
+      },
+      {
+       "uuid": "a6b13197-27f7-483e-8997-cada89bd93a1",
+       "destination_uuid": "21e36b2e-892b-4fdd-b279-707fa6c57da9"
+      },
+      {
+       "uuid": "4b1ea28b-c4e9-4470-a36b-a990455905c7",
+       "destination_uuid": "2cf429bd-585f-4752-9979-2702f7476de2"
+      },
+      {
+       "uuid": "b221a58f-b086-46a4-a8ed-fbc961311e43",
+       "destination_uuid": "c1183ee8-c577-4fe3-ae05-9999b8f011f9"
+      },
+      {
+       "uuid": "908b0ba1-fc1e-4213-9d98-4d5d470d49fd",
+       "destination_uuid": "e293c485-e20f-4d83-ae4d-352319724345"
+      },
+      {
+       "uuid": "bf562f3b-5be5-4337-af0f-3c93971e4c68",
+       "destination_uuid": "b5bd4848-9339-45ea-b07f-a250e2db62b0"
+      },
+      {
+       "uuid": "3a8f2095-2d1b-4944-9564-d05b3c1072de",
+       "destination_uuid": "d58b277f-adc3-46d7-a2de-1c33a40f53ca"
+      },
+      {
+       "uuid": "9c06de13-6cd3-4080-8b37-9c3b10a52949",
+       "destination_uuid": "0c4bb6d6-feb8-4700-8716-e78015525d7a"
+      },
+      {
+       "uuid": "ec7db563-6518-4995-a2d6-b6004cbccdc5",
+       "destination_uuid": "0c31fda4-ef7d-47a8-9331-f3b2b4345610"
+      }
+     ]
+    },
+    {
+     "uuid": "0c31fda4-ef7d-47a8-9331-f3b2b4345610",
+     "actions": [
+      {
+       "uuid": "d46bbf9f-8009-470d-bf52-5404cc6e2dec",
+       "type": "send_msg",
+       "text": "Écris un numéro de 1 à 7 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "640805fe-c033-40b5-b023-4bacbb9de169",
+       "destination_uuid": "8fa132cb-49a7-4ebd-9898-5ec4ae91d5b5"
+      }
+     ]
+    },
+    {
+     "uuid": "02b31eca-b285-4f9d-bfcc-9cfa960275df",
+     "actions": [
+      {
+       "uuid": "6003bf44-3261-47b8-97e0-8d90c1d6e1bb",
+       "type": "send_msg",
+       "text": "Ce thème t'a aidée ?\n1️⃣ 👍 Oui\n2️⃣ 👎 Non",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "08bd6e6c-1899-4829-a5c7-4cdfa162f6aa",
+       "destination_uuid": "9a7db040-9006-4f8d-bd97-c9a418f80e17"
+      }
+     ]
+    },
+    {
+     "uuid": "9a7db040-9006-4f8d-bd97-c9a418f80e17",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "1b36a698-2625-40d0-a98a-39fd966b9499",
+      "cases": [
+       {
+        "uuid": "8f8928cb-e332-4478-bbea-0b7f66f11e50",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "ccbaf8a5-cd6c-4292-8130-45263eee05a7"
+       },
+       {
+        "uuid": "87bec8c0-fa83-466f-855e-56b797a7a26e",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "cabf7991-0a03-41bb-9ca6-772c4170e828"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "ccbaf8a5-cd6c-4292-8130-45263eee05a7",
+        "name": "Oui",
+        "exit_uuid": "9d0f84da-5c3d-4f00-8427-5da2b9fee969"
+       },
+       {
+        "uuid": "cabf7991-0a03-41bb-9ca6-772c4170e828",
+        "name": "Non",
+        "exit_uuid": "4203cb75-88b2-4d73-abfb-961638b1cdfe"
+       },
+       {
+        "uuid": "1b36a698-2625-40d0-a98a-39fd966b9499",
+        "name": "Other",
+        "exit_uuid": "630e4146-9636-4e11-9b19-9b58b49d67bf"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "avis"
+     },
+     "exits": [
+      {
+       "uuid": "9d0f84da-5c3d-4f00-8427-5da2b9fee969",
+       "destination_uuid": "92795f7d-7a6d-40e7-a626-a2d0104e8515"
+      },
+      {
+       "uuid": "4203cb75-88b2-4d73-abfb-961638b1cdfe",
+       "destination_uuid": "92795f7d-7a6d-40e7-a626-a2d0104e8515"
+      },
+      {
+       "uuid": "630e4146-9636-4e11-9b19-9b58b49d67bf",
+       "destination_uuid": "92795f7d-7a6d-40e7-a626-a2d0104e8515"
+      }
+     ]
+    },
+    {
+     "uuid": "92795f7d-7a6d-40e7-a626-a2d0104e8515",
+     "actions": [
+      {
+       "uuid": "1ca6de0a-c53d-4793-8621-8a7cffc403d0",
+       "type": "send_msg",
+       "text": "Merci pour ton avis ! 💛 Choisis un autre thème ci-dessous, ou écris MENU pour le menu principal.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "059af752-1c72-4276-878e-7068c912c710",
+       "destination_uuid": "4f5156e6-4906-46cc-8cc5-16290839686d"
+      }
+     ]
+    },
+    {
+     "uuid": "d40a97f8-401a-4432-87b5-45019822acfd",
+     "actions": [
+      {
+       "uuid": "388a5d73-c53a-4d26-b70e-f91c7c62e964",
+       "type": "send_msg",
+       "text": "🌙 Thème 1 : C'est quoi les règles ?\n\nLes règles, c'est un peu de sang qui sort du vagin chaque mois. C'est normal et c'est un signe que ton corps grandit bien. 🌸",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "bb515104-e28d-4eff-a2b7-d0359f490447",
+       "type": "send_msg",
+       "text": "Chaque mois, l'utérus (une petite poche dans ton ventre) prépare un « nid » doux. S'il n'y a pas de bébé, ce nid se détache et sort sous forme de sang : ce sont les règles.\n\nLes premières règles arrivent souvent entre 10 et 15 ans, parfois un peu avant ou un peu après. Chaque fille a son propre rythme.\nElles durent en général 2 à 7 jours.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "945badbf-a1ee-4a5d-bd1c-31b8f6bb8594",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Les règles, c'est sale. »\n✅ Vrai : le sang des règles n'est pas sale. C'est un sang normal du corps. Toutes les femmes du monde ont leurs règles : ta maman, tes tantes, tes enseignantes. Il n'y a aucune honte. 💛",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "e1d1f220-803d-4bc9-8ea9-0c597f5f710c",
+       "type": "send_msg",
+       "text": "🧘🏾‍♀️ Petit exercice :\nPose une main sur ton ventre. Respire lentement 3 fois et dis dans ta tête : « Mon corps grandit. C'est normal. »",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "9e32ae97-aee7-4130-a56b-f3883f878997",
+       "destination_uuid": "02b31eca-b285-4f9d-bfcc-9cfa960275df"
+      }
+     ]
+    },
+    {
+     "uuid": "21e36b2e-892b-4fdd-b279-707fa6c57da9",
+     "actions": [
+      {
+       "uuid": "8eb8bf65-a17b-44de-aa7b-f6dedf61a7ff",
+       "type": "send_msg",
+       "text": "🌙 Thème 13 : Comprendre la puberté\n\nLa puberté, c'est la période où ton corps passe de celui d'une enfant à celui d'une jeune femme. Elle commence souvent entre 8 et 13 ans et dure plusieurs années. 🌸",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "1d7a2483-b94e-4817-aa0c-7018c633543d",
+       "type": "send_msg",
+       "text": "Ce qui change, petit à petit :\n• la poitrine commence à pousser (souvent le premier signe)\n• des poils apparaissent sous les bras et sur le sexe\n• tu grandis plus vite, tes hanches s'élargissent\n• tu transpires plus : lave-toi chaque jour\n• des boutons peuvent apparaître\n• un liquide blanc ou transparent peut tacher ta culotte\n• puis arrivent les règles, souvent 2 à 3 ans après le début de la poitrine",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "1660b670-3d50-4f25-ab21-151210f4ed20",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Si mon amie a déjà ses règles et pas moi, j'ai un problème. »\n✅ Vrai : chaque corps a son propre rythme. Certaines commencent tôt, d'autres plus tard. C'est normal. Parle à un agent de santé seulement si tu n'as aucun signe de poitrine à 13 ans, ou pas de règles à 15 ans.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "aeff04f1-ff00-4c09-b302-f0895f7f1110",
+       "type": "send_msg",
+       "text": "🪞 Regarde-toi avec douceur :\nQuel changement as-tu remarqué dans ton corps ? Dis-toi : « Mon corps change à son rythme, et c'est bien. »",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "77bed336-d88e-4c5e-acdb-19252157f4ce",
+       "destination_uuid": "02b31eca-b285-4f9d-bfcc-9cfa960275df"
+      }
+     ]
+    },
+    {
+     "uuid": "2cf429bd-585f-4752-9979-2702f7476de2",
+     "actions": [
+      {
+       "uuid": "76a51da8-61b2-491e-9bd9-ac6936fce2ab",
+       "type": "send_msg",
+       "text": "🌙 Thème 12 : Calculer mon cycle\n\nSavoir calculer ton cycle t'aide à deviner quand tes prochaines règles vont arriver. 📅",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "782e5d2c-ca06-4d4c-8145-d9d5b17b1001",
+       "type": "send_msg",
+       "text": "1. Note le PREMIER jour de tes règles. C'est le jour 1.\n2. Le mois suivant, note encore le premier jour de tes règles.\n3. Compte les jours entre les deux : c'est la durée de ton cycle.\n\nExemple : règles le 3 mars, puis le 31 mars → cycle de 28 jours.\nPour deviner les prochaines règles : ajoute ce nombre de jours au jour 1 → environ le 28 avril.\n\n💡 Note 3 cycles de suite, et fais la moyenne : c'est plus précis.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "93014640-9fff-495c-bf8a-bb718f622627",
+       "type": "send_msg",
+       "text": "⚠️ Chez les jeunes filles, le cycle change souvent d'un mois à l'autre. Ce calcul sert à te préparer, PAS à éviter une grossesse : il n'est pas assez sûr pour ça.\n\n✅ Ma Lune peut le faire pour toi : choisis « Noter le début de mes règles » dans le MENU, et je t'enverrai un rappel avant tes prochaines règles.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "9dc6f8a0-7fae-4059-8c3a-46f1ae772c9d",
+       "type": "send_msg",
+       "text": "✍🏾 Essayons maintenant ensemble : je vais calculer ton cycle pour toi 👇",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "51921604-20f8-43dd-bc1b-8a2638e9ae64",
+       "destination_uuid": "68d1004f-5d40-4d09-8985-b1738ab80060"
+      }
+     ]
+    },
+    {
+     "uuid": "68d1004f-5d40-4d09-8985-b1738ab80060",
+     "actions": [
+      {
+       "uuid": "ab0cdef2-4420-4efd-af0d-fbcb0d2e2a76",
+       "type": "enter_flow",
+       "flow": {
+        "uuid": "a8347572-fd78-4e6c-8e88-2bb2c6bf92f2",
+        "name": "Mes règles"
+       }
+      }
+     ],
+     "router": {
+      "type": "switch",
+      "operand": "@child.run.status",
+      "default_category_uuid": "67090431-b5fc-42fa-86cd-0b7a026347ff",
+      "cases": [
+       {
+        "uuid": "89775fc8-13dc-4c77-aab0-834e2b71a1d9",
+        "type": "has_only_text",
+        "arguments": [
+         "completed"
+        ],
+        "category_uuid": "67090431-b5fc-42fa-86cd-0b7a026347ff"
+       },
+       {
+        "uuid": "b23e3d6a-2d0d-495d-ae58-6ad08ff8968a",
+        "type": "has_only_text",
+        "arguments": [
+         "expired"
+        ],
+        "category_uuid": "90140822-f65f-4da8-922c-c1fbcd721dc9"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "67090431-b5fc-42fa-86cd-0b7a026347ff",
+        "name": "Complete",
+        "exit_uuid": "6a15cba2-b28c-4374-b64d-686d299461e0"
+       },
+       {
+        "uuid": "90140822-f65f-4da8-922c-c1fbcd721dc9",
+        "name": "Expired",
+        "exit_uuid": "ebb3ff24-1d88-45e5-b9a8-38aaf390a3bc"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "6a15cba2-b28c-4374-b64d-686d299461e0",
+       "destination_uuid": "02b31eca-b285-4f9d-bfcc-9cfa960275df"
+      },
+      {
+       "uuid": "ebb3ff24-1d88-45e5-b9a8-38aaf390a3bc",
+       "destination_uuid": "02b31eca-b285-4f9d-bfcc-9cfa960275df"
+      }
+     ]
+    },
+    {
+     "uuid": "c1183ee8-c577-4fe3-ae05-9999b8f011f9",
+     "actions": [
+      {
+       "uuid": "8e61942b-98b6-48d0-8941-90e293c72adf",
+       "type": "send_msg",
+       "text": "🌙 Thème 3 : Me préparer\n\nQuand on est prête, on a moins peur. Prépare un petit kit pour tes règles ! 🎒",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "a0aa800e-dc0d-4393-a47d-5710613dba98",
+       "type": "send_msg",
+       "text": "Ton kit dans ton sac :\n• 2 ou 3 serviettes hygiéniques (jetables ou lavables)\n• une culotte de rechange\n• un petit sachet en plastique pour garder une serviette utilisée jusqu'à la poubelle\n• un mouchoir ou du papier\n\n📅 Mets ton kit dans ton sac quelques jours AVANT la date de tes prochaines règles, et garde-le pendant toutes tes règles. Comme ça, tu es prête à l'école, au marché ou chez des amis, et tu évites de tacher tes vêtements.\n\nSi tes règles arrivent à l'école sans kit : demande à une amie, une enseignante ou l'infirmière. En urgence, un tissu propre plié peut aider en attendant.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "a571d2a2-733d-41a7-aa89-7905d4c99b23",
+       "type": "send_msg",
+       "text": "🔔 Ton corps te prévient souvent quelques jours avant tes règles. Tu peux remarquer :\n• des seins un peu gonflés ou sensibles\n• un ventre gonflé ou de petites crampes en bas du ventre ou du dos\n• quelques boutons sur le visage\n• plus de fatigue ou plus faim que d'habitude\n• une humeur qui change : plus triste, plus énervée\n\nToutes les filles n'ont pas tous ces signes. Quand tu les remarques, pense à mettre ton kit dans ton sac ! 🎒\n\n🌸 Avant les toutes premières règles : la poitrine commence à se développer, des poils apparaissent, et souvent un liquide blanc ou transparent tache la culotte quelques mois avant. C'est normal : tes premières règles approchent.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "d71ff7f5-66b3-40e7-b09e-b0d25808b33f",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Tout le monde verra que j'ai mes règles. »\n✅ Vrai : personne ne peut le savoir si tu ne le dis pas. Et si une tache arrive sur tes vêtements, ce n'est pas grave : ça arrive à presque toutes les filles. Attache un pull autour de ta taille et continue ta journée. 💪🏾",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "f4ac67a2-27d3-49a6-a4ca-72c98a075bc1",
+       "type": "send_msg",
+       "text": "💬 Phrase magique pour les moments gênants :\n« C'est normal, ça arrive à toutes les femmes. »\nRépète-la 2 fois dans ta tête. Tu peux l'utiliser si quelqu'un se moque de toi.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "219c8a71-1db4-48ee-8bdd-30b26a397d44",
+       "destination_uuid": "02b31eca-b285-4f9d-bfcc-9cfa960275df"
+      }
+     ]
+    },
+    {
+     "uuid": "e293c485-e20f-4d83-ae4d-352319724345",
+     "actions": [
+      {
+       "uuid": "1c035e94-5d91-4e5a-8cbf-5e58e343f55f",
+       "type": "send_msg",
+       "text": "🌙 Thème 4 : Hygiène\n\nPendant tes règles, quelques gestes simples te gardent propre et en bonne santé. 🧼",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "72016224-d1fc-4125-8516-21844ec19d99",
+       "type": "send_msg",
+       "text": "• Change ta serviette toutes les 4 à 6 heures, et jamais plus de 8 heures, même si elle semble peu pleine.\n• Lave-toi les mains avant et après.\n• Lave l'extérieur de ton sexe avec de l'eau propre, au moins une fois par jour. Pas besoin de laver à l'intérieur : le vagin se nettoie tout seul.\n\n🧺 Serviettes lavables : lave-les à l'eau froide puis avec du savon, rince bien et fais-les sécher complètement, de préférence au soleil. Ne les utilise jamais humides.\n🗑️ Serviettes jetables : enroule-les dans du papier ou un sachet et jette-les à la poubelle. Ne les jette pas dans les toilettes.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "0511d139-b067-4cbd-8e7c-0fd99f063717",
+       "type": "send_msg",
+       "text": "❌ Mythe : « On ne doit pas se laver pendant les règles. »\n✅ Vrai : au contraire, se laver est important ! Prendre une douche ou un bain pendant les règles est sûr et t'aide à te sentir bien.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "bfb507d3-5922-4cbd-86af-afe1f978d464",
+       "type": "send_msg",
+       "text": "🧘🏾‍♀️ Petit exercice (2 minutes) :\nFerme les yeux. Remarque tes pieds, tes jambes, ton ventre, tes épaules. Relâche chaque partie en soufflant doucement.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "658e7a06-7ca1-4f84-bfab-d0b89de13457",
+       "destination_uuid": "02b31eca-b285-4f9d-bfcc-9cfa960275df"
+      }
+     ]
+    },
+    {
+     "uuid": "b5bd4848-9339-45ea-b07f-a250e2db62b0",
+     "actions": [
+      {
+       "uuid": "2665cd5a-57b9-49ed-9ad4-81edd6f19cb2",
+       "type": "send_msg",
+       "text": "🌸 Mon corps m'appartient\n\nTon corps est à toi. Certaines parties sont privées : celles que couvre ton maillot de bain ou ta culotte.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "c0b3052f-d4e2-4be2-bc52-5ff2b54cd51d",
+       "type": "send_msg",
+       "text": "• Personne ne doit toucher tes parties privées, ni te demander de toucher les siennes.\n• Un médecin peut parfois examiner ton corps, mais seulement avec ta maman ou un adulte de confiance présent.\n• Si quelqu'un te met mal à l'aise, tu peux dire NON, partir, et en parler.\n• Un secret qui te fait peur ou qui te rend triste, il faut le dire à un adulte de confiance. Ce n'est jamais ta faute.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "17de22dd-d424-4dc3-8143-5e2e187df1d2",
+       "type": "send_msg",
+       "text": "❌ Mythe : « Si c'est quelqu'un que je connais, je dois obéir. »\n✅ Vrai : même quelqu'un de la famille ou un ami n'a pas le droit de te toucher d'une façon qui te gêne. Tu as le droit de dire NON.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "3a42736a-3539-4982-b53e-99bba61e7a89",
+       "type": "send_msg",
+       "text": "✋🏾 Ma main de confiance :\nAvec ton parent, pense à 5 adultes de confiance, un pour chaque doigt de ta main. Ce sont les personnes à qui tu peux tout dire.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "a2582140-86e3-4d97-831b-3fb832ba2c7e",
+       "destination_uuid": "02b31eca-b285-4f9d-bfcc-9cfa960275df"
+      }
+     ]
+    },
+    {
+     "uuid": "d58b277f-adc3-46d7-a2de-1c33a40f53ca",
+     "actions": [
+      {
+       "uuid": "df288b06-3ede-4e2f-841c-f04ed28602e1",
+       "type": "send_msg",
+       "text": "🌙 Thème 10 : Grandir sereine\n\nGrandir, c'est une aventure. Ton corps change, tes émotions aussi, et tu deviens chaque jour un peu plus toi-même. 🌸",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "64acce7a-179b-4b79-a166-8d65ba2343e3",
+       "type": "send_msg",
+       "text": "Ce qui aide à grandir sereine :\n• parler des règles avec ta maman ou une adulte de confiance, même si c'est un peu gênant au début\n• poser tes questions sans honte, ici ou à un agent de santé\n• aider une amie qui a ses premières règles : partage une serviette, rassure-la, ne te moque jamais\n• garder confiance en toi : tes règles ne décident pas de ta valeur",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "ca43c738-bd3b-4653-8bed-b164e9957d81",
+       "type": "send_msg",
+       "text": "❌ Mythe : « On ne parle pas de ça. »\n✅ Vrai : en parler aide les filles à mieux prendre soin d'elles. Plus on en parle, moins il y a de honte. Tu peux être celle qui aide les autres ! 💪🏾",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "3e3729a8-267e-42bd-98c6-1a7b563af97f",
+       "type": "send_msg",
+       "text": "💌 Un mot gentil pour toi :\nÉcris une phrase douce à toi-même, par exemple : « Je suis fière de moi et de mon corps. » Garde-la dans ton cœur.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "4c6f58a5-4d9c-4927-a358-35bc4c24a160",
+       "destination_uuid": "02b31eca-b285-4f9d-bfcc-9cfa960275df"
+      }
+     ]
+    },
+    {
+     "uuid": "0c4bb6d6-feb8-4700-8716-e78015525d7a",
+     "actions": [
+      {
+       "uuid": "58cf5b12-d016-4885-afd1-74027d8705f5",
+       "type": "enter_flow",
+       "flow": {
+        "uuid": "66962937-3847-46d6-82dd-881d19af7f30",
+        "name": "Urgence"
+       }
+      }
+     ],
+     "router": {
+      "type": "switch",
+      "operand": "@child.run.status",
+      "default_category_uuid": "422b16c1-81ab-4b56-ac9f-178b42aa25af",
+      "cases": [
+       {
+        "uuid": "c1629208-eaba-4394-8429-e087ad232525",
+        "type": "has_only_text",
+        "arguments": [
+         "completed"
+        ],
+        "category_uuid": "422b16c1-81ab-4b56-ac9f-178b42aa25af"
+       },
+       {
+        "uuid": "602248c7-768e-4e46-b99e-4f110f086765",
+        "type": "has_only_text",
+        "arguments": [
+         "expired"
+        ],
+        "category_uuid": "4a3b1546-e181-4e9f-a6df-ef698b922f91"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "422b16c1-81ab-4b56-ac9f-178b42aa25af",
+        "name": "Complete",
+        "exit_uuid": "fe5279b6-5d5a-425d-b7a8-d83082ec542e"
+       },
+       {
+        "uuid": "4a3b1546-e181-4e9f-a6df-ef698b922f91",
+        "name": "Expired",
+        "exit_uuid": "b37a7ace-2d6b-4ada-b583-cf5237b71f3c"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "fe5279b6-5d5a-425d-b7a8-d83082ec542e",
+       "destination_uuid": null
+      },
+      {
+       "uuid": "b37a7ace-2d6b-4ada-b583-cf5237b71f3c",
+       "destination_uuid": null
+      }
+     ]
+    }
+   ],
+   "_ui": {
+    "nodes": {
+     "4f5156e6-4906-46cc-8cc5-16290839686d": {
+      "position": {
+       "left": 0,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "8fa132cb-49a7-4ebd-9898-5ec4ae91d5b5": {
+      "position": {
+       "left": 320,
+       "top": 0
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "0c31fda4-ef7d-47a8-9331-f3b2b4345610": {
+      "position": {
+       "left": 640,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "02b31eca-b285-4f9d-bfcc-9cfa960275df": {
+      "position": {
+       "left": 960,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "9a7db040-9006-4f8d-bd97-c9a418f80e17": {
+      "position": {
+       "left": 1280,
+       "top": 0
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "92795f7d-7a6d-40e7-a626-a2d0104e8515": {
+      "position": {
+       "left": 1600,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "d40a97f8-401a-4432-87b5-45019822acfd": {
+      "position": {
+       "left": 0,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "21e36b2e-892b-4fdd-b279-707fa6c57da9": {
+      "position": {
+       "left": 320,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "2cf429bd-585f-4752-9979-2702f7476de2": {
+      "position": {
+       "left": 640,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "68d1004f-5d40-4d09-8985-b1738ab80060": {
+      "position": {
+       "left": 960,
+       "top": 420
+      },
+      "type": "split_by_subflow",
+      "config": {}
+     },
+     "c1183ee8-c577-4fe3-ae05-9999b8f011f9": {
+      "position": {
+       "left": 1280,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "e293c485-e20f-4d83-ae4d-352319724345": {
+      "position": {
+       "left": 1600,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "b5bd4848-9339-45ea-b07f-a250e2db62b0": {
+      "position": {
+       "left": 0,
+       "top": 840
+      },
+      "type": "execute_actions"
+     },
+     "d58b277f-adc3-46d7-a2de-1c33a40f53ca": {
+      "position": {
+       "left": 320,
+       "top": 840
+      },
+      "type": "execute_actions"
+     },
+     "0c4bb6d6-feb8-4700-8716-e78015525d7a": {
+      "position": {
+       "left": 640,
+       "top": 840
+      },
+      "type": "split_by_subflow",
+      "config": {}
+     }
+    }
+   }
+  },
+  {
+   "uuid": "60efa8d4-54b7-4d82-8eab-6ee3fc6bc68a",
+   "name": "Espace Parents",
+   "spec_version": "13.1.0",
+   "language": "fra",
+   "type": "messaging",
+   "revision": 1,
+   "expire_after_minutes": 10080,
+   "localization": {},
+   "nodes": [
+    {
+     "uuid": "0ca66c75-880c-4574-880c-5e9ac0148175",
+     "actions": [
+      {
+       "uuid": "5aaa762b-fcd0-473a-a608-a0d83406b206",
+       "type": "send_msg",
+       "text": "Espace parents 💛\n1️⃣ Comprendre la puberté de ma fille\n2️⃣ Parler de la puberté avec mon enfant\n3️⃣ Répondre à ses questions sur la sexualité\n4️⃣ Douleurs et règles irrégulières\n5️⃣ Préparer le kit des premières règles\n6️⃣ Protéger ma fille\n7️⃣ Sa première visite chez le gynécologue\n8️⃣ Voir les thèmes des filles\n\nÉcrivez le numéro.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "2322029e-93af-4b03-be96-3b17f29fac94",
+       "destination_uuid": "6e246342-f8d9-4e9e-bb33-78a3f4fae9ce"
+      }
+     ]
+    },
+    {
+     "uuid": "6e246342-f8d9-4e9e-bb33-78a3f4fae9ce",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "b2c9dbb5-0244-49fa-a1df-d1f62eeb4640",
+      "cases": [
+       {
+        "uuid": "8f2c3858-0ce4-4d85-a2fc-3fae3db016d9",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "9cdfb714-b673-4e00-8cbf-6e3819b1e7ce"
+       },
+       {
+        "uuid": "97f4d293-1db9-480c-8e3b-567f3e333958",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "509edb6f-8bb1-4cf2-9028-1ce320e6a118"
+       },
+       {
+        "uuid": "57cac0b8-b944-4152-bcea-b87363d8df04",
+        "type": "has_number_eq",
+        "arguments": [
+         "3"
+        ],
+        "category_uuid": "37f040f1-5442-426d-bfa0-81a6d38d57c7"
+       },
+       {
+        "uuid": "f56b6d55-5c72-4fd8-a5a3-1103666976e1",
+        "type": "has_number_eq",
+        "arguments": [
+         "4"
+        ],
+        "category_uuid": "a4a0eef9-130d-4c6d-b961-086ef3a80881"
+       },
+       {
+        "uuid": "1f42e5d0-9ca2-4643-bdca-a2a732505d06",
+        "type": "has_number_eq",
+        "arguments": [
+         "5"
+        ],
+        "category_uuid": "f5a822d4-05a2-48e9-9061-14c8d74ad240"
+       },
+       {
+        "uuid": "7fea88b7-941e-4634-af86-a6b41fe73089",
+        "type": "has_number_eq",
+        "arguments": [
+         "6"
+        ],
+        "category_uuid": "5ad7bebc-da4a-473e-8ef4-731197aa4a19"
+       },
+       {
+        "uuid": "08ead968-f17b-44ad-aeba-3140d27a080d",
+        "type": "has_number_eq",
+        "arguments": [
+         "7"
+        ],
+        "category_uuid": "ca74efa6-1bc6-430f-95ae-00c1180becd1"
+       },
+       {
+        "uuid": "7a961815-3f7e-4b87-97d3-db8d707d06df",
+        "type": "has_number_eq",
+        "arguments": [
+         "8"
+        ],
+        "category_uuid": "8d9ddfd9-7ed3-41ac-8bdf-d6093f0913b6"
+       },
+       {
+        "uuid": "0f2ba9b0-3195-4cc8-bee2-12f5cc85726f",
+        "type": "has_any_word",
+        "arguments": [
+         "frappe frappée frapper battue battre bat tape tapée viol violée violence violences violent abus abusée agression agressée attouchement attouchements inceste harcèlement harcelée harcèle menace menacée chantage forcée forcé forcer obligée touchée enceinte grossesse mourir tuer suicide danger peur secours urgence saigne saignement hémorragie évanouie"
+        ],
+        "category_uuid": "a31da6c5-2027-4f64-8f2a-fa208be2c85a"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "9cdfb714-b673-4e00-8cbf-6e3819b1e7ce",
+        "name": "P1 Comprendre la puberté de ma fille",
+        "exit_uuid": "188a94de-fb61-42a6-8fff-191269d3bc89"
+       },
+       {
+        "uuid": "509edb6f-8bb1-4cf2-9028-1ce320e6a118",
+        "name": "P2 Parler de la puberté avec mon enf",
+        "exit_uuid": "8d4e5710-5d6c-44d8-8791-dd3e4afc8168"
+       },
+       {
+        "uuid": "37f040f1-5442-426d-bfa0-81a6d38d57c7",
+        "name": "P3 Répondre à ses questions sur la s",
+        "exit_uuid": "3ce4b008-f3cf-4241-8190-3ed5f44e9b3b"
+       },
+       {
+        "uuid": "a4a0eef9-130d-4c6d-b961-086ef3a80881",
+        "name": "P4 Douleurs et règles irrégulières",
+        "exit_uuid": "74907444-2f29-47aa-8a7d-9193f8301c1b"
+       },
+       {
+        "uuid": "f5a822d4-05a2-48e9-9061-14c8d74ad240",
+        "name": "P5 Préparer le kit des premières règ",
+        "exit_uuid": "ed3badb0-1aba-4b6a-842a-b767f7bc763c"
+       },
+       {
+        "uuid": "5ad7bebc-da4a-473e-8ef4-731197aa4a19",
+        "name": "P6 Protéger ma fille",
+        "exit_uuid": "6185adf2-5f03-45d4-99d2-7f8769524fe0"
+       },
+       {
+        "uuid": "ca74efa6-1bc6-430f-95ae-00c1180becd1",
+        "name": "P7 Sa première visite chez le gynéco",
+        "exit_uuid": "2bd03d73-a350-4444-a398-a37ff334189a"
+       },
+       {
+        "uuid": "8d9ddfd9-7ed3-41ac-8bdf-d6093f0913b6",
+        "name": "P8 Voir les thèmes des filles",
+        "exit_uuid": "809ac748-c71c-41de-8779-0a5f639e1ee6"
+       },
+       {
+        "uuid": "a31da6c5-2027-4f64-8f2a-fa208be2c85a",
+        "name": "Urgence",
+        "exit_uuid": "71e30e5f-d2bf-45ad-aefc-fc875a5530ca"
+       },
+       {
+        "uuid": "b2c9dbb5-0244-49fa-a1df-d1f62eeb4640",
+        "name": "Other",
+        "exit_uuid": "ddfddb2a-d3d0-4d5a-b6ec-f6455b68cce2"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "lecon"
+     },
+     "exits": [
+      {
+       "uuid": "188a94de-fb61-42a6-8fff-191269d3bc89",
+       "destination_uuid": "7e28cd78-e5ea-4509-83fc-0589e4ff8389"
+      },
+      {
+       "uuid": "8d4e5710-5d6c-44d8-8791-dd3e4afc8168",
+       "destination_uuid": "b5b22e04-09fe-4002-ac8d-0f04a3e22690"
+      },
+      {
+       "uuid": "3ce4b008-f3cf-4241-8190-3ed5f44e9b3b",
+       "destination_uuid": "f91b1e22-5fc7-4a9e-886b-4d2da6696585"
+      },
+      {
+       "uuid": "74907444-2f29-47aa-8a7d-9193f8301c1b",
+       "destination_uuid": "c3f0de72-332a-410d-8a70-10954d94eebd"
+      },
+      {
+       "uuid": "ed3badb0-1aba-4b6a-842a-b767f7bc763c",
+       "destination_uuid": "d1c61777-0743-4333-8f2f-20b0089c786c"
+      },
+      {
+       "uuid": "6185adf2-5f03-45d4-99d2-7f8769524fe0",
+       "destination_uuid": "92b4ac61-5ab4-4d76-be18-093a430e69af"
+      },
+      {
+       "uuid": "2bd03d73-a350-4444-a398-a37ff334189a",
+       "destination_uuid": "c81c8c84-b802-416f-9336-031bb62ea31e"
+      },
+      {
+       "uuid": "809ac748-c71c-41de-8779-0a5f639e1ee6",
+       "destination_uuid": "f2ef1f31-9b58-41ad-8c4d-ffa41cd3e8bd"
+      },
+      {
+       "uuid": "71e30e5f-d2bf-45ad-aefc-fc875a5530ca",
+       "destination_uuid": "8db202e6-598e-42c0-b22a-4eb1075f0c56"
+      },
+      {
+       "uuid": "ddfddb2a-d3d0-4d5a-b6ec-f6455b68cce2",
+       "destination_uuid": "44624ed6-157b-4ac1-8e37-3a67a7d0980d"
+      }
+     ]
+    },
+    {
+     "uuid": "44624ed6-157b-4ac1-8e37-3a67a7d0980d",
+     "actions": [
+      {
+       "uuid": "c1789edd-6edf-4ef2-9d69-243c3d402128",
+       "type": "send_msg",
+       "text": "Écrivez un numéro de 1 à 8 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "80466838-6f93-492a-8e7f-1a53f82b98bf",
+       "destination_uuid": "6e246342-f8d9-4e9e-bb33-78a3f4fae9ce"
+      }
+     ]
+    },
+    {
+     "uuid": "fe3e82d3-27dc-42ff-adda-f56be42bc709",
+     "actions": [
+      {
+       "uuid": "59519ead-58f1-4183-bb25-1c1e15a018d0",
+       "type": "send_msg",
+       "text": "Merci 💛 Choisissez une autre leçon, ou écrivez MENU.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "67d7cdb5-c369-45cf-9eac-1594314ea4c6",
+       "destination_uuid": "0ca66c75-880c-4574-880c-5e9ac0148175"
+      }
+     ]
+    },
+    {
+     "uuid": "7e28cd78-e5ea-4509-83fc-0589e4ff8389",
+     "actions": [
+      {
+       "uuid": "2b9861e7-a732-49b1-8362-ef38654d13e4",
+       "type": "send_msg",
+       "text": "💛 Comprendre la puberté\n\nLa puberté commence souvent entre 8 et 13 ans. Les signes, dans l'ordre habituel : la poitrine qui pousse, les poils, une croissance rapide, plus de transpiration et parfois des boutons, puis des pertes blanches. Les premières règles arrivent souvent 2 à 3 ans après le début de la poitrine, en général entre 10 et 15 ans.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "6012fcf7-09e8-4aeb-9a67-9dea20cadf48",
+       "type": "send_msg",
+       "text": "Son humeur peut aussi changer : plus sensible, plus besoin d'intimité. C'est normal. Consultez un agent de santé si la poitrine pousse avant 8 ans, s'il n'y a aucun signe à 13 ans, ou pas de règles à 15 ans.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "31eeb2fa-a8e1-4b7d-aafa-e526a9ba6c24",
+       "destination_uuid": "fe3e82d3-27dc-42ff-adda-f56be42bc709"
+      }
+     ]
+    },
+    {
+     "uuid": "b5b22e04-09fe-4002-ac8d-0f04a3e22690",
+     "actions": [
+      {
+       "uuid": "0d8e3987-25bf-421c-8c1e-1305dadfd2fb",
+       "type": "send_msg",
+       "text": "🗣️ Parler AVANT les premières règles\n\nUne fille qui sait à l'avance a moins peur et moins honte. Commencez vers 8 ou 9 ans, avec des mots simples, et reparlez-en souvent, par petites conversations.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "3c063d86-7df6-4360-ba7f-9eb84283631b",
+       "type": "send_msg",
+       "text": "Idées pour commencer :\n• « Ton corps va changer, comme le mien a changé. Je veux t'expliquer. »\n• Racontez vos propres premières règles.\n• Profitez d'un moment calme : en cuisinant, en marchant.\n• Utilisez les vrais mots : règles, seins, vagin. Ce ne sont pas des mots sales.\n• Dites-lui qu'elle peut toujours venir vous voir, sans être grondée.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "6a651262-e611-42af-82b8-feccec52a0d7",
+       "destination_uuid": "fe3e82d3-27dc-42ff-adda-f56be42bc709"
+      }
+     ]
+    },
+    {
+     "uuid": "f91b1e22-5fc7-4a9e-886b-4d2da6696585",
+     "actions": [
+      {
+       "uuid": "cea607de-50b1-4e55-abf3-b7690315cf32",
+       "type": "send_msg",
+       "text": "❓ Quand elle pose une question\n\nSi votre fille vous pose une question sur le sexe, c'est une marque de confiance. Si elle n'a pas de réponse à la maison, elle la cherchera dans la rue ou sur Internet, souvent avec de fausses informations.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "03b0a7f1-6de8-4a35-b9fe-7a6d9dc49c4a",
+       "type": "send_msg",
+       "text": "Conseils :\n• Restez calme, remerciez-la de sa question.\n• Répondez simplement, selon son âge : on n'a pas besoin de tout dire d'un coup.\n• Si vous ne savez pas : « Bonne question, cherchons ensemble » (Ma Lune peut aider).\n• Parlez de respect, du droit de dire NON, et que la grossesse et les infections sont possibles dès la première fois.\n• Une question n'est pas un aveu : ne la punissez pas pour avoir demandé.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "e241944e-7564-4017-8270-c5791c814575",
+       "destination_uuid": "fe3e82d3-27dc-42ff-adda-f56be42bc709"
+      }
+     ]
+    },
+    {
+     "uuid": "c3f0de72-332a-410d-8a70-10954d94eebd",
+     "actions": [
+      {
+       "uuid": "20fbff54-2864-4d3d-8bce-98d946f65b66",
+       "type": "send_msg",
+       "text": "🩺 Ce qui est normal\n\nLes crampes sont fréquentes, surtout les premiers jours. La chaleur sur le ventre, le repos, le mouvement doux et un antidouleur comme l'ibuprofène ou le paracétamol (dose de la boîte ou du pharmacien, pas d'aspirine avant 16 ans) peuvent l'aider.\nLes 2 à 3 premières années, les règles sont souvent irrégulières (cycle de 21 à 45 jours).",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "35ab3562-086b-4d1e-a5d9-77b5fec7985e",
+       "type": "send_msg",
+       "text": "🚩 Emmenez-la consulter si :\n• la douleur l'empêche d'aller à l'école chaque mois\n• elle change de serviette toutes les 1 à 2 heures, ou saigne plus de 7 jours\n• plus de 3 mois sans règles\n• elle est très fatiguée, pâle, a des vertiges",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "b916e53d-3819-45b9-81f2-318ae3b107fa",
+       "destination_uuid": "fe3e82d3-27dc-42ff-adda-f56be42bc709"
+      }
+     ]
+    },
+    {
+     "uuid": "d1c61777-0743-4333-8f2f-20b0089c786c",
+     "actions": [
+      {
+       "uuid": "63451a63-3cf0-41ef-a99f-4c34c94212ac",
+       "type": "send_msg",
+       "text": "🎒 Le kit des premières règles\n\nPréparez-le ENSEMBLE avant les premières règles : 2 ou 3 serviettes (jetables ou lavables), une culotte de rechange, un petit sachet, du papier. Montrez-lui comment mettre une serviette, la changer toutes les 4 à 6 heures, et la jeter ou la laver.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "4eb08166-80d4-413a-ad4d-2b9d179ce30e",
+       "type": "send_msg",
+       "text": "🎉 Le jour des premières règles, félicitez-la : « Ton corps grandit bien. » Une réaction douce, sans honte ni punition, marque toute sa vie de femme.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "34147c11-7473-46a5-8209-6586bf2bb348",
+       "destination_uuid": "fe3e82d3-27dc-42ff-adda-f56be42bc709"
+      }
+     ]
+    },
+    {
+     "uuid": "92b4ac61-5ab4-4d76-be18-093a430e69af",
+     "actions": [
+      {
+       "uuid": "16d04e7a-842e-4d27-b853-b17f6d066ab2",
+       "type": "send_msg",
+       "text": "🛡️ Protéger sans faire peur\n\n• Apprenez-lui que son corps lui appartient et que les parties privées ne doivent pas être touchées.\n• Expliquez la différence entre un bon secret (une surprise) et un mauvais secret (qui fait peur ou rend triste).\n• Avoir ses règles ne veut pas dire être prête pour le mariage : protégez son droit d'aller à l'école.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "ec47579c-6c17-4828-ba50-74810a3e0f3d",
+       "type": "send_msg",
+       "text": "👀 Soyez attentifs si elle change soudain : peur d'une personne ou d'un lieu, tristesse, cadeaux ou argent inexpliqués, douleurs, refus d'aller à l'école. Écoutez-la sans la blâmer. En cas de danger ou de violence, allez à l'hôpital, et écrivez PARLER pour qu'une personne de Ma Lune vous aide.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "19a812fd-2724-4dbc-ba9b-29557400622e",
+       "destination_uuid": "fe3e82d3-27dc-42ff-adda-f56be42bc709"
+      }
+     ]
+    },
+    {
+     "uuid": "c81c8c84-b802-416f-9336-031bb62ea31e",
+     "actions": [
+      {
+       "uuid": "d5f34db7-c954-4bfa-bc3a-694aacfd8890",
+       "type": "send_msg",
+       "text": "🩺 Quand consulter ?\n\nUne première visite est utile en cas de problème : douleurs fortes, règles très abondantes ou très irrégulières, pas de règles à 15 ans, pertes qui sentent mauvais ou qui grattent. Beaucoup de médecins conseillent aussi une première visite de prévention vers 13 à 15 ans, pour parler.",
+       "quick_replies": [],
+       "attachments": []
+      },
+      {
+       "uuid": "0e4004e6-11d0-4dd1-b76e-7e65532a367f",
+       "type": "send_msg",
+       "text": "📋 Comment ça se passe ?\n• La première visite est surtout une conversation : règles, douleurs, questions.\n• Le médecin peut prendre le poids et la tension.\n• Pour une jeune fille sans problème, un examen interne n'est en général pas nécessaire. Si un examen est nécessaire, il est expliqué et fait avec son accord.\n• Elle peut demander une femme médecin et la présence de sa maman.\n• Préparez ensemble son carnet de règles et ses questions.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "0375857e-6534-46f8-8005-b0832d85dbdb",
+       "destination_uuid": "fe3e82d3-27dc-42ff-adda-f56be42bc709"
+      }
+     ]
+    },
+    {
+     "uuid": "f2ef1f31-9b58-41ad-8c4d-ffa41cd3e8bd",
+     "actions": [
+      {
+       "uuid": "3a322bcd-1358-46d9-85ad-745462802c3d",
+       "type": "enter_flow",
+       "flow": {
+        "uuid": "ca7d0b00-da77-448b-b4b7-9d98114db27b",
+        "name": "Apprendre"
+       }
+      }
+     ],
+     "router": {
+      "type": "switch",
+      "operand": "@child.run.status",
+      "default_category_uuid": "54e46bde-b7ba-4069-8256-b6d92ecd11e1",
+      "cases": [
+       {
+        "uuid": "b4b673f0-ff5b-40a2-8611-f5e3f9957744",
+        "type": "has_only_text",
+        "arguments": [
+         "completed"
+        ],
+        "category_uuid": "54e46bde-b7ba-4069-8256-b6d92ecd11e1"
+       },
+       {
+        "uuid": "4fd44103-d8a9-45e5-b9f3-4fc499406816",
+        "type": "has_only_text",
+        "arguments": [
+         "expired"
+        ],
+        "category_uuid": "6bb4e730-79a1-4a5a-ae7f-9083e5cddfac"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "54e46bde-b7ba-4069-8256-b6d92ecd11e1",
+        "name": "Complete",
+        "exit_uuid": "8c21bff3-92d7-46c7-a59a-f106a7cb9253"
+       },
+       {
+        "uuid": "6bb4e730-79a1-4a5a-ae7f-9083e5cddfac",
+        "name": "Expired",
+        "exit_uuid": "0eea80cb-3c9b-4a60-b5bb-762f37608060"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "8c21bff3-92d7-46c7-a59a-f106a7cb9253",
+       "destination_uuid": null
+      },
+      {
+       "uuid": "0eea80cb-3c9b-4a60-b5bb-762f37608060",
+       "destination_uuid": null
+      }
+     ]
+    },
+    {
+     "uuid": "8db202e6-598e-42c0-b22a-4eb1075f0c56",
+     "actions": [
+      {
+       "uuid": "df3cffda-0d98-4cd0-a798-49d5dcca361e",
+       "type": "enter_flow",
+       "flow": {
+        "uuid": "66962937-3847-46d6-82dd-881d19af7f30",
+        "name": "Urgence"
+       }
+      }
+     ],
+     "router": {
+      "type": "switch",
+      "operand": "@child.run.status",
+      "default_category_uuid": "882dcf54-7da9-40a9-939f-cd0a43c059f9",
+      "cases": [
+       {
+        "uuid": "35c0227e-f294-45eb-911e-0d00f6bf2010",
+        "type": "has_only_text",
+        "arguments": [
+         "completed"
+        ],
+        "category_uuid": "882dcf54-7da9-40a9-939f-cd0a43c059f9"
+       },
+       {
+        "uuid": "e6f6ede3-bbba-41f4-a279-53f135c68ae8",
+        "type": "has_only_text",
+        "arguments": [
+         "expired"
+        ],
+        "category_uuid": "662fb32c-7f61-422b-8a63-dd1e7410b2ef"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "882dcf54-7da9-40a9-939f-cd0a43c059f9",
+        "name": "Complete",
+        "exit_uuid": "39404db8-221f-4b86-bb38-c9c50512729d"
+       },
+       {
+        "uuid": "662fb32c-7f61-422b-8a63-dd1e7410b2ef",
+        "name": "Expired",
+        "exit_uuid": "6c472181-b6f9-4b74-a2ad-d1d17317b632"
+       }
+      ]
+     },
+     "exits": [
+      {
+       "uuid": "39404db8-221f-4b86-bb38-c9c50512729d",
+       "destination_uuid": null
+      },
+      {
+       "uuid": "6c472181-b6f9-4b74-a2ad-d1d17317b632",
+       "destination_uuid": null
+      }
+     ]
+    }
+   ],
+   "_ui": {
+    "nodes": {
+     "0ca66c75-880c-4574-880c-5e9ac0148175": {
+      "position": {
+       "left": 0,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "6e246342-f8d9-4e9e-bb33-78a3f4fae9ce": {
+      "position": {
+       "left": 320,
+       "top": 0
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "44624ed6-157b-4ac1-8e37-3a67a7d0980d": {
+      "position": {
+       "left": 640,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "fe3e82d3-27dc-42ff-adda-f56be42bc709": {
+      "position": {
+       "left": 960,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "7e28cd78-e5ea-4509-83fc-0589e4ff8389": {
+      "position": {
+       "left": 1280,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "b5b22e04-09fe-4002-ac8d-0f04a3e22690": {
+      "position": {
+       "left": 1600,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "f91b1e22-5fc7-4a9e-886b-4d2da6696585": {
+      "position": {
+       "left": 0,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "c3f0de72-332a-410d-8a70-10954d94eebd": {
+      "position": {
+       "left": 320,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "d1c61777-0743-4333-8f2f-20b0089c786c": {
+      "position": {
+       "left": 640,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "92b4ac61-5ab4-4d76-be18-093a430e69af": {
+      "position": {
+       "left": 960,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "c81c8c84-b802-416f-9336-031bb62ea31e": {
+      "position": {
+       "left": 1280,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "f2ef1f31-9b58-41ad-8c4d-ffa41cd3e8bd": {
+      "position": {
+       "left": 1600,
+       "top": 420
+      },
+      "type": "split_by_subflow",
+      "config": {}
+     },
+     "8db202e6-598e-42c0-b22a-4eb1075f0c56": {
+      "position": {
+       "left": 0,
+       "top": 840
+      },
+      "type": "split_by_subflow",
+      "config": {}
+     }
+    }
+   }
+  },
+  {
+   "uuid": "b430510b-a569-49e7-a211-ddf6dcaf9bf9",
+   "name": "Quiz",
+   "spec_version": "13.1.0",
+   "language": "fra",
+   "type": "messaging",
+   "revision": 1,
+   "expire_after_minutes": 10080,
+   "localization": {},
+   "nodes": [
+    {
+     "uuid": "00a19e9e-831f-4837-8e98-ff4da62ba821",
+     "actions": [
+      {
+       "uuid": "71c121de-b076-42b0-b174-b8f840be86bd",
+       "type": "send_msg",
+       "text": "🎯 Petit quiz Ma Lune ! 5 questions, réponds 1 pour VRAI ou 2 pour FAUX. Ce n'est pas une note, c'est pour t'aider à apprendre. 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "7b4e9df9-fa95-4fec-8723-315774e6ade2",
+       "destination_uuid": "66298905-32c1-4c51-b8bc-dbaf5f4c76dd"
+      }
+     ]
+    },
+    {
+     "uuid": "66298905-32c1-4c51-b8bc-dbaf5f4c76dd",
+     "actions": [
+      {
+       "uuid": "fe07a656-a2da-42e9-9615-757a2d729604",
+       "type": "send_msg",
+       "text": "Question 1/5 : Les règles, c'est du sang sale.\n1️⃣ Vrai\n2️⃣ Faux",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "da406035-9cfd-4fe8-ba20-d976e0256cdf",
+       "destination_uuid": "ef79350d-8dbc-40c9-b729-af80a1e60ff5"
+      }
+     ]
+    },
+    {
+     "uuid": "ef79350d-8dbc-40c9-b729-af80a1e60ff5",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "10831b6b-ca1b-4b8f-ac46-bc45d855717c",
+      "cases": [
+       {
+        "uuid": "5452ee72-5f66-46b2-a653-21ffd920d8b8",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "21b3c0de-5217-4e48-81e4-1d4ad684719f"
+       },
+       {
+        "uuid": "8778d085-e209-4d4c-bfd1-c3cdfc6e0de8",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "04e3e27e-0de5-46d0-876c-6d1a470ea8d1"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "21b3c0de-5217-4e48-81e4-1d4ad684719f",
+        "name": "Juste",
+        "exit_uuid": "57c08cf1-83e8-430b-a60b-372b35637fc4"
+       },
+       {
+        "uuid": "04e3e27e-0de5-46d0-876c-6d1a470ea8d1",
+        "name": "Faux",
+        "exit_uuid": "bd49d5af-f005-4c10-b31c-2cd4021291a1"
+       },
+       {
+        "uuid": "10831b6b-ca1b-4b8f-ac46-bc45d855717c",
+        "name": "Other",
+        "exit_uuid": "47d34707-7cab-404b-8fc9-dc7d411034e6"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "q1"
+     },
+     "exits": [
+      {
+       "uuid": "57c08cf1-83e8-430b-a60b-372b35637fc4",
+       "destination_uuid": "0ca4ae0e-6ccf-4443-848b-c36c205c387c"
+      },
+      {
+       "uuid": "bd49d5af-f005-4c10-b31c-2cd4021291a1",
+       "destination_uuid": "e3f8a933-bd29-44ae-9946-052b529194b4"
+      },
+      {
+       "uuid": "47d34707-7cab-404b-8fc9-dc7d411034e6",
+       "destination_uuid": "2f20e441-c1e8-4a95-b7cb-3c2b1327a2c3"
+      }
+     ]
+    },
+    {
+     "uuid": "2f20e441-c1e8-4a95-b7cb-3c2b1327a2c3",
+     "actions": [
+      {
+       "uuid": "8afeefed-3f74-4e72-af94-389c286d4545",
+       "type": "send_msg",
+       "text": "Réponds 1 ou 2 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "e8f203e8-dee9-4ce8-9992-befd5452c0a1",
+       "destination_uuid": "ef79350d-8dbc-40c9-b729-af80a1e60ff5"
+      }
+     ]
+    },
+    {
+     "uuid": "0ca4ae0e-6ccf-4443-848b-c36c205c387c",
+     "actions": [
+      {
+       "uuid": "7da5a269-d626-4f7a-acec-001b1255cd30",
+       "type": "send_msg",
+       "text": "Bravo ! Le sang des règles n'est pas sale, c'est un sang normal du corps.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "95d34075-96e9-4085-bfc4-a86860c8a2e9",
+       "destination_uuid": "d823eca2-f3ab-458c-8c7b-9585a7ff1b37"
+      }
+     ]
+    },
+    {
+     "uuid": "e3f8a933-bd29-44ae-9946-052b529194b4",
+     "actions": [
+      {
+       "uuid": "0bacf013-1e45-43b4-896c-fc6f4898e0f8",
+       "type": "send_msg",
+       "text": "Pas tout à fait 😊 Le sang des règles n'est pas sale, c'est un sang normal du corps.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "2ad50a5f-0eee-4acf-840a-d699d3aeef37",
+       "destination_uuid": "d823eca2-f3ab-458c-8c7b-9585a7ff1b37"
+      }
+     ]
+    },
+    {
+     "uuid": "d823eca2-f3ab-458c-8c7b-9585a7ff1b37",
+     "actions": [
+      {
+       "uuid": "46a9134f-174d-4658-92b7-1eb39a269b35",
+       "type": "send_msg",
+       "text": "Question 2/5 : On peut se laver et prendre une douche pendant les règles.\n1️⃣ Vrai\n2️⃣ Faux",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "b435cd25-8253-4bdf-a078-4d1d4c08cafd",
+       "destination_uuid": "7c0d0fab-52b2-4da0-b889-baddd3d4c3bc"
+      }
+     ]
+    },
+    {
+     "uuid": "7c0d0fab-52b2-4da0-b889-baddd3d4c3bc",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "8748115b-4ebd-4e71-82d2-cc2d2b2d3ec3",
+      "cases": [
+       {
+        "uuid": "79887d77-252b-4430-9098-05c7207a0228",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "9466d28b-cd19-491b-845f-1f6074710d76"
+       },
+       {
+        "uuid": "2d2a7225-582c-44f1-8d29-e1d42348fa47",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "fa8efd7f-e6f9-4ac6-8ade-cb213ccb87e9"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "9466d28b-cd19-491b-845f-1f6074710d76",
+        "name": "Juste",
+        "exit_uuid": "964cee66-ce23-4c80-8c11-24e69ea58c07"
+       },
+       {
+        "uuid": "fa8efd7f-e6f9-4ac6-8ade-cb213ccb87e9",
+        "name": "Faux",
+        "exit_uuid": "4c408ed9-ba8a-4327-bb12-9b3f4b0d78e7"
+       },
+       {
+        "uuid": "8748115b-4ebd-4e71-82d2-cc2d2b2d3ec3",
+        "name": "Other",
+        "exit_uuid": "67e2d2a6-acd3-40fd-a2bf-278fabb04a18"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "q2"
+     },
+     "exits": [
+      {
+       "uuid": "964cee66-ce23-4c80-8c11-24e69ea58c07",
+       "destination_uuid": "cfd91556-bfab-48b5-9dfc-0a2b160074c7"
+      },
+      {
+       "uuid": "4c408ed9-ba8a-4327-bb12-9b3f4b0d78e7",
+       "destination_uuid": "235768a2-166d-4bb9-b778-5116a1c12225"
+      },
+      {
+       "uuid": "67e2d2a6-acd3-40fd-a2bf-278fabb04a18",
+       "destination_uuid": "07c65786-08c4-4b4b-b95f-cf392f3981a2"
+      }
+     ]
+    },
+    {
+     "uuid": "07c65786-08c4-4b4b-b95f-cf392f3981a2",
+     "actions": [
+      {
+       "uuid": "1b9d931b-46cb-408c-865a-39c6e9da961f",
+       "type": "send_msg",
+       "text": "Réponds 1 ou 2 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "738d8278-6fde-41d0-9702-2d030906aad3",
+       "destination_uuid": "7c0d0fab-52b2-4da0-b889-baddd3d4c3bc"
+      }
+     ]
+    },
+    {
+     "uuid": "cfd91556-bfab-48b5-9dfc-0a2b160074c7",
+     "actions": [
+      {
+       "uuid": "8ef1b6e4-862f-484f-ae46-c27858d286e6",
+       "type": "send_msg",
+       "text": "Bravo ! Se laver est important pendant les règles.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "af321c57-4818-40e7-9677-938cc2646f4f",
+       "destination_uuid": "46376b7d-3b82-4daf-a856-24887047a9ca"
+      }
+     ]
+    },
+    {
+     "uuid": "235768a2-166d-4bb9-b778-5116a1c12225",
+     "actions": [
+      {
+       "uuid": "29fe33ee-aeb9-4c04-af84-ab23339768c0",
+       "type": "send_msg",
+       "text": "Pas tout à fait 😊 Se laver pendant les règles est sûr et important.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "75ccac13-a204-435a-b7a5-0e9986d22e4b",
+       "destination_uuid": "46376b7d-3b82-4daf-a856-24887047a9ca"
+      }
+     ]
+    },
+    {
+     "uuid": "46376b7d-3b82-4daf-a856-24887047a9ca",
+     "actions": [
+      {
+       "uuid": "5a13f6d1-d817-4465-8bbe-a52e1f557445",
+       "type": "send_msg",
+       "text": "Question 3/5 : Au début, c'est normal que les règles soient irrégulières.\n1️⃣ Vrai\n2️⃣ Faux",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "415bfefa-4873-4fd8-81bf-f4ffff386176",
+       "destination_uuid": "33732efc-946c-4e6f-840e-73c7fdc06d28"
+      }
+     ]
+    },
+    {
+     "uuid": "33732efc-946c-4e6f-840e-73c7fdc06d28",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "a066dc5d-991d-4e91-ad22-7b4bcadd650a",
+      "cases": [
+       {
+        "uuid": "54cc9021-05ad-4df3-b3b0-d617ca899b20",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "306b6c07-92a7-4e74-9b96-e92ef3bd26b0"
+       },
+       {
+        "uuid": "a86346aa-d9f9-4128-af1d-3c325ca69538",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "f7f21dc1-a17e-442a-9a88-0a626aeaa5da"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "306b6c07-92a7-4e74-9b96-e92ef3bd26b0",
+        "name": "Juste",
+        "exit_uuid": "db76bb2f-79ff-43ea-bdf6-7c11ee1c18fa"
+       },
+       {
+        "uuid": "f7f21dc1-a17e-442a-9a88-0a626aeaa5da",
+        "name": "Faux",
+        "exit_uuid": "15a788d9-57c1-47ac-bbbc-ae962d4a9613"
+       },
+       {
+        "uuid": "a066dc5d-991d-4e91-ad22-7b4bcadd650a",
+        "name": "Other",
+        "exit_uuid": "39d3342d-0391-40a8-93f2-89fbb38f8d94"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "q3"
+     },
+     "exits": [
+      {
+       "uuid": "db76bb2f-79ff-43ea-bdf6-7c11ee1c18fa",
+       "destination_uuid": "d0d12cfa-99cc-4723-a2cd-5bebbeb25689"
+      },
+      {
+       "uuid": "15a788d9-57c1-47ac-bbbc-ae962d4a9613",
+       "destination_uuid": "c302e840-14da-4360-8bb2-6c63a63aa117"
+      },
+      {
+       "uuid": "39d3342d-0391-40a8-93f2-89fbb38f8d94",
+       "destination_uuid": "5a02b076-e3ec-4b32-921e-b2217c0edd39"
+      }
+     ]
+    },
+    {
+     "uuid": "5a02b076-e3ec-4b32-921e-b2217c0edd39",
+     "actions": [
+      {
+       "uuid": "9c6103be-9e97-479c-9b10-6be6a8c1e323",
+       "type": "send_msg",
+       "text": "Réponds 1 ou 2 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "65dba8be-2c84-4ae8-80f5-2ad9e0d8fb72",
+       "destination_uuid": "33732efc-946c-4e6f-840e-73c7fdc06d28"
+      }
+     ]
+    },
+    {
+     "uuid": "d0d12cfa-99cc-4723-a2cd-5bebbeb25689",
+     "actions": [
+      {
+       "uuid": "c779940e-d906-4e80-88bf-440c7545b388",
+       "type": "send_msg",
+       "text": "Bravo ! Les 2 à 3 premières années, c'est souvent irrégulier.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "acad298f-d381-492d-8d99-0fedc3164d1a",
+       "destination_uuid": "022ed81c-35ce-47e9-8cb7-3a5172ba523c"
+      }
+     ]
+    },
+    {
+     "uuid": "c302e840-14da-4360-8bb2-6c63a63aa117",
+     "actions": [
+      {
+       "uuid": "a92e0e30-8d62-44e8-aafe-25d2886a23b6",
+       "type": "send_msg",
+       "text": "Pas tout à fait 😊 Au début, c'est souvent irrégulier, et c'est normal.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "39a9734a-d5ba-4bb6-a513-5f18f944deb9",
+       "destination_uuid": "022ed81c-35ce-47e9-8cb7-3a5172ba523c"
+      }
+     ]
+    },
+    {
+     "uuid": "022ed81c-35ce-47e9-8cb7-3a5172ba523c",
+     "actions": [
+      {
+       "uuid": "7e695fee-5ef7-4349-b892-162bce2c92f2",
+       "type": "send_msg",
+       "text": "Question 4/5 : Pendant les règles, on ne doit pas faire de sport ni aller à l'école.\n1️⃣ Vrai\n2️⃣ Faux",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "1e70f9dc-64b6-4591-a24c-0a377aa5ca33",
+       "destination_uuid": "c2b170f7-9dfb-4ee8-b46e-320a41615729"
+      }
+     ]
+    },
+    {
+     "uuid": "c2b170f7-9dfb-4ee8-b46e-320a41615729",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "4282694f-ed8a-479e-aaa2-007e2a77ab7c",
+      "cases": [
+       {
+        "uuid": "8889aa7a-ea55-4ae5-9a22-3c90522e1a35",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "9f7073ba-bcae-43d1-bdc7-a63eb2535d0d"
+       },
+       {
+        "uuid": "816c4339-f82f-4d97-bce7-e04030e428eb",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "9a27f12d-1128-4bba-8c01-91a86e6336a2"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "9f7073ba-bcae-43d1-bdc7-a63eb2535d0d",
+        "name": "Juste",
+        "exit_uuid": "74f01c17-a0ef-415b-b851-304d6c109f95"
+       },
+       {
+        "uuid": "9a27f12d-1128-4bba-8c01-91a86e6336a2",
+        "name": "Faux",
+        "exit_uuid": "d1339268-52bb-46bf-b3fd-7827f0b274f9"
+       },
+       {
+        "uuid": "4282694f-ed8a-479e-aaa2-007e2a77ab7c",
+        "name": "Other",
+        "exit_uuid": "b0a9195c-51c5-4196-9471-8bed9e5e1dca"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "q4"
+     },
+     "exits": [
+      {
+       "uuid": "74f01c17-a0ef-415b-b851-304d6c109f95",
+       "destination_uuid": "4213b04f-48b7-4fb2-b8fe-40c5703ddbf9"
+      },
+      {
+       "uuid": "d1339268-52bb-46bf-b3fd-7827f0b274f9",
+       "destination_uuid": "d2f76192-90b3-4a34-bd59-abada8ac2165"
+      },
+      {
+       "uuid": "b0a9195c-51c5-4196-9471-8bed9e5e1dca",
+       "destination_uuid": "6a215e57-ad86-4ad4-b0cf-7a5db5e05c59"
+      }
+     ]
+    },
+    {
+     "uuid": "6a215e57-ad86-4ad4-b0cf-7a5db5e05c59",
+     "actions": [
+      {
+       "uuid": "26fec83d-46e2-43da-8c94-17e4de2671bc",
+       "type": "send_msg",
+       "text": "Réponds 1 ou 2 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "cbe4d4ee-16a9-450f-9cc6-ce2c284522ba",
+       "destination_uuid": "c2b170f7-9dfb-4ee8-b46e-320a41615729"
+      }
+     ]
+    },
+    {
+     "uuid": "4213b04f-48b7-4fb2-b8fe-40c5703ddbf9",
+     "actions": [
+      {
+       "uuid": "cd3fc3a3-a5c7-4ad7-b1bd-222e0d143f82",
+       "type": "send_msg",
+       "text": "Bravo ! Tu peux aller à l'école et faire du sport.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "8a28b43b-86e8-4748-bac3-8a34b612f137",
+       "destination_uuid": "76b686e4-ba27-49fd-b44d-a7a135bb8f33"
+      }
+     ]
+    },
+    {
+     "uuid": "d2f76192-90b3-4a34-bd59-abada8ac2165",
+     "actions": [
+      {
+       "uuid": "441d8049-0c15-44a2-aa09-3dfd11010135",
+       "type": "send_msg",
+       "text": "Pas tout à fait 😊 Les règles ne sont pas une maladie : école et sport sont possibles.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "0f703af2-bcb0-41f4-9c91-92960e72a452",
+       "destination_uuid": "76b686e4-ba27-49fd-b44d-a7a135bb8f33"
+      }
+     ]
+    },
+    {
+     "uuid": "76b686e4-ba27-49fd-b44d-a7a135bb8f33",
+     "actions": [
+      {
+       "uuid": "287adbb7-4fe0-47de-9fdc-3cbe7f04635d",
+       "type": "send_msg",
+       "text": "Question 5/5 : Avoir ses règles veut dire qu'une fille est prête pour le mariage.\n1️⃣ Vrai\n2️⃣ Faux",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "5d4c0bb0-1673-4b97-b81a-14453420889a",
+       "destination_uuid": "28b35860-6a16-4807-8465-7592841166c3"
+      }
+     ]
+    },
+    {
+     "uuid": "28b35860-6a16-4807-8465-7592841166c3",
+     "actions": [],
+     "router": {
+      "type": "switch",
+      "operand": "@input.text",
+      "default_category_uuid": "a00af52b-2aed-42c0-a5bd-87ab299d7042",
+      "cases": [
+       {
+        "uuid": "dd0826cf-7343-4379-96a2-18b8e70d3785",
+        "type": "has_number_eq",
+        "arguments": [
+         "2"
+        ],
+        "category_uuid": "304dd719-1071-4605-a739-01f430f02203"
+       },
+       {
+        "uuid": "95b29443-497f-4041-9ee7-a9464ab69439",
+        "type": "has_number_eq",
+        "arguments": [
+         "1"
+        ],
+        "category_uuid": "1e000275-4351-484c-94ab-15cd638e9596"
+       }
+      ],
+      "categories": [
+       {
+        "uuid": "304dd719-1071-4605-a739-01f430f02203",
+        "name": "Juste",
+        "exit_uuid": "a0713dbc-a33a-443c-a1fa-50868ce40b71"
+       },
+       {
+        "uuid": "1e000275-4351-484c-94ab-15cd638e9596",
+        "name": "Faux",
+        "exit_uuid": "41a7f73d-b93d-434f-82d1-cdfe76f8eccf"
+       },
+       {
+        "uuid": "a00af52b-2aed-42c0-a5bd-87ab299d7042",
+        "name": "Other",
+        "exit_uuid": "2c4b45d1-eedc-41f8-89dc-a90f5ab30e73"
+       }
+      ],
+      "wait": {
+       "type": "msg"
+      },
+      "result_name": "q5"
+     },
+     "exits": [
+      {
+       "uuid": "a0713dbc-a33a-443c-a1fa-50868ce40b71",
+       "destination_uuid": "9e53bb20-1628-43a7-bf59-eda0afb8905c"
+      },
+      {
+       "uuid": "41a7f73d-b93d-434f-82d1-cdfe76f8eccf",
+       "destination_uuid": "8ad30191-1bdb-44f2-af13-d44263dea04f"
+      },
+      {
+       "uuid": "2c4b45d1-eedc-41f8-89dc-a90f5ab30e73",
+       "destination_uuid": "c72b175d-9249-497f-be80-b44a4330e54c"
+      }
+     ]
+    },
+    {
+     "uuid": "c72b175d-9249-497f-be80-b44a4330e54c",
+     "actions": [
+      {
+       "uuid": "3de3f4f4-3e9a-4006-99d4-21ca52fc7791",
+       "type": "send_msg",
+       "text": "Réponds 1 ou 2 😊",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "be523839-d9be-467b-bc65-1cbec92886e0",
+       "destination_uuid": "28b35860-6a16-4807-8465-7592841166c3"
+      }
+     ]
+    },
+    {
+     "uuid": "9e53bb20-1628-43a7-bf59-eda0afb8905c",
+     "actions": [
+      {
+       "uuid": "417640a2-0c02-4723-8d79-2dbb06267fcc",
+       "type": "send_msg",
+       "text": "Bravo ! Avoir ses règles veut dire que le corps grandit, pas qu'on est prête.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "7a018d0c-7eb1-48b1-bfcd-f0685609dc0e",
+       "destination_uuid": "96c81635-8673-42dc-8443-9d6b253f0e61"
+      }
+     ]
+    },
+    {
+     "uuid": "8ad30191-1bdb-44f2-af13-d44263dea04f",
+     "actions": [
+      {
+       "uuid": "395e75a0-8c4a-4263-bc8e-90e92b6d1661",
+       "type": "send_msg",
+       "text": "Pas tout à fait 😊 Avoir ses règles ne veut pas dire être prête pour le mariage.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "c1b432cd-ed35-491c-9a66-b3c820efa18d",
+       "destination_uuid": "96c81635-8673-42dc-8443-9d6b253f0e61"
+      }
+     ]
+    },
+    {
+     "uuid": "96c81635-8673-42dc-8443-9d6b253f0e61",
+     "actions": [
+      {
+       "uuid": "2bbcf07b-0496-4a1f-956e-48c87a78b591",
+       "type": "send_msg",
+       "text": "Merci @contact.name ! 🌸 Tu as fini le quiz. Plus tu découvres les thèmes, plus tu en sauras. Écris MENU pour continuer.",
+       "quick_replies": [],
+       "attachments": []
+      }
+     ],
+     "exits": [
+      {
+       "uuid": "37ddd41b-3ae7-4bab-bb4d-4a553f55c040",
+       "destination_uuid": null
+      }
+     ]
+    }
+   ],
+   "_ui": {
+    "nodes": {
+     "00a19e9e-831f-4837-8e98-ff4da62ba821": {
+      "position": {
+       "left": 0,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "66298905-32c1-4c51-b8bc-dbaf5f4c76dd": {
+      "position": {
+       "left": 320,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "ef79350d-8dbc-40c9-b729-af80a1e60ff5": {
+      "position": {
+       "left": 640,
+       "top": 0
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "2f20e441-c1e8-4a95-b7cb-3c2b1327a2c3": {
+      "position": {
+       "left": 960,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "0ca4ae0e-6ccf-4443-848b-c36c205c387c": {
+      "position": {
+       "left": 1280,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "e3f8a933-bd29-44ae-9946-052b529194b4": {
+      "position": {
+       "left": 1600,
+       "top": 0
+      },
+      "type": "execute_actions"
+     },
+     "d823eca2-f3ab-458c-8c7b-9585a7ff1b37": {
+      "position": {
+       "left": 0,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "7c0d0fab-52b2-4da0-b889-baddd3d4c3bc": {
+      "position": {
+       "left": 320,
+       "top": 420
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "07c65786-08c4-4b4b-b95f-cf392f3981a2": {
+      "position": {
+       "left": 640,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "cfd91556-bfab-48b5-9dfc-0a2b160074c7": {
+      "position": {
+       "left": 960,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "235768a2-166d-4bb9-b778-5116a1c12225": {
+      "position": {
+       "left": 1280,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "46376b7d-3b82-4daf-a856-24887047a9ca": {
+      "position": {
+       "left": 1600,
+       "top": 420
+      },
+      "type": "execute_actions"
+     },
+     "33732efc-946c-4e6f-840e-73c7fdc06d28": {
+      "position": {
+       "left": 0,
+       "top": 840
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "5a02b076-e3ec-4b32-921e-b2217c0edd39": {
+      "position": {
+       "left": 320,
+       "top": 840
+      },
+      "type": "execute_actions"
+     },
+     "d0d12cfa-99cc-4723-a2cd-5bebbeb25689": {
+      "position": {
+       "left": 640,
+       "top": 840
+      },
+      "type": "execute_actions"
+     },
+     "c302e840-14da-4360-8bb2-6c63a63aa117": {
+      "position": {
+       "left": 960,
+       "top": 840
+      },
+      "type": "execute_actions"
+     },
+     "022ed81c-35ce-47e9-8cb7-3a5172ba523c": {
+      "position": {
+       "left": 1280,
+       "top": 840
+      },
+      "type": "execute_actions"
+     },
+     "c2b170f7-9dfb-4ee8-b46e-320a41615729": {
+      "position": {
+       "left": 1600,
+       "top": 840
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "6a215e57-ad86-4ad4-b0cf-7a5db5e05c59": {
+      "position": {
+       "left": 0,
+       "top": 1260
+      },
+      "type": "execute_actions"
+     },
+     "4213b04f-48b7-4fb2-b8fe-40c5703ddbf9": {
+      "position": {
+       "left": 320,
+       "top": 1260
+      },
+      "type": "execute_actions"
+     },
+     "d2f76192-90b3-4a34-bd59-abada8ac2165": {
+      "position": {
+       "left": 640,
+       "top": 1260
+      },
+      "type": "execute_actions"
+     },
+     "76b686e4-ba27-49fd-b44d-a7a135bb8f33": {
+      "position": {
+       "left": 960,
+       "top": 1260
+      },
+      "type": "execute_actions"
+     },
+     "28b35860-6a16-4807-8465-7592841166c3": {
+      "position": {
+       "left": 1280,
+       "top": 1260
+      },
+      "type": "wait_for_response",
+      "config": {
+       "cases": {}
+      }
+     },
+     "c72b175d-9249-497f-be80-b44a4330e54c": {
+      "position": {
+       "left": 1600,
+       "top": 1260
+      },
+      "type": "execute_actions"
+     },
+     "9e53bb20-1628-43a7-bf59-eda0afb8905c": {
+      "position": {
+       "left": 0,
+       "top": 1680
+      },
+      "type": "execute_actions"
+     },
+     "8ad30191-1bdb-44f2-af13-d44263dea04f": {
+      "position": {
+       "left": 320,
+       "top": 1680
+      },
+      "type": "execute_actions"
+     },
+     "96c81635-8673-42dc-8443-9d6b253f0e61": {
+      "position": {
+       "left": 640,
+       "top": 1680
+      },
+      "type": "execute_actions"
+     }
+    }
+   }
+  }
+ ],
+ "campaigns": [],
+ "triggers": [],
+ "fields": [
+  {
+   "key": "derniere_regle",
+   "name": "Dernière règle",
+   "type": "datetime"
+  },
+  {
+   "key": "duree_cycle",
+   "name": "Durée cycle",
+   "type": "number"
+  },
+  {
+   "key": "prochaines_regles",
+   "name": "Prochaines règles",
+   "type": "datetime"
+  }
+ ],
+ "groups": [
+  {
+   "uuid": "806366ee-172e-4395-8f32-1d9ff6556e8b",
+   "name": "Urgence",
+   "query": null
+  }
+ ]
+}
