@@ -1,5 +1,5 @@
 # Ma Lune – Contenu des thèmes (français)
-> Brouillon en cours de validation par la conseillère médicale. Licence : CC BY-SA 4.0.
+> Contenu préparé avec la conseillère médicale (gynécologue). Licence : CC BY-SA 4.0.
 
 ## Thème 1 – C'est quoi les règles ?
 
@@ -108,15 +108,15 @@
 
 > • Change ta serviette toutes les 4 à 6 heures, et jamais plus de 8 heures, même si elle semble peu pleine.
 > • Lave-toi les mains avant et après.
-> • Lave l'extérieur de ton sexe avec de l'eau propre, au moins une fois par jour. Pas besoin de laver à l'intérieur : le vagin se nettoie tout seul.
+> • Lave l'extérieur de ta vulve avec de l'eau propre, une à deux fois par jour. Pas besoin de laver à l'intérieur : le vagin se nettoie tout seul.
 >
-> 🧺 Serviettes lavables : lave-les à l'eau froide puis avec du savon, rince bien et fais-les sécher complètement, de préférence au soleil. Ne les utilise jamais humides.
+> 🧺 Serviettes lavables : lave-les à l'eau froide avec du savon, rince bien et fais-les sécher complètement, de préférence au soleil. Ne les utilise jamais humides.
 > 🗑️ Serviettes jetables : enroule-les dans du papier ou un sachet et jette-les à la poubelle. Ne les jette pas dans les toilettes.
 
 **Message 3**
 
 > ❌ Mythe : « On ne doit pas se laver pendant les règles. »
-> ✅ Vrai : au contraire, se laver est important ! Prendre une douche ou un bain pendant les règles est sûr et t'aide à te sentir bien.
+> ✅ Vrai : au contraire, se laver est important ! Prendre une douche pendant les règles est important : cela t'aide à te sentir bien et évite les odeurs et les infections.
 
 **Message 4**
 
@@ -145,7 +145,7 @@
 **Message 3**
 
 > ❌ Mythe : « Il faut souffrir en silence. »
-> ✅ Vrai : tu as le droit d'avoir mal et d'en parler. Si la douleur est si forte que tu ne peux pas aller à l'école, ou si les médicaments ne t'aident pas, va voir un agent de santé. Ce n'est pas normal de souffrir autant.
+> ✅ Vrai : tu as le droit d'avoir mal et d'en parler. Si la douleur est si forte que tu ne peux pas aller à l'école, ou si les médicaments ne t'aident pas, va voir un agent de santé. Ce n'est pas normal de souffrir autant : cela peut parfois être le signe d'une maladie comme l'endométriose, qui se soigne.
 
 **Message 4**
 
@@ -190,7 +190,7 @@
 
 **Message 2**
 
-> Les règles ne sont PAS une maladie. Tu peux faire du sport, aller à la gym, danser, courir, jouer au foot.
+> Les règles ne sont PAS une maladie. Tu peux faire du sport, aller à la gym, danser, courir, jouer au foot. Choisis juste une tenue confortable et une bonne protection pour être à l'aise.
 > Bouger aide même souvent à diminuer les crampes et à te sentir de meilleure humeur. Écoute ton corps : si tu es très fatiguée un jour, fais une activité plus douce.
 >
 > Pour avoir de l'énergie :
@@ -334,7 +334,7 @@
 > • Un tissu en coton propre, plié en plusieurs couches, que tu changes comme une serviette.
 >
 > Pour un tissu ou une serviette lavable :
-> • lave à l'eau froide, puis avec du savon
+> • lave à l'eau froide avec du savon
 > • rince bien
 > • sèche complètement, de préférence au soleil
 > • garde-le dans un sachet propre et sec
@@ -342,7 +342,7 @@
 **Message 3**
 
 > ❌ À éviter, car cela peut donner des infections :
-> • papier journal, feuilles, sable, coton de matelas
+> • papier journal, feuilles, coton de matelas
 > • chiffons sales ou humides
 > • un tissu qui n'a pas séché complètement
 >
@@ -572,6 +572,33 @@
 
 > 💛 Parents : le vaccin HPV est un cadeau de santé pour l'avenir de votre fille. Parlez-en avec un agent de santé, et accompagnez-la le jour de la vaccination.
 
+## Thème 20 – Règles et tâches à la maison
+
+**Message 1**
+
+> 🌙 Thème : Mes règles et les tâches à la maison
+>
+> Beaucoup de gens disent qu'une fille qui a ses règles ne doit rien faire : ne pas cuisiner, ne pas toucher l'eau, ne pas entrer dans la cuisine, ne pas aller au champ. Pourtant, avoir ses règles n'est pas une maladie et ton corps n'est pas sale. 🌸
+
+**Message 2**
+
+> ✅ Pendant tes règles, tu peux :
+> • cuisiner et toucher la nourriture : elle ne se gâte pas à cause de toi
+> • puiser de l'eau, faire la vaisselle et laver le linge
+> • balayer, faire le ménage et aider ta famille
+> • aller au champ, au marché et à l'école
+>
+> 🧼 Lave-toi simplement les mains avant de cuisiner et après avoir changé ta serviette, comme d'habitude.
+
+**Message 3**
+
+> ❌ Mythe : « Si une fille qui a ses règles cuisine, touche le sel ou les plantes, la nourriture se gâte ou les plantes meurent. »
+> ✅ Vrai : c'est faux. Le sang des règles ne rend rien impur et ne gâte rien. Ces idées viennent de vieilles croyances, pas de la science.
+
+**Message 4**
+
+> 💛 Écoute ton corps : si tu as très mal au ventre ou si tu es très fatiguée, tu as le droit de te reposer et de demander de l'aide pour les tâches lourdes, comme porter de l'eau. Ce n'est pas de la paresse : c'est prendre soin de toi. Tu peux en parler avec ta maman ou une adulte de confiance.
+
 # Espace parents
 
 ## P1 – Comprendre la puberté de ma fille
@@ -658,6 +685,7 @@
 > • Apprenez-lui que son corps lui appartient et que les parties privées ne doivent pas être touchées.
 > • Expliquez la différence entre un bon secret (une surprise) et un mauvais secret (qui fait peur ou rend triste).
 > • Avoir ses règles ne veut pas dire être prête pour le mariage : protégez son droit d'aller à l'école.
+> • Pendant ses règles, laissez-la continuer l'école et ses activités habituelles. Aidez-la pour les tâches lourdes si elle a mal.
 
 **Message 2**
 

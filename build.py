@@ -161,8 +161,8 @@ app=topic_menu_flow("Apprendre","Que veux-tu découvrir ? 🌙",[
  ("Mon corps qui grandit",[13,14,16,19,10]),
  ("Prendre soin de moi",[4,5,7,17]),
  ("Mes émotions et ma sécurité",[6,9,18]),
- ("Pratique et santé",[3,11,8])])
-jeu=topic_menu_flow("Apprendre Jeunes","Choisis un thème 🌸",[(None,[1,13,12,3,4,"9d",10])])
+ ("Pratique et santé",[3,11,8,20])])
+jeu=topic_menu_flow("Apprendre Jeunes","Choisis un thème 🌸",[(None,[1,13,12,3,4,"9d",10,20])])
 
 # Parents
 par=Flow("Espace Parents")
