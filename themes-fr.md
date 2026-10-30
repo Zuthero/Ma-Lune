@@ -194,7 +194,7 @@
 > Bouger aide même souvent à diminuer les crampes et à te sentir de meilleure humeur. Écoute ton corps : si tu es très fatiguée un jour, fais une activité plus douce.
 >
 > Pour avoir de l'énergie :
-> • Bois beaucoup d'eau.
+> • Bois beaucoup d'eau, surtout pendant tes règles : environ 6 à 8 verres par jour. Cela peut aider contre la fatigue, les maux de tête et le ventre gonflé. Évite trop de boissons sucrées et de café.
 > • Mange des aliments riches en fer, car tu perds un peu de sang : haricots, feuilles de manioc (pondu), légumes verts, poisson, œufs, viande quand c'est possible.
 > • Les fruits (orange, mangue, goyave) aident ton corps à bien utiliser le fer.
 
